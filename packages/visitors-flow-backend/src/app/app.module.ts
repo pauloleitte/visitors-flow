@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './core/modules/users/users.module';
 import { AuthModule } from './core/modules/auth/auth.module';
+import { VisitorModule } from './core/modules/visitors/visitor.module';
 // import { MailerModule } from '@nestjs-modules/mailer';
 // import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 // import * as path from 'path';
@@ -35,6 +36,7 @@ import { AuthModule } from './core/modules/auth/auth.module';
       useUnifiedTopology: true,
     }),
     UsersModule,
+    VisitorModule,
   ],
   controllers: [AppController],
   providers: [AppService],
