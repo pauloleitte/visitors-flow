@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UsersService } from './users.service';
-import { UsersController } from './users.controller';
+import { UserService } from './user.service';
+import { UserController } from './user.controller';
 import { UserSchema } from './schemas/user.shema';
 import { BcryptService } from '../../../shared/services/bcrypt.service';
 
@@ -9,8 +9,8 @@ import { BcryptService } from '../../../shared/services/bcrypt.service';
   imports: [
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
   ],
-  controllers: [UsersController],
-  providers: [UsersService, BcryptService],
-  exports: [UsersService]
+  controllers: [UserController],
+  providers: [UserService, BcryptService],
+  exports: [UserService]
 })
-export class UsersModule { }
+export class UserModule { }

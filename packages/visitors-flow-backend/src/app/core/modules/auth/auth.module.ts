@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 
-import { UsersModule } from './../users/users.module';
+import { UserModule } from '../user/user.module';
 import { AuthController } from './controllers/auth.controller';
 import { AuthService } from './services/auth.service';
 import { LocalStrategy } from './strategy/local.strategy';
@@ -14,7 +14,7 @@ import { BcryptService } from '../../../shared/services/bcrypt.service';
 @Module({
     imports: [
         ConfigModule.forRoot(),
-        UsersModule,
+        UserModule,
         PassportModule.register({ session: true }),
         JwtModule.register({
             secret: process.env.JWT_SECRET,

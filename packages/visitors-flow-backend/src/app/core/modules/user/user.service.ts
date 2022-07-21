@@ -1,6 +1,6 @@
 import { InjectModel } from '@nestjs/mongoose';
 import { Injectable } from '@nestjs/common';
-import { Model, ObjectId } from 'mongoose';
+import { Model } from 'mongoose';
 import { User } from './schemas/user.shema';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common/exceptions';
 
 @Injectable()
-export class UsersService {
+export class UserService {
   constructor(
     @InjectModel('User') private readonly userModel: Model<User>,
     private bcryptService: BcryptService

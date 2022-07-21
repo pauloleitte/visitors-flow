@@ -3,9 +3,10 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './core/modules/users/users.module';
+import { UserModule } from './core/modules/user/user.module';
 import { AuthModule } from './core/modules/auth/auth.module';
-import { VisitorModule } from './core/modules/visitors/visitor.module';
+import { VisitorModule } from './core/modules/visitor/visitor.module';
+import { CeremonyModule } from './core/modules/ceremony/ceremony.module';
 // import { MailerModule } from '@nestjs-modules/mailer';
 // import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 // import * as path from 'path';
@@ -35,8 +36,9 @@ import { VisitorModule } from './core/modules/visitors/visitor.module';
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }),
-    UsersModule,
+    UserModule,
     VisitorModule,
+    CeremonyModule,
   ],
   controllers: [AppController],
   providers: [AppService],
