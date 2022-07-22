@@ -3,7 +3,7 @@ import 'package:dio/native_imp.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:visitors_flow_app/src/core/modules/auth/auth_module.dart';
 
-import 'core/app-routes.dart';
+import 'core/config/app_routes.dart';
 import 'core/modules/auth/repositories/user_repository.dart';
 import 'core/modules/auth/services/user_service.dart';
 import 'core/modules/auth/stores/user_store.dart';

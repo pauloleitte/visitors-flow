@@ -1,23 +1,22 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
-import '../../../app-constants.dart';
-import '../../../app-images.dart';
-import '../../../app-routes.dart';
+import '../../../config/app_routes.dart';
 import '../controllers/login/login_controller.dart';
+import '../../../config/theme_helper.dart';
+import 'header_widget.dart';
 
 class BodyLogin extends StatefulWidget {
-  BodyLogin({Key? key}) : super(key: key);
+  const BodyLogin({Key? key}) : super(key: key);
 
   @override
   _BodyLoginState createState() => _BodyLoginState();
 }
 
 class _BodyLoginState extends ModularState<BodyLogin, LoginController> {
-  final _form = GlobalKey<FormState>();
-  final _emailFocusNode = FocusNode();
-  final _passwordFocusNode = FocusNode();
+  final double _headerHeight = 250;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void didChangeDependencies() {
@@ -30,138 +29,110 @@ class _BodyLoginState extends ModularState<BodyLogin, LoginController> {
   }
 
   Future<void> login() async {
-    if (_form.currentState!.validate()) {
-      _form.currentState!.save();
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
       controller.login();
     }
-  }
-
-  void _requestFocus(FocusNode focusNode) {
-    setState(() {
-      FocusScope.of(context).requestFocus(focusNode);
-    });
-  }
-
-  Widget buildEmail() {
-    return TextFormField(
-        onTap: () {
-          _requestFocus(_emailFocusNode);
-        },
-        focusNode: _emailFocusNode,
-        style: TextStyle(color: Colors.white),
-        decoration: InputDecoration(
-            labelText: 'e-mail',
-            border: OutlineInputBorder(),
-            labelStyle: TextStyle(
-                color: kSecondaryColor,
-                fontWeight: _emailFocusNode.hasFocus
-                    ? FontWeight.bold
-                    : FontWeight.normal)),
-        keyboardType: TextInputType.emailAddress,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return 'campo obrigatório';
-          }
-          return null;
-        },
-        onSaved: (value) {
-          controller.email = value!;
-        });
-  }
-
-  Widget buildPassword() {
-    return TextFormField(
-        onTap: () {
-          _requestFocus(_passwordFocusNode);
-        },
-        obscureText: true,
-        focusNode: _passwordFocusNode,
-        style: TextStyle(color: Colors.white),
-        decoration: InputDecoration(
-            labelText: 'senha',
-            border: OutlineInputBorder(),
-            labelStyle: TextStyle(
-                color: kSecondaryColor,
-                fontWeight: _passwordFocusNode.hasFocus
-                    ? FontWeight.bold
-                    : FontWeight.normal)),
-        validator: (value) {
-          if (value!.isEmpty) {
-            return 'campo obrigatório';
-          }
-          return null;
-        },
-        onSaved: (value) {
-          controller.password = value!;
-        });
   }
 
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
-      return Container(
-        width: double.infinity,
-        height: MediaQuery.of(context).size.height,
-        color: kPrimaryColor,
-        child: Padding(
-          padding: EdgeInsets.all(10),
-          child: SingleChildScrollView(
-            child: Form(
-              key: _form,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: Image.asset(
-                        AppImages.logo,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    buildEmail(),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    buildPassword(),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 10),
-                            child: InkWell(
-                              child: Text(
-                                'Não tenho uma conta',
-                                style: kTextStyleLink,
-                              ),
-                              onTap: () =>
-                                  {Modular.to.navigate(AppRoutes.AUTH_SIGNUP)},
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: controller.busy ? null : login,
-                        child: Text(
-                          'Entrar',
-                          style: kTextStyleButtonAuth,
-                        ),
-                      ),
-                    )
-                  ]),
+      return SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: _headerHeight,
+              child: HeaderWidget(_headerHeight, true,
+                  Icons.login_rounded), //let's create a common header widget
             ),
-          ),
+            SafeArea(
+              child: Container(
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  margin: const EdgeInsets.fromLTRB(
+                      20, 10, 20, 10), // This will be the login form
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Hello',
+                        style: TextStyle(
+                            fontSize: 60, fontWeight: FontWeight.bold),
+                      ),
+                      const Text(
+                        'Signin into your account',
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                      const SizedBox(height: 30.0),
+                      Form(
+                          key: _formKey,
+                          child: Column(
+                            children: [
+                              Container(
+                                decoration:
+                                    ThemeHelper().inputBoxDecorationShaddow(),
+                                child: TextField(
+                                  decoration: ThemeHelper().textInputDecoration(
+                                      'User Name', 'Enter your user name'),
+                                ),
+                              ),
+                              const SizedBox(height: 30.0),
+                              Container(
+                                decoration:
+                                    ThemeHelper().inputBoxDecorationShaddow(),
+                                child: TextField(
+                                  obscureText: true,
+                                  decoration: ThemeHelper().textInputDecoration(
+                                      'Password', 'Enter your password'),
+                                ),
+                              ),
+                              Container(
+                                decoration:
+                                    ThemeHelper().buttonBoxDecoration(context),
+                                child: ElevatedButton(
+                                  style: ThemeHelper().buttonStyle(),
+                                  onPressed: () =>
+                                      {Modular.to.navigate(AppRoutes.PROFILE)},
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        40, 10, 40, 10),
+                                    child: Text(
+                                      'Sign In'.toUpperCase(),
+                                      style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin:
+                                    const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                                //child: Text('Don\'t have an account? Create'),
+                                child: Text.rich(TextSpan(children: [
+                                  const TextSpan(
+                                      text: "Don\'t have an account? "),
+                                  TextSpan(
+                                    text: 'Create',
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () => {
+                                            Modular.to
+                                                .navigate(AppRoutes.AUTH_SIGNUP)
+                                          },
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary),
+                                  ),
+                                ])),
+                              ),
+                            ],
+                          )),
+                    ],
+                  )),
+            ),
+          ],
         ),
       );
     });

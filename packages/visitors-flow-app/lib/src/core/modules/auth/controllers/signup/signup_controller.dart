@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
-import '../../../../app-routes.dart';
+import '../../../../config/app_routes.dart';
 import '../../models/user_create_model.dart';
 import '../../services/user_service.dart';
 import '../../view-models/signup_view_model.dart';

@@ -4,4 +4,5 @@ class AppRoutes {
   static const AUTH_LOGIN = '/auth/login';
   static const AUTH_SIGNUP = '/auth/signup';
   static const HOME = '/home';
+  static const PROFILE = '/auth/profile';
 }

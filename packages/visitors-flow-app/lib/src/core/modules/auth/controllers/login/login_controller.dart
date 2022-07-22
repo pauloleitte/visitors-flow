@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
-import '../../../../app-routes.dart';
+import '../../../../config/app_routes.dart';
 import '../../services/user_service.dart';
 import '../../stores/user_store.dart';
 import '../../view-models/login_view_model.dart';

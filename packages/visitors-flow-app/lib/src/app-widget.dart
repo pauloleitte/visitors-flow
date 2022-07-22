@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter_modular/flutter_modular.dart';
-import './core/app-theme.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Color primaryColor = HexColor('#DC54FE');
+    Color accentColor = HexColor('#8A02AE');
     return MaterialApp(
       title: 'Visitors Flow',
       debugShowCheckedModeBanner: false,
-      theme: theme(),
+      theme: ThemeData(
+        primaryColor: primaryColor,
+        scaffoldBackgroundColor: Colors.grey.shade100,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.grey)
+            .copyWith(secondary: accentColor),
+      ),
       navigatorObservers: [
         asuka.asukaHeroController //if u don`t add this Hero will not work
       ],
