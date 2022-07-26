@@ -16,8 +16,4 @@ abstract class _ProfileControllerBase with Store {
   UserService service;
 
   _ProfileControllerBase(this.service);
-
-  Future<void> getUser() async {
-    userModel = await service.getCurrentUser();
-  }
 }
