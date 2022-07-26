@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
-import '../widgets/body_profile.dart';
-import '../widgets/drawer_profile.dart';
+import 'package:visitors_flow_app/src/core/modules/home/widgets/body_home.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+import '../widgets/drawer_home.dart';
 
-  @override
-  _ProfilePageState createState() => _ProfilePageState();
-}
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
 
-class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Profile Page",
+          "Visitors Flow",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         elevation: 0.5,
@@ -66,8 +62,8 @@ class _ProfilePageState extends State<ProfilePage> {
           )
         ],
       ),
-      drawer: DrawerProfile(),
-      body: BodyProfile(),
+      drawer: const DrawerHome(),
+      body: const BodyHome(),
     );
   }
 }

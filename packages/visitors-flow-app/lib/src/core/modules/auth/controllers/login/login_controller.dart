@@ -35,7 +35,7 @@ abstract class _LoginControllerBase with Store {
       var result = await service.login(model);
       result.fold((failure) {
         asuka.showSnackBar(
-            SnackBar(content: Text('Usuário ou senha inválidos!')));
+            const SnackBar(content: Text('Usuário ou senha inválidos!')));
       }, (user) {
         store.setUser(user);
         Modular.to.navigate(AppRoutes.HOME);

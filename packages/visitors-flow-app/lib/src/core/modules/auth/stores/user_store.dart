@@ -22,4 +22,10 @@ abstract class _UserStoreBase with Store {
     user = v;
     _userService.saveLocalDB(v);
   }
+
+  @action
+  void clearUser() {
+    user = UserModel();
+    _userService.saveLocalDB(user);
+  }
 }

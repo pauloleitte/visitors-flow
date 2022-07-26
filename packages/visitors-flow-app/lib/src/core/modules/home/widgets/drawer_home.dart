@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:visitors_flow_app/src/core/modules/auth/controllers/login/login_controller.dart';
 
 import '../../../config/app_routes.dart';
 
-class DrawerProfile extends StatefulWidget {
-  DrawerProfile({Key? key}) : super(key: key);
+class DrawerHome extends StatefulWidget {
+  const DrawerHome({Key? key}) : super(key: key);
 
   @override
-  _DrawerProfileState createState() => _DrawerProfileState();
+  _DrawerHomeState createState() => _DrawerHomeState();
 }
 
-class _DrawerProfileState extends ModularState<DrawerProfile, LoginController> {
+class _DrawerHomeState extends State<DrawerHome> {
   @override
   Widget build(BuildContext context) {
-    double _drawerIconSize = 24;
-    double _drawerFontSize = 17;
+    double drawerIconSize = 24;
+    double drawerFontSize = 17;
 
     return Drawer(
       child: Container(
@@ -58,66 +57,36 @@ class _DrawerProfileState extends ModularState<DrawerProfile, LoginController> {
                 ),
               ),
             ),
+            Divider(
+              color: Theme.of(context).primaryColor,
+              height: 1,
+            ),
             ListTile(
               leading: Icon(
-                Icons.screen_lock_landscape_rounded,
-                size: _drawerIconSize,
+                Icons.supervised_user_circle_outlined,
+                size: drawerIconSize,
                 color: Theme.of(context).colorScheme.secondary,
               ),
               title: Text(
-                'Splash Screen',
+                'Profile',
                 style: TextStyle(
-                    fontSize: 17,
+                    fontSize: drawerFontSize,
                     color: Theme.of(context).colorScheme.secondary),
               ),
-              onTap: () => {Modular.to.navigate(AppRoutes.SPLASH)},
-            ),
-            Divider(
-              color: Theme.of(context).primaryColor,
-              height: 1,
-            ),
-            ListTile(
-              leading: Icon(Icons.login_rounded,
-                  size: _drawerIconSize,
-                  color: Theme.of(context).colorScheme.secondary),
-              title: Text(
-                'Login Page',
-                style: TextStyle(
-                    fontSize: _drawerFontSize,
-                    color: Theme.of(context).colorScheme.secondary),
-              ),
-              onTap: () => {Modular.to.navigate(AppRoutes.AUTH_LOGIN)},
-            ),
-            Divider(
-              color: Theme.of(context).primaryColor,
-              height: 1,
-            ),
-            ListTile(
-              leading: Icon(Icons.person_add_alt_1,
-                  size: _drawerIconSize,
-                  color: Theme.of(context).colorScheme.secondary),
-              title: Text(
-                'Registration Page',
-                style: TextStyle(
-                    fontSize: _drawerFontSize,
-                    color: Theme.of(context).colorScheme.secondary),
-              ),
-              onTap: () => {Modular.to.navigate(AppRoutes.AUTH_SIGNUP)},
-            ),
-            Divider(
-              color: Theme.of(context).primaryColor,
-              height: 1,
+              onTap: () {
+                Modular.to.navigate(AppRoutes.PROFILE);
+              },
             ),
             ListTile(
               leading: Icon(
                 Icons.logout_rounded,
-                size: _drawerIconSize,
+                size: drawerIconSize,
                 color: Theme.of(context).colorScheme.secondary,
               ),
               title: Text(
                 'Logout',
                 style: TextStyle(
-                    fontSize: _drawerFontSize,
+                    fontSize: drawerFontSize,
                     color: Theme.of(context).colorScheme.secondary),
               ),
               onTap: () {

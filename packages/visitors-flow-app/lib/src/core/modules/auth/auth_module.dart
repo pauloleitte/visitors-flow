@@ -1,5 +1,4 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:visitors_flow_app/src/core/modules/auth/pages/profile_page.dart';
 
 import 'controllers/login/login_controller.dart';
 import 'controllers/signup/signup_controller.dart';
@@ -19,9 +18,8 @@ class AuthModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => LoginPage()),
-    ChildRoute('/signup', child: (_, args) => SignupPage()),
-    ChildRoute('/login', child: (_, args) => LoginPage()),
-    ChildRoute('/profile', child: (_, args) => ProfilePage())
+    ChildRoute('/', child: (_, args) => const LoginPage()),
+    ChildRoute('/signup', child: (_, args) => const SignupPage()),
+    ChildRoute('/login', child: (_, args) => const LoginPage()),
   ];
 }

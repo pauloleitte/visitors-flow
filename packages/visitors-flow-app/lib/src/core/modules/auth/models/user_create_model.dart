@@ -3,6 +3,7 @@ class UserCreateModel {
   String? name;
   String? email;
   String? password;
+  String? phone;
   String? createdAt;
   String? updatedAt;
   int? iV;
@@ -12,6 +13,7 @@ class UserCreateModel {
       this.name,
       this.email,
       this.password,
+      this.phone,
       this.createdAt,
       this.updatedAt,
       this.iV});
@@ -21,20 +23,22 @@ class UserCreateModel {
     name = json['name'];
     email = json['email'];
     password = json['password'];
+    phone = json['phone'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     iV = json['__v'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['name'] = this.name;
-    data['email'] = this.email;
-    data['password'] = this.password;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['__v'] = this.iV;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    data['name'] = name;
+    data['email'] = email;
+    data['password'] = password;
+    data['phone'] = phone;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    data['__v'] = iV;
     return data;
   }
 }

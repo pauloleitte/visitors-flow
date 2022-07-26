@@ -4,6 +4,7 @@ class UserModel {
   String? name;
   String? email;
   String? avatar;
+  String? phone;
 
   UserModel({this.auth, this.token, this.name, this.email});
 
@@ -12,16 +13,18 @@ class UserModel {
     token = json['token'];
     name = json['name'];
     email = json['email'];
+    phone = json['phone'];
     avatar = json['avatar'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['auth'] = this.auth;
-    data['token'] = this.token;
-    data['name'] = this.name;
-    data['email'] = this.email;
-    data['avatar'] = this.avatar;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['auth'] = auth;
+    data['token'] = token;
+    data['name'] = name;
+    data['email'] = email;
+    data['phone'] = phone;
+    data['avatar'] = avatar;
     return data;
   }
 }

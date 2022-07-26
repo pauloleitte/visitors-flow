@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -24,13 +22,10 @@ abstract class _SignupControllerBase with Store {
   String? password;
 
   @observable
-  String? confirmPassword;
+  String? phone;
 
   @observable
   bool busy = false;
-
-  @observable
-  File? file;
 
   @observable
   UserCreateModel? userCreateModel;
@@ -41,32 +36,33 @@ abstract class _SignupControllerBase with Store {
 
   @computed
   bool get isValid =>
-      model.isValidEmail &&
-      model.isValidPassword &&
-      model.isValidName &&
-      model.isValidConfirmPassword;
+      model.isValidEmail && model.isValidPassword && model.isValidName;
 
   @computed
   bool get isValidEmail => model.isValidEmail;
 
   @computed
   SignupViewModel get model => SignupViewModel(
-      email: email,
-      password: password,
-      name: name,
-      confirmPassword: confirmPassword);
+        email: email,
+        password: password,
+        name: name,
+        phone: phone,
+      );
 
   Future<void> signup() async {
     try {
       busy = true;
       var result = await service.signup(model);
       result.fold((l) {
-        asuka.showSnackBar(SnackBar(
+        asuka.showSnackBar(const SnackBar(
             content: Text(
                 'Não foi possível realizar o cadastro, por favor tente novamente')));
       }, (userCreateModel) async {
-        this.userCreateModel = userCreateModel;
-        Modular.to.navigate(AppRoutes.AUTH_HOME);
+        asuka.showSnackBar(
+            const SnackBar(content: Text('Cadastro realizado com sucesso!')));
+        Future.delayed(Duration(seconds: 2), () {
+          Modular.to.navigate(AppRoutes.AUTH_HOME);
+        });
       });
     } catch (e) {
       busy = false;

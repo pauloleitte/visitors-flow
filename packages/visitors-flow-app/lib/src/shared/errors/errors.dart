@@ -3,6 +3,7 @@ abstract class Failure implements Exception {
 }
 
 class DioFailure extends Failure {
+  @override
   final String? message;
   final int? statusCode;
 

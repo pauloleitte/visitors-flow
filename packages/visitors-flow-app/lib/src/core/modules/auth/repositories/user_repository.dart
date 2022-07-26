@@ -22,7 +22,7 @@ class UserRepository implements IUserRepository {
   @override
   Future<Either<Failure, UserModel>> login(LoginRequestModel model) async {
     try {
-      var response = await _client.post('/login', data: model.toJson());
+      var response = await _client.post('/auth/login', data: model.toJson());
       if (response.statusCode == HttpStatus.ok) {
         var result = UserModel.fromJson(response.data);
         return Right(result);
@@ -41,7 +41,7 @@ class UserRepository implements IUserRepository {
   Future<Either<Failure, UserCreateModel>> signup(
       SignupRequestModel model) async {
     try {
-      var response = await _client.post('/signup', data: model.toJson());
+      var response = await _client.post('/users', data: model.toJson());
       if (response.statusCode == HttpStatus.created) {
         return Right(UserCreateModel.fromJson(response.data));
       }

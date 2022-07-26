@@ -4,7 +4,7 @@ import '../../../config/app_routes.dart';
 import 'dart:async';
 
 class SplashPage extends StatefulWidget {
-  SplashPage({Key? key}) : super(key: key);
+  const SplashPage({Key? key}) : super(key: key);
 
   @override
   _SplashPageState createState() => _SplashPageState();
@@ -34,7 +34,7 @@ class _SplashPageState extends State<SplashPage> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Theme.of(context).accentColor,
+            Theme.of(context).colorScheme.secondary,
             Theme.of(context).primaryColor
           ],
           begin: const FractionalOffset(0, 0),
@@ -45,7 +45,7 @@ class _SplashPageState extends State<SplashPage> {
       ),
       child: AnimatedOpacity(
         opacity: _isVisible ? 1.0 : 0,
-        duration: Duration(milliseconds: 1200),
+        duration: const Duration(milliseconds: 1200),
         child: Center(
           child: Container(
             height: 140.0,
@@ -57,7 +57,7 @@ class _SplashPageState extends State<SplashPage> {
                   BoxShadow(
                     color: Colors.black.withOpacity(0.3),
                     blurRadius: 2.0,
-                    offset: Offset(5.0, 3.0),
+                    offset: const Offset(5.0, 3.0),
                     spreadRadius: 2.0,
                   )
                 ]),

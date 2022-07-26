@@ -5,7 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../../../config/app_routes.dart';
 import '../controllers/login/login_controller.dart';
 import '../../../config/theme_helper.dart';
-import 'header_widget.dart';
+import '../../../../shared/widgets/header_widget.dart';
 
 class BodyLogin extends StatefulWidget {
   const BodyLogin({Key? key}) : super(key: key);
@@ -43,8 +43,8 @@ class _BodyLoginState extends ModularState<BodyLogin, LoginController> {
           children: [
             SizedBox(
               height: _headerHeight,
-              child: HeaderWidget(_headerHeight, true,
-                  Icons.login_rounded), //let's create a common header widget
+              child: HeaderWidget(_headerHeight, false,
+                  Icons.home), //let's create a common header widget
             ),
             SafeArea(
               child: Container(
@@ -54,12 +54,12 @@ class _BodyLoginState extends ModularState<BodyLogin, LoginController> {
                   child: Column(
                     children: [
                       const Text(
-                        'Hello',
+                        'Olá',
                         style: TextStyle(
                             fontSize: 60, fontWeight: FontWeight.bold),
                       ),
                       const Text(
-                        'Signin into your account',
+                        'Seja bem vindo!',
                         style: TextStyle(color: Colors.grey),
                       ),
                       const SizedBox(height: 30.0),
@@ -70,33 +70,39 @@ class _BodyLoginState extends ModularState<BodyLogin, LoginController> {
                               Container(
                                 decoration:
                                     ThemeHelper().inputBoxDecorationShaddow(),
-                                child: TextField(
+                                child: TextFormField(
                                   decoration: ThemeHelper().textInputDecoration(
-                                      'User Name', 'Enter your user name'),
+                                      'Email', 'Insira seu email'),
+                                  onSaved: (value) {
+                                    controller.email = value;
+                                  },
                                 ),
                               ),
                               const SizedBox(height: 30.0),
                               Container(
                                 decoration:
                                     ThemeHelper().inputBoxDecorationShaddow(),
-                                child: TextField(
+                                child: TextFormField(
                                   obscureText: true,
                                   decoration: ThemeHelper().textInputDecoration(
-                                      'Password', 'Enter your password'),
+                                      'Senha', 'Insira sua senha'),
+                                  onSaved: (value) {
+                                    controller.password = value;
+                                  },
                                 ),
                               ),
+                              const SizedBox(height: 30.0),
                               Container(
                                 decoration:
                                     ThemeHelper().buttonBoxDecoration(context),
                                 child: ElevatedButton(
                                   style: ThemeHelper().buttonStyle(),
-                                  onPressed: () =>
-                                      {Modular.to.navigate(AppRoutes.PROFILE)},
+                                  onPressed: controller.busy ? null : login,
                                   child: Padding(
                                     padding: const EdgeInsets.fromLTRB(
                                         40, 10, 40, 10),
                                     child: Text(
-                                      'Sign In'.toUpperCase(),
+                                      'Entrar'.toUpperCase(),
                                       style: const TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
@@ -111,9 +117,9 @@ class _BodyLoginState extends ModularState<BodyLogin, LoginController> {
                                 //child: Text('Don\'t have an account? Create'),
                                 child: Text.rich(TextSpan(children: [
                                   const TextSpan(
-                                      text: "Don\'t have an account? "),
+                                      text: "Não possui uma conta? "),
                                   TextSpan(
-                                    text: 'Create',
+                                    text: 'Criar',
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () => {
                                             Modular.to

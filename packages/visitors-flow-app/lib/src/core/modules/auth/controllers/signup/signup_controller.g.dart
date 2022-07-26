@@ -6,7 +6,7 @@ part of 'signup_controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$SignupController on _SignupControllerBase, Store {
   Computed<bool>? _$isValidComputed;
@@ -30,7 +30,8 @@ mixin _$SignupController on _SignupControllerBase, Store {
               name: '_SignupControllerBase.model'))
           .value;
 
-  final _$nameAtom = Atom(name: '_SignupControllerBase.name');
+  late final _$nameAtom =
+      Atom(name: '_SignupControllerBase.name', context: context);
 
   @override
   String? get name {
@@ -45,7 +46,8 @@ mixin _$SignupController on _SignupControllerBase, Store {
     });
   }
 
-  final _$emailAtom = Atom(name: '_SignupControllerBase.email');
+  late final _$emailAtom =
+      Atom(name: '_SignupControllerBase.email', context: context);
 
   @override
   String? get email {
@@ -60,7 +62,8 @@ mixin _$SignupController on _SignupControllerBase, Store {
     });
   }
 
-  final _$passwordAtom = Atom(name: '_SignupControllerBase.password');
+  late final _$passwordAtom =
+      Atom(name: '_SignupControllerBase.password', context: context);
 
   @override
   String? get password {
@@ -75,23 +78,24 @@ mixin _$SignupController on _SignupControllerBase, Store {
     });
   }
 
-  final _$confirmPasswordAtom =
-      Atom(name: '_SignupControllerBase.confirmPassword');
+  late final _$phoneAtom =
+      Atom(name: '_SignupControllerBase.phone', context: context);
 
   @override
-  String? get confirmPassword {
-    _$confirmPasswordAtom.reportRead();
-    return super.confirmPassword;
+  String? get phone {
+    _$phoneAtom.reportRead();
+    return super.phone;
   }
 
   @override
-  set confirmPassword(String? value) {
-    _$confirmPasswordAtom.reportWrite(value, super.confirmPassword, () {
-      super.confirmPassword = value;
+  set phone(String? value) {
+    _$phoneAtom.reportWrite(value, super.phone, () {
+      super.phone = value;
     });
   }
 
-  final _$busyAtom = Atom(name: '_SignupControllerBase.busy');
+  late final _$busyAtom =
+      Atom(name: '_SignupControllerBase.busy', context: context);
 
   @override
   bool get busy {
@@ -106,14 +110,31 @@ mixin _$SignupController on _SignupControllerBase, Store {
     });
   }
 
+  late final _$userCreateModelAtom =
+      Atom(name: '_SignupControllerBase.userCreateModel', context: context);
+
+  @override
+  UserCreateModel? get userCreateModel {
+    _$userCreateModelAtom.reportRead();
+    return super.userCreateModel;
+  }
+
+  @override
+  set userCreateModel(UserCreateModel? value) {
+    _$userCreateModelAtom.reportWrite(value, super.userCreateModel, () {
+      super.userCreateModel = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
 name: ${name},
 email: ${email},
 password: ${password},
-confirmPassword: ${confirmPassword},
+phone: ${phone},
 busy: ${busy},
+userCreateModel: ${userCreateModel},
 isValid: ${isValid},
 isValidEmail: ${isValidEmail},
 model: ${model}

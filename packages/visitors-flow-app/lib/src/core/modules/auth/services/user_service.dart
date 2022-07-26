@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import '../../../../shared/errors/errors.dart';
@@ -41,16 +40,16 @@ class UserService implements IUserService {
 
   @override
   Future<Either<Failure, UserModel>> login(LoginViewModel model) async {
-    var data = LoginRequestModel(email: model.email, password: model.password);
-    var result = await _userRepository.login(data);
-
-    return result;
+    return await _userRepository
+        .login(LoginRequestModel(email: model.email, password: model.password));
   }
 
   @override
   Future<Either<Failure, UserCreateModel>> signup(SignupViewModel model) async {
-    var data = SignupRequestModel(
-        name: model.name, email: model.email, password: model.password);
-    return await _userRepository.signup(data);
+    return await _userRepository.signup(SignupRequestModel(
+        name: model.name,
+        email: model.email,
+        password: model.password,
+        phone: model.phone));
   }
 }
