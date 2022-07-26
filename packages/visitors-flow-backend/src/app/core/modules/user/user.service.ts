@@ -39,6 +39,7 @@ export class UserService {
     return await this.userModel.create({
       name: user.name,
       email: user.email,
+      phone: user.phone,
       password: await this.bcryptService.encrypt(user.password),
     });
   }
@@ -55,5 +56,9 @@ export class UserService {
     } catch (e) {
       throw new InternalServerErrorException(e);
     }
+  }
+
+  async delete(id: string) {
+    return await this.userModel.findByIdAndDelete(id).exec();
   }
 }

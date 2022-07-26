@@ -14,6 +14,9 @@ export class User {
   @Prop()
   password: string;
 
+  @Prop()
+  phone: string;
+
   @Prop({ required: false })
   passwordResetToken: string;
 
