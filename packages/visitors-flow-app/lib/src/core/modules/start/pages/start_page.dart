@@ -20,34 +20,6 @@ class StartPageState extends State<StartPage> {
     super.initState();
   }
 
-  // BottomNavigationBar(
-  //             currentIndex: 0,
-  //             type: BottomNavigationBarType.fixed,
-  //             backgroundColor: Theme.of(context).primaryColor,
-  //             selectedItemColor: Colors.white,
-  //             unselectedItemColor: Colors.white.withOpacity(.60),
-  //             selectedFontSize: 14,
-  //             unselectedFontSize: 14,
-  //             onTap: (index) {
-  //               switch (index) {
-  //                 case 0:
-  //                   Modular.to.navigate(AppRoutes.HOME);
-  //                   break;
-  //                 case 1:
-  //                   Modular.to.navigate(AppRoutes.CEREMONY);
-  //                   break;
-  //                 case 2:
-  //                   Modular.to.navigate(AppRoutes.VISITOR);
-  //                   break;
-  //                 case 3:
-  //                   Modular.to.navigate(AppRoutes.PROFILE);
-  //                   break;
-  //                 default:
-  //                   Modular.to.navigate(AppRoutes.HOME);
-  //               }
-  //             },
-  //           )
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +48,7 @@ class StartPageState extends State<StartPage> {
             currentIndex: store.currentIndex,
             type: BottomNavigationBarType.fixed,
             backgroundColor: Theme.of(context).primaryColor,
-            selectedItemColor: Colors.white,
+            selectedItemColor: Theme.of(context).colorScheme.secondary,
             unselectedItemColor: Colors.white.withOpacity(.60),
             selectedFontSize: 14,
             unselectedFontSize: 14,

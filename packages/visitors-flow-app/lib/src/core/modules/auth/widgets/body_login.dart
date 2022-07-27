@@ -53,10 +53,12 @@ class _BodyLoginState extends ModularState<BodyLogin, LoginController> {
                       20, 10, 20, 10), // This will be the login form
                   child: Column(
                     children: [
-                      const Text(
+                      Text(
                         'Olá',
                         style: TextStyle(
-                            fontSize: 60, fontWeight: FontWeight.bold),
+                            fontSize: 60,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).primaryColor),
                       ),
                       const Text(
                         'Seja bem vindo!',
@@ -127,9 +129,7 @@ class _BodyLoginState extends ModularState<BodyLogin, LoginController> {
                                           },
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .secondary),
+                                        color: Theme.of(context).primaryColor),
                                   ),
                                 ])),
                               ),

@@ -1,13 +1,13 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'pages/home_page.dart';
+import 'pages/visitor_page.dart';
 
-class HomeModule extends Module {
+class VisitorModule extends Module {
   @override
   final List<Bind> binds = [];
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => HomePage())
+    ChildRoute('/', child: (_, args) => VisitorPage())
   ];
 }

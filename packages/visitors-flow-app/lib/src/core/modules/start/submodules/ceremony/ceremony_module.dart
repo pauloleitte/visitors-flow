@@ -16,8 +16,10 @@ class CeremonyModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => const CeremonyPage(), children: [
-      ChildRoute('/form', child: (_, args) => const CeremonyFormPage()),
-    ]),
+    ChildRoute(
+      '/',
+      child: (_, args) => const CeremonyPage(),
+    ),
+    ChildRoute('/form', child: (_, args) => const CeremonyFormPage()),
   ];
 }

@@ -50,16 +50,7 @@ class ThemeHelper {
       boxShadow: const [
         BoxShadow(color: Colors.black26, offset: Offset(0, 4), blurRadius: 5.0)
       ],
-      gradient: LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        stops: const [0.0, 1.0],
-        colors: [
-          c1,
-          c2,
-        ],
-      ),
-      color: Colors.deepPurple.shade300,
+      color: c2,
       borderRadius: BorderRadius.circular(30),
     );
   }

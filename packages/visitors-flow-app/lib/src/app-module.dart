@@ -32,7 +32,7 @@ class AppModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ModuleRoute(AppRoutes.AUTH_LOGIN, module: AuthModule()),
+    ModuleRoute(AppRoutes.AUTH, module: AuthModule()),
     ModuleRoute(AppRoutes.START, module: StartModule()),
     ChildRoute(AppRoutes.SPLASH, child: (_, __) => const SplashPage()),
   ];
