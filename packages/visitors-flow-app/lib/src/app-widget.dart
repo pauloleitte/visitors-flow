@@ -9,8 +9,8 @@ class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color primaryColor = HexColor('#DC54FE');
-    Color accentColor = HexColor('#8A02AE');
+    Color primaryColor = HexColor('#344955');
+    Color accentColor = HexColor('#F9AA33');
     return MaterialApp(
       title: 'Visitors Flow',
       debugShowCheckedModeBanner: false,

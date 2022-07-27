@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
-import '../../../../shared/widgets/header_widget.dart';
-import '../../../config/app_routes.dart';
-import '../../../config/theme_helper.dart';
-import '../../auth/stores/user_store.dart';
+import '../../../../../config/theme_helper.dart';
+import '../../../../auth/stores/user_store.dart';
 import '../controllers/profile_controller.dart';
 
 class BodyProfile extends StatefulWidget {
@@ -30,35 +27,16 @@ class _BodyProfileState extends ModularState<BodyProfile, ProfileController> {
       return SingleChildScrollView(
         child: Stack(
           children: [
-            const SizedBox(
-              height: 150,
-              child: HeaderWidget(150, false, Icons.person_add_alt_1_rounded),
-            ),
             Container(
               margin: const EdgeInsets.fromLTRB(25, 50, 25, 10),
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               alignment: Alignment.center,
               child: Column(
                 children: [
-                  //arrow back for login page
                   Form(
                     key: _formKey,
                     child: Column(
                       children: [
-                        const SizedBox(
-                          height: 150,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            IconButton(
-                              icon: const Icon(Icons.arrow_back_ios),
-                              onPressed: () {
-                                Modular.to.navigate(AppRoutes.HOME);
-                              },
-                            ),
-                          ],
-                        ),
                         const SizedBox(height: 30.0),
                         Container(
                           decoration: ThemeHelper().inputBoxDecorationShaddow(),

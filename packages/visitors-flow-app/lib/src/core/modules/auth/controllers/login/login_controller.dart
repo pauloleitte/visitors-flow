@@ -38,7 +38,7 @@ abstract class _LoginControllerBase with Store {
             const SnackBar(content: Text('Usuário ou senha inválidos!')));
       }, (user) {
         store.setUser(user);
-        Modular.to.navigate(AppRoutes.HOME);
+        Modular.to.navigate(AppRoutes.START);
       });
     } catch (e) {
       busy = false;

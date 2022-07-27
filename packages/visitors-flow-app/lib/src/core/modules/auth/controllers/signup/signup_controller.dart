@@ -60,8 +60,8 @@ abstract class _SignupControllerBase with Store {
       }, (userCreateModel) async {
         asuka.showSnackBar(
             const SnackBar(content: Text('Cadastro realizado com sucesso!')));
-        Future.delayed(Duration(seconds: 2), () {
-          Modular.to.navigate(AppRoutes.AUTH_HOME);
+        Future.delayed(const Duration(seconds: 2), () {
+          Modular.to.navigate(AppRoutes.AUTH_LOGIN);
         });
       });
     } catch (e) {

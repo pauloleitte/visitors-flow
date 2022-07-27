@@ -16,7 +16,7 @@ class _SplashPageState extends State<SplashPage> {
   _SplashPageState() {
     Timer(const Duration(milliseconds: 2000), () {
       setState(() {
-        Modular.to.navigate(AppRoutes.AUTH_HOME);
+        Modular.to.navigate(AppRoutes.AUTH_LOGIN);
       });
     });
 

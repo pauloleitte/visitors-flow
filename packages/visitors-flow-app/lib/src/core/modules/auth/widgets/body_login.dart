@@ -122,8 +122,8 @@ class _BodyLoginState extends ModularState<BodyLogin, LoginController> {
                                     text: 'Criar',
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () => {
-                                            Modular.to
-                                                .navigate(AppRoutes.AUTH_SIGNUP)
+                                            Modular.to.pushNamed(
+                                                AppRoutes.AUTH_SIGNUP)
                                           },
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
