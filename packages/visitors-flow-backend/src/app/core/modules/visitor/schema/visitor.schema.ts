@@ -18,7 +18,7 @@ export class Visitor {
   isChurchgoer: boolean;
 
   @Prop({ required: false })
-  churh: string;
+  church: string;
 
   @Prop({ required: false })
   observations: string;

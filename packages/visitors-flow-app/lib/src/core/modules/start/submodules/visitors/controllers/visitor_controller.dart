@@ -2,56 +2,62 @@ import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:visitors_flow_app/src/core/modules/start/submodules/ceremony/models/ceremony_model.dart';
+import 'package:visitors_flow_app/src/core/modules/start/submodules/visitors/models/visitor_model.dart';
+import 'package:visitors_flow_app/src/core/modules/start/submodules/visitors/services/visitor_service.dart';
+import 'package:visitors_flow_app/src/core/modules/start/submodules/visitors/view-model/visitor_view_model.dart';
 
 import '../../../../../config/app_routes.dart';
-import '../services/ceremony_service.dart';
-import '../view-models/ceremony_view_model.dart';
-part 'ceremony_controller.g.dart';
+part 'visitor_controller.g.dart';
 
-class CeremonyController = _CeremonyControllerBase with _$CeremonyController;
+class VisitorController = _VisitorControllerBase with _$VisitorController;
 
-abstract class _CeremonyControllerBase with Store {
-  @observable
-  String? name;
-
-  @observable
-  String? description;
-
-  @observable
-  String? date;
-
+abstract class _VisitorControllerBase with Store {
   @observable
   String? id;
+  @observable
+  String? name;
+  @observable
+  String? email;
+  @observable
+  String? telephone;
+  @observable
+  bool? isChurchgoer;
+  @observable
+  String? church;
+  @observable
+  String? observations;
+
+  @observable
+  List<VisitorModel> visitors = [];
 
   @observable
   bool busy = false;
 
-  CeremonyService service;
+  VisitorService service;
 
-  _CeremonyControllerBase(this.service);
-
-  @observable
-  List<CeremonyModel> ceremonies = [];
+  _VisitorControllerBase(this.service);
 
   @computed
-  CeremonyViewModel get model => CeremonyViewModel(
+  VisitorViewModel get model => VisitorViewModel(
         id: id,
         name: name,
-        date: date,
-        description: description,
+        email: email,
+        telephone: telephone,
+        isChurchgoer: isChurchgoer,
+        church: church,
+        observations: observations,
       );
 
-  Future<void> getCeremony() async {
+  Future<void> getVisitor() async {
     try {
       busy = true;
-      var result = await service.getCeremony(model);
+      var result = await service.getVisitor(model);
       result.fold((l) {
         asuka.showSnackBar(const SnackBar(
             content: Text(
-                'Não foi possível recuperar o culto, por favor tente novamente')));
-      }, (ceremony) async {
-        print(ceremony);
+                'Não foi possível recuperar o visitante, por favor tente novamente')));
+      }, (visitor) async {
+        print(visitor);
       });
     } catch (e) {
       busy = false;
@@ -61,32 +67,32 @@ abstract class _CeremonyControllerBase with Store {
     }
   }
 
-  Future<void> getCeremonies() async {
+  Future<void> getVisitors() async {
     try {
       busy = true;
-      var result = await service.getCeremonies();
+      var result = await service.getVisitors();
       result.fold((l) {
         asuka.showSnackBar(const SnackBar(
             content: Text(
-                'Não foi possível recuperar os cultos, por favor tente novamente')));
-      }, (ceremonies) async {
+                'Não foi possível recuperar os visitantes, por favor tente novamente')));
+      }, (visitors) async {
         busy = false;
-        this.ceremonies = ceremonies;
+        this.visitors = visitors;
       });
     } catch (e) {
       busy = false;
       asuka.showSnackBar(const SnackBar(
           content: Text(
-              'Não foi possível recuperar os cultos, por favor tente novamente')));
+              'Não foi possível recuperar os visitantes, por favor tente novamente')));
     } finally {
       busy = false;
     }
   }
 
-  Future<void> deleteCeremony() async {
+  Future<void> deleteVisitor() async {
     try {
       busy = true;
-      var result = await service.deleteCeremony(model);
+      var result = await service.deleteVisitor(model);
       result.fold((l) {
         asuka.showSnackBar(const SnackBar(
             content: Text(
@@ -103,10 +109,10 @@ abstract class _CeremonyControllerBase with Store {
     }
   }
 
-  Future<void> updateCeremony() async {
+  Future<void> udapteVisitor() async {
     try {
       busy = true;
-      var result = await service.updateCeremony(model);
+      var result = await service.updateVisitor(model);
       result.fold((l) {
         asuka.showSnackBar(const SnackBar(
             content: Text(
@@ -115,7 +121,7 @@ abstract class _CeremonyControllerBase with Store {
         asuka.showSnackBar(
             const SnackBar(content: Text('Atualização realizada com sucesso')));
         Future.delayed(const Duration(seconds: 2), () {
-          Modular.to.navigate(AppRoutes.CEREMONY);
+          Modular.to.navigate(AppRoutes.VISITOR);
         });
       });
     } catch (e) {
@@ -126,10 +132,10 @@ abstract class _CeremonyControllerBase with Store {
     }
   }
 
-  Future<void> createCeremony() async {
+  Future<void> createVisitor() async {
     try {
       busy = true;
-      var result = await service.createCeremony(model);
+      var result = await service.createVisitor(model);
       result.fold((l) {
         asuka.showSnackBar(const SnackBar(
             content: Text(
@@ -138,7 +144,7 @@ abstract class _CeremonyControllerBase with Store {
         asuka.showSnackBar(
             const SnackBar(content: Text('Cadastro realizado com sucesso!')));
         Future.delayed(const Duration(seconds: 2), () {
-          Modular.to.navigate(AppRoutes.CEREMONY);
+          Modular.to.navigate(AppRoutes.VISITOR);
         });
       });
     } catch (e) {

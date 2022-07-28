@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:dio/native_imp.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:visitors_flow_app/src/core/modules/start/start_module.dart';
+import 'package:visitors_flow_app/src/shared/http/custom_dio.dart';
 
 import 'core/config/app_routes.dart';
 import 'core/modules/auth/auth_module.dart';
@@ -14,7 +15,7 @@ import 'core/modules/splash/pages/splash_page.dart';
 class AppModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.lazySingleton((i) => DioForNative(i.get())),
+    Bind.lazySingleton((i) => CustomDio(i.get())),
     Bind((i) => UserService(i.get())),
     Bind((i) => UserRepository(i.get())),
     Bind((i) => UserStore(i.get())),
