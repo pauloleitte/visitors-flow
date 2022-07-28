@@ -38,63 +38,33 @@ class CeremonyItem extends StatelessWidget {
             onClosing: () {},
             builder: (context) {
               return Container(
-                padding: const EdgeInsets.all(10.0),
-                color: Colors.grey.shade100,
-                child: Wrap(
-                  children: [
-                    ListTile(
-                      leading: const Icon(Icons.add),
-                      title: const Text('Cadastrar Visitante'),
-                      onTap: () {
-                        print('adicionar visitante');
-                      },
-                    ),
-                    ListTile(
-                      leading: const Icon(Icons.edit),
-                      title: const Text('Editar'),
-                      onTap: () {
-                        print('adicionar visitante');
-                      },
-                    ),
-                    ListTile(
-                      leading: const Icon(Icons.delete),
-                      title: const Text('Excluir'),
-                      onTap: () {
-                        print('adicionar visitante');
-                      },
-                    ),
-                  ],
-                ),
-                // child: Column(
-                //   mainAxisSize: MainAxisSize.min,
-                //   children: <Widget>[
-                //     Padding(
-                //       padding: const EdgeInsets.all(10.0),
-                //       child: ElevatedButton(
-                //         child: const Text(
-                //           "Editar",
-                //           style: TextStyle(color: Colors.black, fontSize: 20.0),
-                //         ),
-                //         onPressed: () {
-                //           print('editar');
-                //         },
-                //       ),
-                //     ),
-                //     Padding(
-                //       padding: const EdgeInsets.all(10.0),
-                //       child: ElevatedButton(
-                //         child: const Text(
-                //           "Excluir",
-                //           style: TextStyle(color: Colors.black, fontSize: 20.0),
-                //         ),
-                //         onPressed: () {
-                //           print('excluir');
-                //         },
-                //       ),
-                //     ),
-                //   ],
-                // ),
-              );
+                  padding: const EdgeInsets.all(10.0),
+                  color: Colors.grey.shade100,
+                  child: Wrap(
+                    children: [
+                      ListTile(
+                        leading: const Icon(Icons.add),
+                        title: const Text('Cadastrar Visitante'),
+                        onTap: () {
+                          print('adicionar visitante');
+                        },
+                      ),
+                      ListTile(
+                        leading: const Icon(Icons.edit),
+                        title: const Text('Editar'),
+                        onTap: () {
+                          print('adicionar visitante');
+                        },
+                      ),
+                      ListTile(
+                        leading: const Icon(Icons.delete),
+                        title: const Text('Excluir'),
+                        onTap: () {
+                          print('adicionar visitante');
+                        },
+                      ),
+                    ],
+                  ));
             },
           );
         });

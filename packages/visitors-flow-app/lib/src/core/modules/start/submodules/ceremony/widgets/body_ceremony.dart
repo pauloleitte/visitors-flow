@@ -22,7 +22,6 @@ class _BodyCeremonyState
 
   init() async {
     await controller.getCeremonies();
-    print(controller.ceremonies);
   }
 
   @override

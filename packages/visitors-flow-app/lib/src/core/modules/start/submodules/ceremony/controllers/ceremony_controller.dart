@@ -50,9 +50,7 @@ abstract class _CeremonyControllerBase with Store {
         asuka.showSnackBar(const SnackBar(
             content: Text(
                 'Não foi possível recuperar o culto, por favor tente novamente')));
-      }, (ceremony) async {
-        print(ceremony);
-      });
+      }, (ceremony) async {});
     } catch (e) {
       busy = false;
       asuka.showSnackBar(SnackBar(content: Text(e.toString())));

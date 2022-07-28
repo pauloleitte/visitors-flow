@@ -97,6 +97,22 @@ mixin _$CeremonyController on _CeremonyControllerBase, Store {
     });
   }
 
+  late final _$ceremoniesAtom =
+      Atom(name: '_CeremonyControllerBase.ceremonies', context: context);
+
+  @override
+  List<CeremonyModel> get ceremonies {
+    _$ceremoniesAtom.reportRead();
+    return super.ceremonies;
+  }
+
+  @override
+  set ceremonies(List<CeremonyModel> value) {
+    _$ceremoniesAtom.reportWrite(value, super.ceremonies, () {
+      super.ceremonies = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
@@ -105,6 +121,7 @@ description: ${description},
 date: ${date},
 id: ${id},
 busy: ${busy},
+ceremonies: ${ceremonies},
 model: ${model}
     ''';
   }

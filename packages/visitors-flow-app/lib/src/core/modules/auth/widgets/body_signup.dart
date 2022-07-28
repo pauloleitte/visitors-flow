@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../../../config/app_routes.dart';
 import '../../../config/theme_helper.dart';
 import '../controllers/signup/signup_controller.dart';
-import '../../../../shared/widgets/header_widget.dart';
 
 class BodySignup extends StatefulWidget {
   @override

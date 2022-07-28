@@ -34,7 +34,8 @@ class VisitorRepository implements IVisitorRepository {
   @override
   Future<Either<Failure, VisitorModel>> getVisitor(String id) async {
     try {
-      var response = await _client.get('/visitors/$id');
+      var response = await _client.get('/visitors/$id',
+          options: Options(headers: {"requiresToken": true}));
       if (response.statusCode == HttpStatus.ok) {
         var result = VisitorModel.fromJson(response.data);
         return Right(result);
@@ -50,7 +51,9 @@ class VisitorRepository implements IVisitorRepository {
   Future<Either<Failure, VisitorModel>> createVisitor(
       VisitorModel model) async {
     try {
-      var response = await _client.post('/visitors', data: model.toJson());
+      var response = await _client.post('/visitors',
+          data: model.toJson(),
+          options: Options(headers: {"requiresToken": true}));
       if (response.statusCode == HttpStatus.created) {
         var result = VisitorModel.fromJson(response.data);
         return Right(result);
@@ -66,8 +69,9 @@ class VisitorRepository implements IVisitorRepository {
   Future<Either<Failure, VisitorModel>> updateVisitor(
       VisitorModel model) async {
     try {
-      var response = await _client.put('/visitors/${model.sId.toString()}',
-          data: model.toJson());
+      var response = await _client.patch('/visitors/${model.sId.toString()}',
+          data: model.toJson(),
+          options: Options(headers: {"requiresToken": true}));
       if (response.statusCode == HttpStatus.ok) {
         var result = VisitorModel.fromJson(response.data);
         return Right(result);
@@ -82,9 +86,10 @@ class VisitorRepository implements IVisitorRepository {
   @override
   Future<Either<Failure, bool>> deleteVisitor(String id) async {
     try {
-      var response = await _client.delete('/visitors/$id');
+      var response = await _client.delete('/visitors/$id',
+          options: Options(headers: {"requiresToken": true}));
       if (response.statusCode == HttpStatus.ok) {
-        return Right(true);
+        return const Right(true);
       }
       return Left(
           DioFailure(message: 'ocorreu um erro durante o processamento'));

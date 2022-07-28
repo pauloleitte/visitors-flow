@@ -17,115 +17,35 @@ mixin _$VisitorController on _VisitorControllerBase, Store {
               name: '_VisitorControllerBase.model'))
           .value;
 
-  late final _$idAtom =
-      Atom(name: '_VisitorControllerBase.id', context: context);
+  late final _$visitorAtom =
+      Atom(name: '_VisitorControllerBase.visitor', context: context);
 
   @override
-  String? get id {
-    _$idAtom.reportRead();
-    return super.id;
+  VisitorModel get visitor {
+    _$visitorAtom.reportRead();
+    return super.visitor;
   }
 
   @override
-  set id(String? value) {
-    _$idAtom.reportWrite(value, super.id, () {
-      super.id = value;
+  set visitor(VisitorModel value) {
+    _$visitorAtom.reportWrite(value, super.visitor, () {
+      super.visitor = value;
     });
   }
 
-  late final _$nameAtom =
-      Atom(name: '_VisitorControllerBase.name', context: context);
+  late final _$visitorsAtom =
+      Atom(name: '_VisitorControllerBase.visitors', context: context);
 
   @override
-  String? get name {
-    _$nameAtom.reportRead();
-    return super.name;
+  List<VisitorModel> get visitors {
+    _$visitorsAtom.reportRead();
+    return super.visitors;
   }
 
   @override
-  set name(String? value) {
-    _$nameAtom.reportWrite(value, super.name, () {
-      super.name = value;
-    });
-  }
-
-  late final _$emailAtom =
-      Atom(name: '_VisitorControllerBase.email', context: context);
-
-  @override
-  String? get email {
-    _$emailAtom.reportRead();
-    return super.email;
-  }
-
-  @override
-  set email(String? value) {
-    _$emailAtom.reportWrite(value, super.email, () {
-      super.email = value;
-    });
-  }
-
-  late final _$telephoneAtom =
-      Atom(name: '_VisitorControllerBase.telephone', context: context);
-
-  @override
-  String? get telephone {
-    _$telephoneAtom.reportRead();
-    return super.telephone;
-  }
-
-  @override
-  set telephone(String? value) {
-    _$telephoneAtom.reportWrite(value, super.telephone, () {
-      super.telephone = value;
-    });
-  }
-
-  late final _$isChurchgoerAtom =
-      Atom(name: '_VisitorControllerBase.isChurchgoer', context: context);
-
-  @override
-  bool? get isChurchgoer {
-    _$isChurchgoerAtom.reportRead();
-    return super.isChurchgoer;
-  }
-
-  @override
-  set isChurchgoer(bool? value) {
-    _$isChurchgoerAtom.reportWrite(value, super.isChurchgoer, () {
-      super.isChurchgoer = value;
-    });
-  }
-
-  late final _$churchAtom =
-      Atom(name: '_VisitorControllerBase.church', context: context);
-
-  @override
-  String? get church {
-    _$churchAtom.reportRead();
-    return super.church;
-  }
-
-  @override
-  set church(String? value) {
-    _$churchAtom.reportWrite(value, super.church, () {
-      super.church = value;
-    });
-  }
-
-  late final _$observationsAtom =
-      Atom(name: '_VisitorControllerBase.observations', context: context);
-
-  @override
-  String? get observations {
-    _$observationsAtom.reportRead();
-    return super.observations;
-  }
-
-  @override
-  set observations(String? value) {
-    _$observationsAtom.reportWrite(value, super.observations, () {
-      super.observations = value;
+  set visitors(List<VisitorModel> value) {
+    _$visitorsAtom.reportWrite(value, super.visitors, () {
+      super.visitors = value;
     });
   }
 
@@ -148,13 +68,8 @@ mixin _$VisitorController on _VisitorControllerBase, Store {
   @override
   String toString() {
     return '''
-id: ${id},
-name: ${name},
-email: ${email},
-telephone: ${telephone},
-isChurchgoer: ${isChurchgoer},
-church: ${church},
-observations: ${observations},
+visitor: ${visitor},
+visitors: ${visitors},
 busy: ${busy},
 model: ${model}
     ''';

@@ -2,30 +2,17 @@ import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:visitors_flow_app/src/core/modules/start/submodules/visitors/models/visitor_model.dart';
-import 'package:visitors_flow_app/src/core/modules/start/submodules/visitors/services/visitor_service.dart';
-import 'package:visitors_flow_app/src/core/modules/start/submodules/visitors/view-model/visitor_view_model.dart';
-
 import '../../../../../config/app_routes.dart';
+import '../models/visitor_model.dart';
+import '../services/visitor_service.dart';
+import '../view-model/visitor_view_model.dart';
 part 'visitor_controller.g.dart';
 
 class VisitorController = _VisitorControllerBase with _$VisitorController;
 
 abstract class _VisitorControllerBase with Store {
   @observable
-  String? id;
-  @observable
-  String? name;
-  @observable
-  String? email;
-  @observable
-  String? telephone;
-  @observable
-  bool? isChurchgoer;
-  @observable
-  String? church;
-  @observable
-  String? observations;
+  VisitorModel visitor = VisitorModel();
 
   @observable
   List<VisitorModel> visitors = [];
@@ -39,13 +26,13 @@ abstract class _VisitorControllerBase with Store {
 
   @computed
   VisitorViewModel get model => VisitorViewModel(
-        id: id,
-        name: name,
-        email: email,
-        telephone: telephone,
-        isChurchgoer: isChurchgoer,
-        church: church,
-        observations: observations,
+        id: visitor.sId,
+        name: visitor.name,
+        email: visitor.email,
+        telephone: visitor.telephone,
+        isChurchgoer: visitor.isChurchgoer,
+        church: visitor.church,
+        observations: visitor.observations,
       );
 
   Future<void> getVisitor() async {
@@ -57,7 +44,7 @@ abstract class _VisitorControllerBase with Store {
             content: Text(
                 'Não foi possível recuperar o visitante, por favor tente novamente')));
       }, (visitor) async {
-        print(visitor);
+        // print(visitor);
       });
     } catch (e) {
       busy = false;
@@ -98,6 +85,7 @@ abstract class _VisitorControllerBase with Store {
             content: Text(
                 'Não foi possível realizar a exclusão, por favor tente novamente')));
       }, (_) async {
+        busy = false;
         asuka.showSnackBar(
             const SnackBar(content: Text('Exclusão realizada com sucesso')));
       });

@@ -15,14 +15,12 @@ class BodyVisitor extends StatefulWidget {
 class _BodyVisitorState extends ModularState<BodyVisitor, VisitorController> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     init();
   }
 
   init() async {
     await controller.getVisitors();
-    print(controller.visitors);
   }
 
   @override
