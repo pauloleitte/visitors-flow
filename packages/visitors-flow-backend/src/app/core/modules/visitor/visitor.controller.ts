@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  UseGuards,
+  Delete,
+} from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CreateVisitorDTO } from './dto/create-visitor.dto';
 import { UpdateVisitorDTO } from './dto/update-visitor.dto';
@@ -22,5 +31,10 @@ export class VisitorController {
   @Patch('/:id')
   async update(@Param('id') id: string, @Body() visitor: UpdateVisitorDTO) {
     return this.visitorService.findByIdAndUpdate(id, visitor);
+  }
+
+  @Delete('/:id')
+  async delete(@Param('id') id: string) {
+    return this.visitorService.findByIdAndDelete(id);
   }
 }
