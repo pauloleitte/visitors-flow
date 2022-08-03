@@ -39,6 +39,11 @@ class VisitorService implements IVisitorService {
   }
 
   @override
+  Future<Either<Failure, List<VisitorModel>>> getVisitorsByName(String filter) {
+    return _repository.getVisitorsByName(filter);
+  }
+
+  @override
   Future<Either<Failure, VisitorModel>> updateVisitor(VisitorViewModel model) {
     return _repository.updateVisitor(VisitorModel(
       sId: model.id,

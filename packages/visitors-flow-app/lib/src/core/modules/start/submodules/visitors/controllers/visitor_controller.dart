@@ -20,6 +20,9 @@ abstract class _VisitorControllerBase with Store {
   @observable
   bool busy = false;
 
+  @observable
+  String filter = "";
+
   VisitorService service;
 
   _VisitorControllerBase(this.service);
@@ -47,7 +50,24 @@ abstract class _VisitorControllerBase with Store {
         // print(visitor);
       });
     } catch (e) {
+      asuka.showSnackBar(SnackBar(content: Text(e.toString())));
+    } finally {
       busy = false;
+    }
+  }
+
+  Future<void> getVisitorsByName() async {
+    try {
+      busy = true;
+      var result = await service.getVisitorsByName(filter);
+      result.fold((l) {
+        asuka.showSnackBar(const SnackBar(
+            content: Text(
+                'Não foi possível recuperar os visitantes, por favor tente novamente')));
+      }, (visitors) async {
+        // print(visitors);
+      });
+    } catch (e) {
       asuka.showSnackBar(SnackBar(content: Text(e.toString())));
     } finally {
       busy = false;
@@ -67,7 +87,6 @@ abstract class _VisitorControllerBase with Store {
         this.visitors = visitors;
       });
     } catch (e) {
-      busy = false;
       asuka.showSnackBar(const SnackBar(
           content: Text(
               'Não foi possível recuperar os visitantes, por favor tente novamente')));
@@ -85,7 +104,6 @@ abstract class _VisitorControllerBase with Store {
             content: Text(
                 'Não foi possível realizar a exclusão, por favor tente novamente')));
       }, (_) async {
-        busy = false;
         asuka.showSnackBar(
             const SnackBar(content: Text('Exclusão realizada com sucesso')));
       });

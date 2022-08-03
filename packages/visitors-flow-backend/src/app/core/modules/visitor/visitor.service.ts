@@ -20,7 +20,7 @@ export class VisitorService {
   }
 
   async getByName(name: string) {
-    return await this.visitorModel.findOne({ name }).exec();
+    return await this.visitorModel.find({name: {$regex: name, $options: 'i'}}).exec();
   }
 
   async create(visitor: CreateVisitorDTO) {

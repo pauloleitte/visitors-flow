@@ -14,6 +14,25 @@ class VisitorRepository implements IVisitorRepository {
   VisitorRepository(this._client);
 
   @override
+  Future<Either<Failure, List<VisitorModel>>> getVisitorsByName(
+      String filter) async {
+    try {
+      final response = await _client.get('/visitors?name=$filter',
+          options: Options(headers: {"requiresToken": true}));
+      if (response.statusCode == HttpStatus.ok) {
+        return Right(response.data
+            .map<VisitorModel>((json) => VisitorModel.fromJson(json))
+            .toList());
+      } else {
+        return Left(
+            DioFailure(message: 'ocorreu um erro durante o processamento'));
+      }
+    } on DioError catch (err) {
+      return Left(DioFailure(message: err.message.toString()));
+    }
+  }
+
+  @override
   Future<Either<Failure, List<VisitorModel>>> getVisitors() async {
     try {
       var response = await _client.get('/visitors',

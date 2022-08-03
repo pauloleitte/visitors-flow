@@ -7,6 +7,7 @@ import '../../view-model/visitor_view_model.dart';
 
 abstract class IVisitorService implements Disposable {
   Future<Either<Failure, List<VisitorModel>>> getVisitors();
+  Future<Either<Failure, List<VisitorModel>>> getVisitorsByName(String filter);
   Future<Either<Failure, VisitorModel>> getVisitor(VisitorViewModel model);
   Future<Either<Failure, VisitorModel>> createVisitor(VisitorViewModel model);
   Future<Either<Failure, VisitorModel>> updateVisitor(VisitorViewModel model);

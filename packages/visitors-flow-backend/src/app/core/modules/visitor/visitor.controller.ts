@@ -7,6 +7,7 @@ import {
   Param,
   UseGuards,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CreateVisitorDTO } from './dto/create-visitor.dto';
@@ -17,6 +18,15 @@ import { VisitorService } from './visitor.service';
 @UseGuards(JwtAuthGuard)
 export class VisitorController {
   constructor(private visitorService: VisitorService) {}
+
+  @Get('')
+  async getByName(@Query('name') name: string) {
+    if (name) {
+      return this.visitorService.getByName(name);
+    } else {
+      return this.visitorService.getAll();
+    }
+  }
 
   @Get()
   async getAll() {

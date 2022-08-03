@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -13,14 +15,30 @@ class BodyVisitor extends StatefulWidget {
 }
 
 class _BodyVisitorState extends ModularState<BodyVisitor, VisitorController> {
+  Timer? _debounce;
+
   @override
   void initState() {
     super.initState();
-    init();
+    _handleVisitors();
   }
 
-  init() async {
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    super.dispose();
+  }
+
+  _handleVisitors() async {
     await controller.getVisitors();
+  }
+
+  _onSearchChanged(String query) {
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      controller.filter = query;
+      controller.getVisitorsByName();
+    });
   }
 
   @override
@@ -30,18 +48,30 @@ class _BodyVisitorState extends ModularState<BodyVisitor, VisitorController> {
         children: [
           controller.busy
               ? const Center(child: CircularProgressIndicator())
-              : Container(
-                  margin: const EdgeInsets.fromLTRB(15, 25, 15, 25),
-                  child: ListView.builder(
-                    itemCount: controller.visitors.length,
-                    itemBuilder: (ctx, i) => Column(
-                      children: <Widget>[
-                        VisitorItem(controller.visitors[i]),
-                        const Divider(),
-                      ],
+              : controller.visitors.isNotEmpty
+                  ? Container(
+                      margin: const EdgeInsets.fromLTRB(15, 25, 15, 25),
+                      child: RefreshIndicator(
+                        onRefresh: () async {
+                          await _handleVisitors();
+                        },
+                        child: ListView.builder(
+                          itemCount: controller.visitors.length,
+                          itemBuilder: (ctx, i) => Column(
+                            children: <Widget>[
+                              VisitorItem(controller.visitors[i]),
+                              const Divider(),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  : const Center(
+                      child: Text(
+                        'Nenhum visitante cadastrado',
+                        style: TextStyle(fontSize: 20),
+                      ),
                     ),
-                  ),
-                )
         ],
       );
     });

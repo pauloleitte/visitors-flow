@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
+import '../../../../../config/app_routes.dart';
 import '../models/ceremony_model.dart';
 
 class CeremonyItem extends StatelessWidget {
@@ -11,62 +13,29 @@ class CeremonyItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 10,
-      color: Theme.of(context).colorScheme.secondary,
       child: ListTile(
+        leading: CircleAvatar(
+          radius: 25,
+          backgroundColor: Theme.of(context).primaryColor,
+          child: const Icon(
+            Icons.church,
+            color: Colors.white,
+          ),
+        ),
         title: Text(
           ceremony.name!,
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.black),
         ),
         onTap: () {
-          _showOptions(context);
+          Modular.to.navigate(AppRoutes.CEREMONY_FORM, arguments: ceremony);
         },
         subtitle: Text(
-          '${ceremony.name}',
+          '${ceremony.date}',
           style: const TextStyle(
-            color: Colors.white,
+            color: Colors.black,
           ),
         ),
       ),
     );
-  }
-
-  void _showOptions(BuildContext context) {
-    showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return BottomSheet(
-            onClosing: () {},
-            builder: (context) {
-              return Container(
-                  padding: const EdgeInsets.all(10.0),
-                  color: Colors.grey.shade100,
-                  child: Wrap(
-                    children: [
-                      ListTile(
-                        leading: const Icon(Icons.add),
-                        title: const Text('Cadastrar Visitante'),
-                        onTap: () {
-                          print('adicionar visitante');
-                        },
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.edit),
-                        title: const Text('Editar'),
-                        onTap: () {
-                          print('adicionar visitante');
-                        },
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.delete),
-                        title: const Text('Excluir'),
-                        onTap: () {
-                          print('adicionar visitante');
-                        },
-                      ),
-                    ],
-                  ));
-            },
-          );
-        });
   }
 }

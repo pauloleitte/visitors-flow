@@ -20,6 +20,9 @@ class CeremonyModule extends Module {
       '/',
       child: (_, args) => const CeremonyPage(),
     ),
-    ChildRoute('/form', child: (_, args) => const CeremonyFormPage()),
+    ChildRoute('/form',
+        child: (_, args) => CeremonyFormPage(
+              ceremony: args.data,
+            ))
   ];
 }

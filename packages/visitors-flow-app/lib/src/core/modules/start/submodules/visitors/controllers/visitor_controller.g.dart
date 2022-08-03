@@ -65,12 +65,29 @@ mixin _$VisitorController on _VisitorControllerBase, Store {
     });
   }
 
+  late final _$filterAtom =
+      Atom(name: '_VisitorControllerBase.filter', context: context);
+
+  @override
+  String get filter {
+    _$filterAtom.reportRead();
+    return super.filter;
+  }
+
+  @override
+  set filter(String value) {
+    _$filterAtom.reportWrite(value, super.filter, () {
+      super.filter = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
 visitor: ${visitor},
 visitors: ${visitors},
 busy: ${busy},
+filter: ${filter},
 model: ${model}
     ''';
   }

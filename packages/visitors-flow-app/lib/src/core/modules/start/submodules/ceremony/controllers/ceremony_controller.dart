@@ -13,16 +13,7 @@ class CeremonyController = _CeremonyControllerBase with _$CeremonyController;
 
 abstract class _CeremonyControllerBase with Store {
   @observable
-  String? name;
-
-  @observable
-  String? description;
-
-  @observable
-  String? date;
-
-  @observable
-  String? id;
+  CeremonyModel ceremony = CeremonyModel();
 
   @observable
   bool busy = false;
@@ -36,10 +27,10 @@ abstract class _CeremonyControllerBase with Store {
 
   @computed
   CeremonyViewModel get model => CeremonyViewModel(
-        id: id,
-        name: name,
-        date: date,
-        description: description,
+        id: ceremony.sId,
+        name: ceremony.name,
+        date: ceremony.date,
+        description: ceremony.description,
       );
 
   Future<void> getCeremony() async {

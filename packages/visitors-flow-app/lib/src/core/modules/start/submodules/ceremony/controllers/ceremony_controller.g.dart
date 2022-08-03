@@ -17,67 +17,19 @@ mixin _$CeremonyController on _CeremonyControllerBase, Store {
               name: '_CeremonyControllerBase.model'))
           .value;
 
-  late final _$nameAtom =
-      Atom(name: '_CeremonyControllerBase.name', context: context);
+  late final _$ceremonyAtom =
+      Atom(name: '_CeremonyControllerBase.ceremony', context: context);
 
   @override
-  String? get name {
-    _$nameAtom.reportRead();
-    return super.name;
+  CeremonyModel get ceremony {
+    _$ceremonyAtom.reportRead();
+    return super.ceremony;
   }
 
   @override
-  set name(String? value) {
-    _$nameAtom.reportWrite(value, super.name, () {
-      super.name = value;
-    });
-  }
-
-  late final _$descriptionAtom =
-      Atom(name: '_CeremonyControllerBase.description', context: context);
-
-  @override
-  String? get description {
-    _$descriptionAtom.reportRead();
-    return super.description;
-  }
-
-  @override
-  set description(String? value) {
-    _$descriptionAtom.reportWrite(value, super.description, () {
-      super.description = value;
-    });
-  }
-
-  late final _$dateAtom =
-      Atom(name: '_CeremonyControllerBase.date', context: context);
-
-  @override
-  String? get date {
-    _$dateAtom.reportRead();
-    return super.date;
-  }
-
-  @override
-  set date(String? value) {
-    _$dateAtom.reportWrite(value, super.date, () {
-      super.date = value;
-    });
-  }
-
-  late final _$idAtom =
-      Atom(name: '_CeremonyControllerBase.id', context: context);
-
-  @override
-  String? get id {
-    _$idAtom.reportRead();
-    return super.id;
-  }
-
-  @override
-  set id(String? value) {
-    _$idAtom.reportWrite(value, super.id, () {
-      super.id = value;
+  set ceremony(CeremonyModel value) {
+    _$ceremonyAtom.reportWrite(value, super.ceremony, () {
+      super.ceremony = value;
     });
   }
 
@@ -116,10 +68,7 @@ mixin _$CeremonyController on _CeremonyControllerBase, Store {
   @override
   String toString() {
     return '''
-name: ${name},
-description: ${description},
-date: ${date},
-id: ${id},
+ceremony: ${ceremony},
 busy: ${busy},
 ceremonies: ${ceremonies},
 model: ${model}
