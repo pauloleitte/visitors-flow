@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CeremonyService } from './ceremony.service';
 import { CreateCeremonyDTO } from './dto/create-ceremony.dto';
@@ -23,9 +32,14 @@ export class CeremonyController {
   findOne(@Param('id') id: string) {
     return this.service.getById(id);
   }
-  
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() ceremony: UpdateCeremonyDTO) {
     return this.service.findByIdAndUpdate(id, ceremony);
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: string) {
+    return this.service.delete(id);
   }
 }

@@ -7,7 +7,9 @@ class AppRoutes {
   static const AUTH_LOGIN = '/auth/login';
   static const AUTH_SIGNUP = '/auth/signup';
   static const HOME = '/start/home';
-  static const PROFILE = '/start/profile';
+  static const CONFIG = '/start/config';
+  static const CONFIG_PROFILE = '/start/config/profile';
+  static const CONFIG_SECURITY = '/start/config/security';
   static const CEREMONY = '/start/ceremony';
   static const CEREMONY_FORM = '/start/ceremony/form';
   static const VISITOR = '/start/visitor';

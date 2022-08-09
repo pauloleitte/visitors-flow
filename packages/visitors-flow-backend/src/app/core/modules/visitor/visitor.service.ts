@@ -12,15 +12,15 @@ export class VisitorService {
   ) {}
 
   async getAll() {
-    return await this.visitorModel.find().exec();
+    return await this.visitorModel.find();
   }
 
   async getById(id: string) {
-    return await this.visitorModel.findById(id).exec();
+    return await this.visitorModel.findById(id);
   }
 
   async getByName(name: string) {
-    return await this.visitorModel.find({name: {$regex: name, $options: 'i'}}).exec();
+    return await this.visitorModel.find({name: {$regex: name, $options: 'i'}});
   }
 
   async create(visitor: CreateVisitorDTO) {
@@ -34,6 +34,5 @@ export class VisitorService {
   async findByIdAndUpdate(id: string, visitor: UpdateVisitorDTO) {
     return await this.visitorModel
       .findByIdAndUpdate(id, { $set: visitor }, { new: true })
-      .exec();
   }
 }

@@ -25,10 +25,27 @@ mixin _$ProfileController on _ProfileControllerBase, Store {
     });
   }
 
+  late final _$busyAtom =
+      Atom(name: '_ProfileControllerBase.busy', context: context);
+
+  @override
+  bool get busy {
+    _$busyAtom.reportRead();
+    return super.busy;
+  }
+
+  @override
+  set busy(bool value) {
+    _$busyAtom.reportWrite(value, super.busy, () {
+      super.busy = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
-model: ${model}
+model: ${model},
+busy: ${busy}
     ''';
   }
 }

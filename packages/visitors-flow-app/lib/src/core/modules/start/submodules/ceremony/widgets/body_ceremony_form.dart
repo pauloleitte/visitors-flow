@@ -55,6 +55,12 @@ class _BodyCeremonyFormState
                         decoration: ThemeHelper().inputBoxDecorationShaddow(),
                         child: TextFormField(
                           initialValue: controller.ceremony.name,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Nome é obrigatório';
+                            }
+                            return null;
+                          },
                           decoration: ThemeHelper().textInputDecoration(
                               'Nome', 'Insira o nome do culto'),
                           onSaved: (value) {
@@ -66,7 +72,14 @@ class _BodyCeremonyFormState
                       Container(
                         decoration: ThemeHelper().inputBoxDecorationShaddow(),
                         child: TextFormField(
+                          maxLines: 8,
                           initialValue: controller.ceremony.description,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Descrição é obrigatório';
+                            }
+                            return null;
+                          },
                           decoration: ThemeHelper().textInputDecoration(
                               'Descrição', 'Insira uma descrição'),
                           onSaved: (value) {
@@ -79,6 +92,12 @@ class _BodyCeremonyFormState
                         decoration: ThemeHelper().inputBoxDecorationShaddow(),
                         child: TextFormField(
                           initialValue: controller.ceremony.date,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Data é obrigatório';
+                            }
+                            return null;
+                          },
                           keyboardType: TextInputType.datetime,
                           decoration: ThemeHelper().textInputDecoration(
                               'Data', 'Insira a data do culto'),

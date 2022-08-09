@@ -43,6 +43,7 @@ export class AuthService {
       name: user.name,
       email: user.email,
       phone: user.phone,
+      id: user._id,
     };
   }
 }

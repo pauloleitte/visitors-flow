@@ -23,7 +23,7 @@ class _CeremonyPageState extends State<CeremonyPage> {
       body: const BodyCeremony(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Modular.to.pushNamed(AppRoutes.CEREMONY_FORM);
+          Modular.to.navigate(AppRoutes.CEREMONY_FORM);
         },
         backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(Icons.add, color: Colors.white),

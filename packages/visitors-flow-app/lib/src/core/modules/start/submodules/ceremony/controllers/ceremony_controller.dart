@@ -2,6 +2,7 @@ import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:visitors_flow_app/src/core/config/app_messages.dart';
 import 'package:visitors_flow_app/src/core/modules/start/submodules/ceremony/models/ceremony_model.dart';
 
 import '../../../../../config/app_routes.dart';
@@ -33,31 +34,13 @@ abstract class _CeremonyControllerBase with Store {
         description: ceremony.description,
       );
 
-  Future<void> getCeremony() async {
-    try {
-      busy = true;
-      var result = await service.getCeremony(model);
-      result.fold((l) {
-        asuka.showSnackBar(const SnackBar(
-            content: Text(
-                'Não foi possível recuperar o culto, por favor tente novamente')));
-      }, (ceremony) async {});
-    } catch (e) {
-      busy = false;
-      asuka.showSnackBar(SnackBar(content: Text(e.toString())));
-    } finally {
-      busy = false;
-    }
-  }
-
   Future<void> getCeremonies() async {
     try {
       busy = true;
       var result = await service.getCeremonies();
       result.fold((l) {
-        asuka.showSnackBar(const SnackBar(
-            content: Text(
-                'Não foi possível recuperar os cultos, por favor tente novamente')));
+        asuka.showSnackBar(
+            const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (ceremonies) async {
         busy = false;
         this.ceremonies = ceremonies;
@@ -66,7 +49,8 @@ abstract class _CeremonyControllerBase with Store {
       busy = false;
       asuka.showSnackBar(const SnackBar(
           content: Text(
-              'Não foi possível recuperar os cultos, por favor tente novamente')));
+        AppMessages.ERROR_MESSAGE,
+      )));
     } finally {
       busy = false;
     }
@@ -77,16 +61,18 @@ abstract class _CeremonyControllerBase with Store {
       busy = true;
       var result = await service.deleteCeremony(model);
       result.fold((l) {
-        asuka.showSnackBar(const SnackBar(
-            content: Text(
-                'Não foi possível realizar a exclusão, por favor tente novamente')));
+        asuka.showSnackBar(
+            const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (_) async {
         asuka.showSnackBar(
-            const SnackBar(content: Text('Exclusão realizada com sucesso')));
+            const SnackBar(content: Text(AppMessages.EXCLUSION_MESSAGE)));
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(SnackBar(content: Text(e.toString())));
+      asuka.showSnackBar(const SnackBar(
+          content: Text(
+        AppMessages.ERROR_MESSAGE,
+      )));
     } finally {
       busy = false;
     }
@@ -97,19 +83,19 @@ abstract class _CeremonyControllerBase with Store {
       busy = true;
       var result = await service.updateCeremony(model);
       result.fold((l) {
-        asuka.showSnackBar(const SnackBar(
-            content: Text(
-                'Não foi possível realizar a atualização, por favor tente novamente')));
+        asuka.showSnackBar(
+            const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (_) async {
         asuka.showSnackBar(
-            const SnackBar(content: Text('Atualização realizada com sucesso')));
-        Future.delayed(const Duration(seconds: 2), () {
-          Modular.to.navigate(AppRoutes.CEREMONY);
-        });
+            const SnackBar(content: Text(AppMessages.UPDATE_MESSAGE)));
+        Modular.to.navigate(AppRoutes.CEREMONY);
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(SnackBar(content: Text(e.toString())));
+      asuka.showSnackBar(const SnackBar(
+          content: Text(
+        AppMessages.ERROR_MESSAGE,
+      )));
     } finally {
       busy = false;
     }
@@ -120,19 +106,19 @@ abstract class _CeremonyControllerBase with Store {
       busy = true;
       var result = await service.createCeremony(model);
       result.fold((l) {
-        asuka.showSnackBar(const SnackBar(
-            content: Text(
-                'Não foi possivel realizar o cadastro, por favor tente novamente')));
+        asuka.showSnackBar(
+            const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (userCreateModel) async {
         asuka.showSnackBar(
-            const SnackBar(content: Text('Cadastro realizado com sucesso!')));
-        Future.delayed(const Duration(seconds: 2), () {
-          Modular.to.navigate(AppRoutes.CEREMONY);
-        });
+            const SnackBar(content: Text(AppMessages.CREATE_MESSAGE)));
+        Modular.to.navigate(AppRoutes.CEREMONY);
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(SnackBar(content: Text(e.toString())));
+      asuka.showSnackBar(const SnackBar(
+          content: Text(
+        AppMessages.ERROR_MESSAGE,
+      )));
     } finally {
       busy = false;
     }

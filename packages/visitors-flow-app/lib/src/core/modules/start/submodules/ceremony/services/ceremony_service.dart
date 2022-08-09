@@ -33,7 +33,10 @@ class CeremonyService implements ICeremonyService {
   Future<Either<Failure, CeremonyModel>> updateCeremony(
       CeremonyViewModel model) async {
     return await _ceremonyRepository.updateCeremony(CeremonyModel(
-        name: model.name, date: model.date, description: model.description));
+        sId: model.id,
+        name: model.name,
+        date: model.date,
+        description: model.description));
   }
 
   @override

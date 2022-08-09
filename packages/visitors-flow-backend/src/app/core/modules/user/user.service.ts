@@ -18,15 +18,15 @@ export class UserService {
   ) {}
 
   async getAll() {
-    return await this.userModel.find().exec();
+    return await this.userModel.find();
   }
 
   async getById(id: string) {
-    return await this.userModel.findById(id).exec();
+    return await this.userModel.findById(id);
   }
 
   async getByEmail(email: string) {
-    return await this.userModel.findOne({ email }).exec();
+    return await this.userModel.findOne({ email });
   }
 
   async create(user: CreateUserDto) {
@@ -48,9 +48,14 @@ export class UserService {
     try {
       const exist = await this.userModel.findById(id);
       if (exist) {
-        return await this.userModel
-          .findByIdAndUpdate(id, { $set: user }, { new: true })
-          .exec();
+        user.password
+          ? (user.password = await this.bcryptService.encrypt(user.password))
+          : (user.password = exist.password);
+        return await this.userModel.findByIdAndUpdate(
+          id,
+          { $set: user },
+          { new: true }
+        );
       }
       throw new BadRequestException('user does not exist');
     } catch (e) {
@@ -59,6 +64,6 @@ export class UserService {
   }
 
   async delete(id: string) {
-    return await this.userModel.findByIdAndDelete(id).exec();
+    return await this.userModel.findByIdAndDelete(id);
   }
 }

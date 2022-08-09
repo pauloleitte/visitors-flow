@@ -17,13 +17,15 @@ export class CeremonyService {
   ) {}
 
   async getAll() {
-    return await this.ceremonyModel.find().populate('visitors').exec();
+    return await this.ceremonyModel.find().populate('visitors');
   }
 
   async getById(id: string) {
-    return await (await this.ceremonyModel.findById(id))
-      .populated('visitors')
-      .exec();
+    return await (await this.ceremonyModel.findById(id)).populated('visitors');
+  }
+
+  async delete(id: string) {
+    return await this.ceremonyModel.findByIdAndDelete(id);
   }
 
   async create(ceremony: CreateCeremonyDTO) {
@@ -31,11 +33,13 @@ export class CeremonyService {
   }
   async findByIdAndUpdate(id: string, ceremony: UpdateCeremonyDTO) {
     try {
-      const exist =  await this.ceremonyModel.findById(id);
+      const exist = await this.ceremonyModel.findById(id);
       if (exist) {
-        return await this.ceremonyModel
-          .findByIdAndUpdate(id, { $set: ceremony }, { new: true })
-          .exec();
+        return await this.ceremonyModel.findByIdAndUpdate(
+          id,
+          { $set: ceremony },
+          { new: true }
+        );
       }
       throw new BadRequestException('ceremony does not exist');
     } catch (e) {

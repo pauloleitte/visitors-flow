@@ -56,6 +56,12 @@ class _BodyVisitorFormState
                         decoration: ThemeHelper().inputBoxDecorationShaddow(),
                         child: TextFormField(
                           initialValue: controller.visitor.name,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Insira o nome do visitante';
+                            }
+                            return null;
+                          },
                           decoration: ThemeHelper()
                               .textInputDecoration('Nome', 'Insira seu nome'),
                           onSaved: (value) {

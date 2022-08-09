@@ -2,6 +2,7 @@ import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:visitors_flow_app/src/core/config/app_messages.dart';
 import '../../../../../config/app_routes.dart';
 import '../models/visitor_model.dart';
 import '../services/visitor_service.dart';
@@ -38,37 +39,21 @@ abstract class _VisitorControllerBase with Store {
         observations: visitor.observations,
       );
 
-  Future<void> getVisitor() async {
-    try {
-      busy = true;
-      var result = await service.getVisitor(model);
-      result.fold((l) {
-        asuka.showSnackBar(const SnackBar(
-            content: Text(
-                'Não foi possível recuperar o visitante, por favor tente novamente')));
-      }, (visitor) async {
-        // print(visitor);
-      });
-    } catch (e) {
-      asuka.showSnackBar(SnackBar(content: Text(e.toString())));
-    } finally {
-      busy = false;
-    }
-  }
-
   Future<void> getVisitorsByName() async {
     try {
       busy = true;
       var result = await service.getVisitorsByName(filter);
       result.fold((l) {
-        asuka.showSnackBar(const SnackBar(
-            content: Text(
-                'Não foi possível recuperar os visitantes, por favor tente novamente')));
+        asuka.showSnackBar(
+            const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (visitors) async {
-        // print(visitors);
+        this.visitors = visitors;
       });
     } catch (e) {
-      asuka.showSnackBar(SnackBar(content: Text(e.toString())));
+      asuka.showSnackBar(const SnackBar(
+          content: Text(
+        AppMessages.ERROR_MESSAGE,
+      )));
     } finally {
       busy = false;
     }
@@ -79,9 +64,8 @@ abstract class _VisitorControllerBase with Store {
       busy = true;
       var result = await service.getVisitors();
       result.fold((l) {
-        asuka.showSnackBar(const SnackBar(
-            content: Text(
-                'Não foi possível recuperar os visitantes, por favor tente novamente')));
+        asuka.showSnackBar(
+            const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (visitors) async {
         busy = false;
         this.visitors = visitors;
@@ -89,7 +73,8 @@ abstract class _VisitorControllerBase with Store {
     } catch (e) {
       asuka.showSnackBar(const SnackBar(
           content: Text(
-              'Não foi possível recuperar os visitantes, por favor tente novamente')));
+        AppMessages.ERROR_MESSAGE,
+      )));
     } finally {
       busy = false;
     }
@@ -100,16 +85,18 @@ abstract class _VisitorControllerBase with Store {
       busy = true;
       var result = await service.deleteVisitor(model);
       result.fold((l) {
-        asuka.showSnackBar(const SnackBar(
-            content: Text(
-                'Não foi possível realizar a exclusão, por favor tente novamente')));
+        asuka.showSnackBar(
+            const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (_) async {
         asuka.showSnackBar(
-            const SnackBar(content: Text('Exclusão realizada com sucesso')));
+            const SnackBar(content: Text(AppMessages.EXCLUSION_MESSAGE)));
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(SnackBar(content: Text(e.toString())));
+      asuka.showSnackBar(const SnackBar(
+          content: Text(
+        AppMessages.ERROR_MESSAGE,
+      )));
     } finally {
       busy = false;
     }
@@ -120,19 +107,21 @@ abstract class _VisitorControllerBase with Store {
       busy = true;
       var result = await service.updateVisitor(model);
       result.fold((l) {
-        asuka.showSnackBar(const SnackBar(
-            content: Text(
-                'Não foi possível realizar a atualização, por favor tente novamente')));
+        asuka.showSnackBar(
+            const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (_) async {
         asuka.showSnackBar(
-            const SnackBar(content: Text('Atualização realizada com sucesso')));
+            const SnackBar(content: Text(AppMessages.UPDATE_MESSAGE)));
         Future.delayed(const Duration(seconds: 2), () {
           Modular.to.navigate(AppRoutes.VISITOR);
         });
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(SnackBar(content: Text(e.toString())));
+      asuka.showSnackBar(const SnackBar(
+          content: Text(
+        AppMessages.ERROR_MESSAGE,
+      )));
     } finally {
       busy = false;
     }
@@ -143,19 +132,19 @@ abstract class _VisitorControllerBase with Store {
       busy = true;
       var result = await service.createVisitor(model);
       result.fold((l) {
-        asuka.showSnackBar(const SnackBar(
-            content: Text(
-                'Não foi possivel realizar o cadastro, por favor tente novamente')));
+        asuka.showSnackBar(
+            const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (userCreateModel) async {
         asuka.showSnackBar(
-            const SnackBar(content: Text('Cadastro realizado com sucesso!')));
-        Future.delayed(const Duration(seconds: 2), () {
-          Modular.to.navigate(AppRoutes.VISITOR);
-        });
+            const SnackBar(content: Text(AppMessages.CREATE_MESSAGE)));
+        Modular.to.navigate(AppRoutes.VISITOR);
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(SnackBar(content: Text(e.toString())));
+      asuka.showSnackBar(const SnackBar(
+          content: Text(
+        AppMessages.ERROR_MESSAGE,
+      )));
     } finally {
       busy = false;
     }

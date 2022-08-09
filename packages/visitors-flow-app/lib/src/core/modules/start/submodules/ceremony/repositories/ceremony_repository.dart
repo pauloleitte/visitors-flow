@@ -17,7 +17,9 @@ class CeremonyRepository implements ICeremonyRepository {
   Future<Either<Failure, CeremonyModel>> createCeremony(
       CeremonyModel model) async {
     try {
-      var response = await _client.post('/ceremonys', data: model.toJson());
+      var response = await _client.post('/ceremonys',
+          data: model.toJson(),
+          options: Options(headers: {"requiresToken": "true"}));
       if (response.statusCode == HttpStatus.created) {
         var result = CeremonyModel.fromJson(response.data);
         return Right(result);
@@ -32,8 +34,9 @@ class CeremonyRepository implements ICeremonyRepository {
   @override
   Future<Either<Failure, bool>> deleteCeremony(String id) async {
     try {
-      var response = await _client.delete('/ceremonys/$id');
-      if (response.statusCode == HttpStatus.noContent) {
+      var response = await _client.delete('/ceremonys/$id',
+          options: Options(headers: {"requiresToken": true}));
+      if (response.statusCode == HttpStatus.ok) {
         return const Right(true);
       }
       return Left(
@@ -46,7 +49,8 @@ class CeremonyRepository implements ICeremonyRepository {
   @override
   Future<Either<Failure, CeremonyModel>> getCeremony(String id) async {
     try {
-      var response = await _client.get('/ceremonys/$id');
+      var response = await _client.get('/ceremonys/$id',
+          options: Options(headers: {"requiresToken": "true"}));
       if (response.statusCode == HttpStatus.ok) {
         var result = CeremonyModel.fromJson(response.data);
         return Right(result);
@@ -62,8 +66,9 @@ class CeremonyRepository implements ICeremonyRepository {
   Future<Either<Failure, CeremonyModel>> updateCeremony(
       CeremonyModel model) async {
     try {
-      var response =
-          await _client.put('/ceremonys/${model.sId}', data: model.toJson());
+      var response = await _client.patch('/ceremonys/${model.sId}',
+          data: model.toJson(),
+          options: Options(headers: {"requiresToken": "true"}));
       if (response.statusCode == HttpStatus.ok) {
         var result = CeremonyModel.fromJson(response.data);
         return Right(result);

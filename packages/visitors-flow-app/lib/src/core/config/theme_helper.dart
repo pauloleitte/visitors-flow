@@ -2,6 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class ThemeHelper {
+  final primaryColor = const MaterialColor(
+    0xFF173D70,
+    <int, Color>{
+      50: Color(0xFF173D70),
+      100: Color(0xFF173D70),
+      200: Color(0xFF173D70),
+      300: Color(0xFF173D70),
+      400: Color(0xFF173D70),
+      500: Color(0xFF173D70),
+      600: Color(0xFF173D70),
+      700: Color(0xFF173D70),
+      800: Color(0xFF173D70),
+      900: Color(0xFF173D70),
+    },
+  );
+
   InputDecoration textInputDecoration(
       [String lableText = "", String hintText = ""]) {
     return InputDecoration(
@@ -41,19 +57,47 @@ class ThemeHelper {
     if (color2.isEmpty == false) {
       c2 = HexColor(color2);
     }
-
     return BoxDecoration(
-      boxShadow: const [
-        BoxShadow(color: Colors.black26, offset: Offset(0, 4), blurRadius: 5.0)
+      boxShadow: <BoxShadow>[
+        BoxShadow(
+          color: c1.withOpacity(0.1),
+          blurRadius: 18,
+          offset: const Offset(10, 10),
+        ),
       ],
+      borderRadius: BorderRadius.circular(30),
       color: c2,
     );
   }
 
   ButtonStyle buttonStyle() {
     return ButtonStyle(
-      backgroundColor: MaterialStateProperty.all(Colors.transparent),
-      shadowColor: MaterialStateProperty.all(Colors.transparent),
+      minimumSize: MaterialStateProperty.all(const Size.fromRadius(10)),
+      // backgroundColor: MaterialStateProperty.all(HexColor('#173D70')),
+    );
+  }
+
+  IconThemeData iconThemeData() {
+    return const IconThemeData(
+      color: Colors.white,
+    );
+  }
+
+  ButtonThemeData buttonThemeData() {
+    return ButtonThemeData(
+        disabledColor: Colors.grey.shade400,
+        buttonColor: HexColor('#173D70'),
+        textTheme: ButtonTextTheme.accent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30),
+        ));
+  }
+
+  ColorScheme colorScheme() {
+    return ColorScheme.fromSwatch(
+      primarySwatch: primaryColor,
+      accentColor: HexColor('#FFFFFF'),
+      errorColor: Colors.red,
     );
   }
 
@@ -77,5 +121,3 @@ class ThemeHelper {
     );
   }
 }
-
-class LoginFormStyle {}

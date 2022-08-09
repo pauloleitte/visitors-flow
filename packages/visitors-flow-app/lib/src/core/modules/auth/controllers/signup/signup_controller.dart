@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../../../config/app_messages.dart';
 import '../../../../config/app_routes.dart';
 import '../../models/user_create_model.dart';
 import '../../services/user_service.dart';
@@ -54,19 +55,21 @@ abstract class _SignupControllerBase with Store {
       busy = true;
       var result = await service.signup(model);
       result.fold((l) {
-        asuka.showSnackBar(const SnackBar(
-            content: Text(
-                'Não foi possível realizar o cadastro, por favor tente novamente')));
+        asuka.showSnackBar(
+            const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (userCreateModel) async {
         asuka.showSnackBar(
-            const SnackBar(content: Text('Cadastro realizado com sucesso!')));
+            const SnackBar(content: Text(AppMessages.CREATE_MESSAGE)));
         Future.delayed(const Duration(seconds: 2), () {
           Modular.to.navigate(AppRoutes.AUTH_LOGIN);
         });
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(SnackBar(content: Text(e.toString())));
+      asuka.showSnackBar(const SnackBar(
+          content: Text(
+        AppMessages.ERROR_MESSAGE,
+      )));
     } finally {
       busy = false;
     }

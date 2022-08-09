@@ -41,11 +41,7 @@ class _BodyLoginState extends ModularState<BodyLogin, LoginController> {
       return SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              height: _headerHeight,
-              child: HeaderWidget(_headerHeight, false,
-                  Icons.home), //let's create a common header widget
-            ),
+            SizedBox(child: Image.asset('assets/images/logo_vila_yara.png')),
             SafeArea(
               child: Container(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -53,17 +49,6 @@ class _BodyLoginState extends ModularState<BodyLogin, LoginController> {
                       20, 10, 20, 10), // This will be the login form
                   child: Column(
                     children: [
-                      Text(
-                        'Olá',
-                        style: TextStyle(
-                            fontSize: 60,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).primaryColor),
-                      ),
-                      const Text(
-                        'Seja bem vindo!',
-                        style: TextStyle(color: Colors.grey),
-                      ),
                       const SizedBox(height: 30.0),
                       Form(
                           key: _formKey,

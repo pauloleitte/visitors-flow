@@ -30,7 +30,7 @@ class CeremonyItem extends StatelessWidget {
           Modular.to.navigate(AppRoutes.CEREMONY_FORM, arguments: ceremony);
         },
         subtitle: Text(
-          '${ceremony.date}',
+          '${ceremony.description}',
           style: const TextStyle(
             color: Colors.black,
           ),

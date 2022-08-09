@@ -38,27 +38,11 @@ class _SplashPageState extends State<SplashPage> {
         opacity: _isVisible ? 1.0 : 0,
         duration: const Duration(milliseconds: 1200),
         child: Center(
-          child: Container(
-            height: 140.0,
-            width: 140.0,
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.3),
-                    blurRadius: 2.0,
-                    offset: const Offset(5.0, 3.0),
-                    spreadRadius: 2.0,
-                  )
-                ]),
-            child: const Center(
-              child: ClipOval(
-                child: Icon(
-                  Icons.android_outlined,
-                  size: 128,
-                ), //put your logo here
-              ),
+          child: Center(
+            child: Image.asset(
+              'assets/images/logo_vila_yara.png',
+              height: 700.0,
+              width: 700.0,
             ),
           ),
         ),
