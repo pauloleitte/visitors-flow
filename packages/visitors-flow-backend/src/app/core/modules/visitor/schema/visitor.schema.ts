@@ -3,7 +3,10 @@ import { Document } from 'mongoose';
 
 export type UserDocument = Visitor & Document;
 
-@Schema()
+const schemaOptions = {
+  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
+};
+@Schema(schemaOptions)
 export class Visitor {
   @Prop()
   name: string;

@@ -6,10 +6,13 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
+import { FilterParams } from '../../../shared/utils/filter-params';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CeremonyService } from './ceremony.service';
+import { CeremonyOfDayDTO } from './dto/ceremony-of-day.dto';
 import { CreateCeremonyDTO } from './dto/create-ceremony.dto';
 import { UpdateCeremonyDTO } from './dto/update-ceremony.dto';
 
@@ -19,8 +22,13 @@ export class CeremonyController {
   constructor(private service: CeremonyService) {}
 
   @Get()
-  getAll() {
-    return this.service.getAll();
+  async getAll(@Query() { page, limit, name }: FilterParams) {
+    return this.service.getAll({page, limit, name});
+  }
+
+  @Post('of-day')
+  async getOfDay(@Body() ceremony: CeremonyOfDayDTO) {
+    return this.service.getCeremoniesOfDay(ceremony);
   }
 
   @Post()

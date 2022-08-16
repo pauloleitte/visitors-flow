@@ -1,44 +1,31 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './core/modules/user/user.module';
 import { AuthModule } from './core/modules/auth/auth.module';
 import { VisitorModule } from './core/modules/visitor/visitor.module';
 import { CeremonyModule } from './core/modules/ceremony/ceremony.module';
-// import { MailerModule } from '@nestjs-modules/mailer';
-// import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
-// import * as path from 'path';
-
+import { HealthModule } from './core/modules/health/health.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './core/modules/user/entities/user.entity';
+import { Visitor } from './core/modules/visitor/entities/visitor.entity';
 @Module({
   imports: [
     AuthModule,
     ConfigModule.forRoot(),
-    // MailerModule.forRoot({
-    //   transport: {
-    //     host: process.env.HOST_MAIL,
-    //     port: Number(process.env.PORT_MAIL),
-    //     auth: {
-    //       user: process.env.AUTH_EMAIL_USER,
-    //       pass: process.env.AUTH_EMAIL_PASS,
-    //     },
-    //   },
-    //   template: {
-    //     dir: path.join(__dirname, 'mail/templates'),
-    //     adapter: new HandlebarsAdapter(), // or new PugAdapter() or new EjsAdapter()
-    //     options: {
-    //       strict: false,
-    //     },
-    //   },
-    // }),
-    MongooseModule.forRoot(process.env.MONGO_URI, {
+    TypeOrmModule.forRoot({
+      type: 'mongodb',
+      url: process.env.MONGO_URI,
+      entities: [User, Visitor],
+      synchronize: true,
       useNewUrlParser: true,
-      useUnifiedTopology: true,
+      logging: true,
     }),
+    HealthModule,
     UserModule,
     VisitorModule,
-    CeremonyModule,
+    // CeremonyModule,
   ],
   controllers: [AppController],
   providers: [AppService],

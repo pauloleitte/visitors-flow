@@ -45,6 +45,11 @@ class CeremonyService implements ICeremonyService {
   }
 
   @override
+  Future<Either<Failure, List<CeremonyModel>>> getCeremoniesOfDay(
+          String date) async =>
+      await _ceremonyRepository.getCeremoniesOfDay(date);
+
+  @override
   void dispose() {
     // TODO: implement dispose
   }

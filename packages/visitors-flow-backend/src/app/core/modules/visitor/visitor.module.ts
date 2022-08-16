@@ -1,15 +1,15 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { VisitorSchema } from './schema/visitor.schema';
-import { VisitorController } from './visitor.controller';
-import { VisitorService } from './visitor.service';
+import { VisitorController } from './controllers/visitor.controller';
+import { Visitor } from './entities/visitor.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { VisitorRepository } from './repositories/visitor.repository';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'Visitor', schema: VisitorSchema }]),
+    TypeOrmModule.forFeature([Visitor]),
   ],
   controllers: [VisitorController],
-  providers: [VisitorService],
+  providers: [VisitorRepository],
   exports: []
 })
 export class VisitorModule { }

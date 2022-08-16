@@ -86,10 +86,27 @@ class CeremonyRepository implements ICeremonyRepository {
       var response = await _client.get('/ceremonys',
           options: Options(headers: {"requiresToken": true}));
       if (response.statusCode == HttpStatus.ok) {
-        var result = (response.data as List)
-            .map((e) => CeremonyModel.fromJson(e))
-            .toList();
-        return Right(result);
+        var ceremonies = ResponseCeremonies.fromJson(response.data);
+        return Right(ceremonies.ceremonies);
+      }
+      return Left(
+          DioFailure(message: 'ocorreu um erro durante o processamento'));
+    } on DioError catch (err) {
+      return Left(DioFailure(message: err.message.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<CeremonyModel>>> getCeremoniesOfDay(
+      String date) async {
+    try {
+      final Map<String, dynamic> data = <String, dynamic>{};
+      data['date'] = date;
+      var response = await _client.post('/ceremonys/of-day',
+          data: data, options: Options(headers: {"requiresToken": true}));
+      if (response.statusCode == HttpStatus.created) {
+        var result = ResponseCeremonies.fromJson(response.data);
+        return Right(result.ceremonies);
       }
       return Left(
           DioFailure(message: 'ocorreu um erro durante o processamento'));

@@ -1,3 +1,26 @@
+class ResponseVisitors {
+  late List<VisitorModel> visitors;
+  int? count;
+
+  ResponseVisitors({required this.visitors, this.count});
+
+  ResponseVisitors.fromJson(Map<String, dynamic> json) {
+    visitors = <VisitorModel>[];
+    json['visitors'].forEach((v) {
+      visitors.add(VisitorModel.fromJson(v));
+    });
+
+    count = json['count'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['visitors'] = visitors.map((v) => v.toJson()).toList();
+    data['count'] = count;
+    return data;
+  }
+}
+
 class VisitorModel {
   String? sId;
   String? name;

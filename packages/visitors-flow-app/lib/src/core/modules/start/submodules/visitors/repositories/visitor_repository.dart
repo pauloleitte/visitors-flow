@@ -38,10 +38,8 @@ class VisitorRepository implements IVisitorRepository {
       var response = await _client.get('/visitors',
           options: Options(headers: {"requiresToken": true}));
       if (response.statusCode == HttpStatus.ok) {
-        var result = (response.data as List)
-            .map((e) => VisitorModel.fromJson(e))
-            .toList();
-        return Right(result);
+        var data = ResponseVisitors.fromJson(response.data);
+        return Right(data.visitors);
       }
       return Left(
           DioFailure(message: 'ocorreu um erro durante o processamento'));

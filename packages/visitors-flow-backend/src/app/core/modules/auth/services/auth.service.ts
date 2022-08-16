@@ -1,20 +1,13 @@
-import {
-  BadRequestException,
-  Injectable,
-  InternalServerErrorException,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { BcryptService } from '../../../../shared/services/bcrypt.service';
-import { UserService } from '../../user/user.service';
-import { ForgotPasswordDTO } from '../dto/forgot-password.dto';
-import { ResetPasswordDTO } from '../dto/reset-password.dto';
-
+import { UserRepository } from '../../user/repositories/user.repository';
 @Injectable()
 export class AuthService {
   constructor(
-    private userService: UserService,
+    private userRepository: UserRepository,
     private jwtService: JwtService,
-    private bcryptService: BcryptService,
+    private bcryptService: BcryptService
   ) {}
 
   async generateOTP() {
@@ -27,7 +20,7 @@ export class AuthService {
   }
 
   async validateUser(email: string, password: string) {
-    const user = await this.userService.getByEmail(email);
+    const user = await this.userRepository.getByEmail(email);
     if (user && (await this.bcryptService.compare(password, user.password))) {
       const { password, ...result } = user;
       return result;

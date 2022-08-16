@@ -1,10 +1,10 @@
 import { InjectModel } from '@nestjs/mongoose';
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { User } from './schemas/user.shema';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { BcryptService } from '../../../shared/services/bcrypt.service';
+import { User } from '../schemas/user.shema';
+import { CreateUserDto } from '../dto/create-user.dto';
+import { UpdateUserDto } from '../dto/update-user.dto';
+import { BcryptService } from '../../../../shared/services/bcrypt.service';
 import {
   BadRequestException,
   InternalServerErrorException,
