@@ -24,7 +24,10 @@ export class CeremonyService {
       })
       .sort({ _id: 1 })
       .skip(documentsToSkip)
-      .populate([{ path: 'visitors', strictPopulate: false }]);
+      .populate([
+        { path: 'visitors', strictPopulate: false },
+        { path: 'notices', strictPopulate: false },
+      ]);
     if (limitOfDocuments) {
       findQuery.limit(limitOfDocuments);
     }
@@ -35,7 +38,12 @@ export class CeremonyService {
   }
 
   async getById(id: string) {
-    return await (await this.ceremonyModel.findById(id)).populated('visitors');
+    return await (
+      await this.ceremonyModel.findById(id)
+    ).populate([
+      { path: 'visitors', strictPopulate: false },
+      { path: 'notices', strictPopulate: false },
+    ]);
   }
 
   async delete(id: string) {
@@ -46,7 +54,6 @@ export class CeremonyService {
     return await this.ceremonyModel.create(ceremony);
   }
   async findByIdAndUpdate(id: string, dto: UpdateCeremonyDTO) {
-    console.log('dto', dto);
     try {
       const exist = await this.ceremonyModel.findById(id);
       if (exist) {
@@ -66,7 +73,10 @@ export class CeremonyService {
       .find({
         date: { $gte: startOfDay(paramDate), $lte: endOfDay(paramDate) },
       })
-      .populate([{ path: 'visitors', strictPopulate: false }]);
+      .populate([
+        { path: 'visitors', strictPopulate: false },
+        { path: 'notices', strictPopulate: false },
+      ]);
     const ceremonies = await query;
     return { ceremonies };
   }
