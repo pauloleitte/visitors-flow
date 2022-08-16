@@ -1,4 +1,4 @@
-import { IsMongoId, IsNumber, IsOptional, Min } from 'class-validator';
+import { IsNumber, IsOptional, Min } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class FilterParams {
@@ -8,14 +8,14 @@ export class FilterParams {
   name?: string;
   
   @IsOptional()
-  @Type(() => Number)
+  @Type(() => String)
   @IsNumber()
   @Min(0)
-  page?: number;
+  skip?: number;
 
   @IsOptional()
-  @Type(() => Number)
+  @Type(() => String)
   @IsNumber()
   @Min(1)
-  limit?: number;
+  take?: number;
 }

@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Type } from 'class-transformer';
 import mongoose, { Document } from 'mongoose';
 import { Visitor } from '../../visitor/schema/visitor.schema';
 
@@ -17,9 +18,10 @@ export class Ceremony {
 
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: Visitor.name }],
-    required: false,
   })
-  
+  @Type(() => Visitor)
+  visitors: Visitor;
+
   @Prop({ default: new Date() })
   date: Date;
 }

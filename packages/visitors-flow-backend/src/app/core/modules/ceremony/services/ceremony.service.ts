@@ -6,10 +6,10 @@ import {
   BadRequestException,
   InternalServerErrorException,
 } from '@nestjs/common/exceptions';
-import { Ceremony } from './schema/ceremony.schema';
-import { CreateCeremonyDTO } from './dto/create-ceremony.dto';
-import { UpdateCeremonyDTO } from './dto/update-ceremony.dto';
-import { CeremonyOfDayDTO } from './dto/ceremony-of-day.dto';
+import { Ceremony } from '../schema/ceremony.schema';
+import { CreateCeremonyDTO } from '../dto/create-ceremony.dto';
+import { UpdateCeremonyDTO } from '../dto/update-ceremony.dto';
+import { CeremonyOfDayDTO } from '../dto/ceremony-of-day.dto';
 import { endOfDay, startOfDay } from 'date-fns';
 
 @Injectable()
@@ -17,17 +17,16 @@ export class CeremonyService {
   constructor(
     @InjectModel('Ceremony') private readonly ceremonyModel: Model<Ceremony>
   ) {}
-
-  async getAll(args: any) {
+  async getAll(documentsToSkip = 0, limitOfDocuments?: number, name?: string) {
     const findQuery = this.ceremonyModel
       .find({
-        name: { $regex: args.name ?? '', $options: 'i' },
+        name: { $regex: name ?? '', $options: 'i' },
       })
       .sort({ _id: 1 })
-      .skip(args.documentsToSkip)
-      .populate('visitors');
-    if (args.limitOfDocuments) {
-      findQuery.limit(args.imitOfDocuments);
+      .skip(documentsToSkip)
+      .populate([{ path: 'visitors', strictPopulate: false }]);
+    if (limitOfDocuments) {
+      findQuery.limit(limitOfDocuments);
     }
     const ceremonies = await findQuery;
     const count = await this.ceremonyModel.count();
@@ -47,6 +46,7 @@ export class CeremonyService {
     return await this.ceremonyModel.create(ceremony);
   }
   async findByIdAndUpdate(id: string, dto: UpdateCeremonyDTO) {
+    console.log('dto', dto);
     try {
       const exist = await this.ceremonyModel.findById(id);
       if (exist) {
@@ -62,9 +62,11 @@ export class CeremonyService {
 
   async getCeremoniesOfDay(dto: CeremonyOfDayDTO) {
     const paramDate = new Date(dto.date);
-    const query = this.ceremonyModel.find({
-      date: { $gte: startOfDay(paramDate), $lte: endOfDay(paramDate) },
-    });
+    const query = this.ceremonyModel
+      .find({
+        date: { $gte: startOfDay(paramDate), $lte: endOfDay(paramDate) },
+      })
+      .populate([{ path: 'visitors', strictPopulate: false }]);
     const ceremonies = await query;
     return { ceremonies };
   }

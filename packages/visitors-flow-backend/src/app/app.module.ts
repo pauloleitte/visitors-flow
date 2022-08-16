@@ -7,25 +7,19 @@ import { AuthModule } from './core/modules/auth/auth.module';
 import { VisitorModule } from './core/modules/visitor/visitor.module';
 import { CeremonyModule } from './core/modules/ceremony/ceremony.module';
 import { HealthModule } from './core/modules/health/health.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './core/modules/user/entities/user.entity';
-import { Visitor } from './core/modules/visitor/entities/visitor.entity';
+import { MongooseModule } from '@nestjs/mongoose';
 @Module({
   imports: [
     AuthModule,
     ConfigModule.forRoot(),
-    TypeOrmModule.forRoot({
-      type: 'mongodb',
-      url: process.env.MONGO_URI,
-      entities: [User, Visitor],
-      synchronize: true,
+    MongooseModule.forRoot(process.env.MONGO_URI, {
       useNewUrlParser: true,
-      logging: true,
+      useUnifiedTopology: true,
     }),
     HealthModule,
     UserModule,
     VisitorModule,
-    // CeremonyModule,
+    CeremonyModule,
   ],
   controllers: [AppController],
   providers: [AppService],
