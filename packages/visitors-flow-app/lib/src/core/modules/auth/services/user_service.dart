@@ -3,19 +3,24 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import '../../../../shared/errors/errors.dart';
 import '../../../../shared/services/local_storage_service.dart';
+import '../../start/submodules/configuration/models/update-password.model.dart';
+import '../../start/submodules/configuration/view-models/user_view_model.dart';
 import '../models/login_request_model.dart';
 import '../models/signup_request_model.dart';
+import '../models/token_model.dart';
 import '../models/user_create_model.dart';
 import '../models/user_model.dart';
 import '../repositories/interfaces/user_repository_interface.dart';
 import '../view-models/login_view_model.dart';
 import '../view-models/signup_view_model.dart';
+import 'interfaces/token_service_interface.dart';
 import 'interfaces/user_service_interface.dart';
 
 class UserService implements IUserService {
   final IUserRepository _userRepository;
+  final ITokenService _tokenService;
 
-  UserService(this._userRepository);
+  UserService(this._userRepository, this._tokenService);
 
   @override
   void dispose() {}
@@ -39,7 +44,7 @@ class UserService implements IUserService {
   }
 
   @override
-  Future<Either<Failure, UserModel>> login(LoginViewModel model) async {
+  Future<Either<Failure, TokenModel>> login(LoginViewModel model) async {
     return await _userRepository
         .login(LoginRequestModel(email: model.email, password: model.password));
   }
@@ -50,6 +55,27 @@ class UserService implements IUserService {
         name: model.name,
         email: model.email,
         password: model.password,
+        phone: model.phone));
+  }
+
+  @override
+  Future<Either<Failure, UserModel>> getUser() async {
+    var token = await _tokenService.getCurrentToken();
+    return _userRepository.getUser(token);
+  }
+
+  @override
+  Future<Either<Failure, bool>> updatePassword(UserViewModel model) async {
+    return await _userRepository.updatePassword(
+        UpdatePasswordModel(oldPassword: model.password, id: model.id));
+  }
+
+  @override
+  Future<Either<Failure, UserModel>> updateUser(UserViewModel model) async {
+    return await _userRepository.updateUser(UserModel(
+        id: model.id,
+        name: model.name,
+        email: model.email,
         phone: model.phone));
   }
 }

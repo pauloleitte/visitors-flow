@@ -1,7 +1,8 @@
 // ignore: file_names
 import 'package:dio/dio.dart';
-import 'package:dio/native_imp.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:visitors_flow_app/src/core/modules/auth/services/token_service.dart';
+import 'package:visitors_flow_app/src/core/modules/auth/stores/token_store.dart';
 import 'package:visitors_flow_app/src/core/modules/start/start_module.dart';
 import 'package:visitors_flow_app/src/shared/http/custom_dio.dart';
 
@@ -16,9 +17,11 @@ class AppModule extends Module {
   @override
   final List<Bind> binds = [
     Bind.lazySingleton((i) => CustomDio(i.get())),
-    Bind((i) => UserService(i.get())),
+    Bind((i) => UserService(i.get(), i.get())),
     Bind((i) => UserRepository(i.get())),
+    Bind((i) => TokenService()),
     Bind((i) => UserStore(i.get())),
+    Bind((i) => TokenStore(i.get())),
     Bind(
       (i) => BaseOptions(
         followRedirects: false,

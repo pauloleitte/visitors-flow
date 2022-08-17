@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:visitors_flow_app/src/core/modules/auth/services/interfaces/token_service_interface.dart';
 
 import '../../../core/modules/auth/services/interfaces/user_service_interface.dart';
 
@@ -11,11 +12,11 @@ class CustomInterceptors extends InterceptorsWrapper {
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     if (options.headers.containsKey("requiresToken")) {
-      var userService = Modular.get<IUserService>();
-      var user = await userService.getCurrentUser();
+      var tokenService = Modular.get<ITokenService>();
+      var token = await tokenService.getCurrentToken();
 
-      if (user.token != null && user.token!.isNotEmpty) {
-        var headerAuth = genToken(user.token);
+      if (token.accessToken != null && token.accessToken!.isNotEmpty) {
+        var headerAuth = genToken(token.accessToken);
         options.headers['Authorization'] = headerAuth;
       }
       if (kDebugMode) {

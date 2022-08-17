@@ -64,7 +64,7 @@ class _BodySecurityState extends ModularState<BodySecurity, ProfileController> {
                       return null;
                     },
                     onSaved: (value) {
-                      controller.model.password = value;
+                      controller.vm.password = value;
                     },
                   ),
                 ),

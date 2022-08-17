@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:visitors_flow_app/src/core/config/theme_helper.dart';
-import 'package:visitors_flow_app/src/core/modules/start/submodules/configuration/widgets/body_profile.dart';
+
+import '../../../../../config/theme_helper.dart';
+import '../widgets/body_profile.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);

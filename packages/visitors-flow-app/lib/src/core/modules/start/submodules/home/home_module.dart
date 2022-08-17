@@ -10,7 +10,7 @@ class HomeModule extends Module {
   final List<Bind> binds = [
     Bind((i) => CeremonyRepository(i.get())),
     Bind((i) => CeremonyService(i.get())),
-    Bind((i) => HomeController(i.get())),
+    Bind((i) => HomeController(i.get(), i.get())),
   ];
 
   @override

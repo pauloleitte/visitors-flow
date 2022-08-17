@@ -1,18 +1,24 @@
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import 'package:visitors_flow_app/src/core/modules/start/submodules/ceremony/services/ceremony_service.dart';
-import 'package:visitors_flow_app/src/core/modules/start/submodules/ceremony/services/interfaces/ceremony_service_interface.dart';
 
 import '../../../../../config/app_messages.dart';
+import '../../../../auth/models/user_model.dart';
+import '../../../../auth/services/interfaces/user_service_interface.dart';
 import '../../ceremony/models/ceremony_model.dart';
+import '../../ceremony/services/interfaces/ceremony_service_interface.dart';
 part 'home_controller.g.dart';
 
 class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
-  ICeremonyService _ceremonyService;
-  _HomeControllerBase(this._ceremonyService);
+  final ICeremonyService _ceremonyService;
+  final IUserService _userService;
+
+  @observable
+  UserModel model = UserModel();
+
+  _HomeControllerBase(this._ceremonyService, this._userService);
 
   @observable
   List<CeremonyModel> ceremonies = [];
@@ -28,11 +34,30 @@ abstract class _HomeControllerBase with Store {
         asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (ceremonies) async {
-        busy = false;
         this.ceremonies = ceremonies;
       });
     } catch (e) {
+      asuka.showSnackBar(const SnackBar(
+          content: Text(
+        AppMessages.ERROR_MESSAGE,
+      )));
+    } finally {
       busy = false;
+    }
+  }
+
+  getUser() async {
+    try {
+      busy = true;
+      var result = await _userService.getUser();
+      result.fold((l) {
+        asuka.showSnackBar(
+            const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
+      }, (user) async {
+        model = user;
+        _userService.saveLocalDB(user);
+      });
+    } catch (e) {
       asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,

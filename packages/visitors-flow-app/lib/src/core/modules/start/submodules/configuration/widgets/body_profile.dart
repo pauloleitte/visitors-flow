@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:visitors_flow_app/src/core/modules/start/submodules/configuration/controllers/profile_controller.dart';
-
 import '../../../../../config/theme_helper.dart';
-import '../../../../auth/stores/user_store.dart';
+import '../controllers/profile_controller.dart';
 
 class BodyProfile extends StatefulWidget {
   BodyProfile({Key? key}) : super(key: key);
@@ -24,8 +22,6 @@ class _BodyProfileState extends ModularState<BodyProfile, ProfileController> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final store = Modular.get<UserStore>();
-    controller.model = store.user;
     return Observer(builder: (context) {
       return SingleChildScrollView(
         child: Container(
@@ -42,7 +38,7 @@ class _BodyProfileState extends ModularState<BodyProfile, ProfileController> {
                     Container(
                       decoration: ThemeHelper().inputBoxDecorationShaddow(),
                       child: TextFormField(
-                        initialValue: store.user.name,
+                        initialValue: controller.model.name,
                         decoration: ThemeHelper()
                             .textInputDecoration('Nome', 'Insira seu nome'),
                         validator: (val) {
@@ -52,7 +48,7 @@ class _BodyProfileState extends ModularState<BodyProfile, ProfileController> {
                           return null;
                         },
                         onSaved: (value) {
-                          controller.model.name = value;
+                          controller.vm.name = value;
                         },
                       ),
                     ),
@@ -60,7 +56,7 @@ class _BodyProfileState extends ModularState<BodyProfile, ProfileController> {
                     Container(
                       decoration: ThemeHelper().inputBoxDecorationShaddow(),
                       child: TextFormField(
-                        initialValue: store.user.email,
+                        initialValue: controller.model.email,
                         decoration: ThemeHelper()
                             .textInputDecoration("E-mail", "Insiira seu email"),
                         keyboardType: TextInputType.emailAddress,
@@ -73,7 +69,7 @@ class _BodyProfileState extends ModularState<BodyProfile, ProfileController> {
                           return null;
                         },
                         onSaved: (value) {
-                          controller.model.email = value;
+                          controller.vm.email = value;
                         },
                       ),
                     ),
@@ -81,7 +77,7 @@ class _BodyProfileState extends ModularState<BodyProfile, ProfileController> {
                     Container(
                       decoration: ThemeHelper().inputBoxDecorationShaddow(),
                       child: TextFormField(
-                        initialValue: store.user.phone,
+                        initialValue: controller.model.phone,
                         decoration: ThemeHelper().textInputDecoration(
                             "Celular", "Insira o número do seu celular"),
                         keyboardType: TextInputType.phone,
@@ -93,7 +89,7 @@ class _BodyProfileState extends ModularState<BodyProfile, ProfileController> {
                           return null;
                         },
                         onSaved: (value) {
-                          controller.model.phone = value;
+                          controller.vm.phone = value;
                         },
                       ),
                     ),

@@ -23,6 +23,7 @@ class _BodyHomeState extends ModularState<BodyHome, HomeController> {
   void _init() async {
     await controller
         .getCeremoniesOfDay(DateTime.now().toUtc().toLocal().toString());
+    await controller.getUser();
   }
 
   Widget getCard(CeremonyModel model) {
@@ -42,7 +43,6 @@ class _BodyHomeState extends ModularState<BodyHome, HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    final store = Modular.get<UserStore>();
     return Observer(builder: (context) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
@@ -52,7 +52,7 @@ class _BodyHomeState extends ModularState<BodyHome, HomeController> {
           child: Column(
             children: [
               Text(
-                'Olá, ${store.user.name.toString().split(' ')[0]}',
+                'Olá, ${controller.model.name.toString().split(' ')[0]}',
                 style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.bold,

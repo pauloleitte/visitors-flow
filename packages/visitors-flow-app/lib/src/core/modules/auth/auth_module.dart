@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:visitors_flow_app/src/core/modules/auth/services/token_service.dart';
 
 import 'controllers/login/login_controller.dart';
 import 'controllers/signup/signup_controller.dart';
@@ -10,9 +11,10 @@ import 'services/user_service.dart';
 class AuthModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.factory((i) => UserService(i.get())),
+    Bind.factory((i) => TokenService()),
+    Bind.factory((i) => UserService(i.get(), i.get())),
     Bind.factory((i) => UserRepository(i.get())),
-    Bind.factory((i) => LoginController(i.get(), i.get())),
+    Bind.factory((i) => LoginController(i.get(), i.get(), i.get())),
     Bind.factory((i) => SignupController(i.get())),
   ];
 
