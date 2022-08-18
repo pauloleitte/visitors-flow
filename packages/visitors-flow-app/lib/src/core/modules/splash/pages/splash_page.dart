@@ -32,7 +32,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
+        color: Colors.grey.shade100,
       ),
       child: AnimatedOpacity(
         opacity: _isVisible ? 1.0 : 0,

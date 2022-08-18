@@ -87,6 +87,14 @@ class _BodyNoticeFormState
                           },
                         ),
                       ),
+                      // CheckboxListTile(
+                      //   controlAffinity: ListTileControlAffinity.leading,
+                      //   title: const Text('Ativo'),
+                      //   value: controller.notice.isDone,
+                      //   onChanged: (value) {
+                      //     controller.notice.isDone = value;
+                      //   },
+                      // ),
                       const SizedBox(height: 20.0),
                       Container(
                         decoration: ThemeHelper().buttonBoxDecoration(context),

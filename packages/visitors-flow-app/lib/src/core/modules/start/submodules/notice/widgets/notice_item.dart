@@ -17,7 +17,7 @@ class NoticeItem extends StatelessWidget {
           radius: 25,
           backgroundColor: Theme.of(context).primaryColor,
           child: const Icon(
-            Icons.church,
+            Icons.notifications_outlined,
             color: Colors.white,
           ),
         ),

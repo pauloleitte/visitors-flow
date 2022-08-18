@@ -31,6 +31,7 @@ abstract class _NoticeControllerBase with Store {
         id: notice.sId,
         name: notice.name,
         description: notice.description,
+        isDone: notice.isDone,
       );
 
   Future<void> getNotices() async {
