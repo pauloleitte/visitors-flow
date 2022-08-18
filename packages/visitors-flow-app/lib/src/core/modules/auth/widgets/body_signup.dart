@@ -65,7 +65,7 @@ class _BodySignupState extends ModularState<BodySignup, SignupController> {
                                 return null;
                               },
                               onSaved: (value) {
-                                controller.name = value;
+                                controller.model.name = value;
                               },
                             ),
                           ),
@@ -86,7 +86,7 @@ class _BodySignupState extends ModularState<BodySignup, SignupController> {
                                 return null;
                               },
                               onSaved: (value) {
-                                controller.email = value;
+                                controller.model.email = value;
                               },
                             ),
                           ),
@@ -106,7 +106,7 @@ class _BodySignupState extends ModularState<BodySignup, SignupController> {
                                 return null;
                               },
                               onSaved: (value) {
-                                controller.phone = value;
+                                controller.model.phone = value;
                               },
                             ),
                           ),
@@ -125,7 +125,7 @@ class _BodySignupState extends ModularState<BodySignup, SignupController> {
                                 return null;
                               },
                               onSaved: (value) {
-                                controller.password = value;
+                                controller.model.password = value;
                               },
                             ),
                           ),

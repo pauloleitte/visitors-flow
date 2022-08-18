@@ -5,11 +5,9 @@ import 'package:dio/dio.dart';
 import 'package:dio/native_imp.dart';
 import 'package:visitors_flow_app/src/core/modules/auth/models/user_model.dart';
 import '../../../../shared/errors/errors.dart';
-import '../../start/submodules/configuration/models/update-password.model.dart';
 import '../models/login_request_model.dart';
 import '../models/signup_request_model.dart';
 import '../models/token_model.dart';
-import '../models/user_create_model.dart';
 import 'interfaces/user_repository_interface.dart';
 
 class UserRepository implements IUserRepository {
@@ -39,12 +37,11 @@ class UserRepository implements IUserRepository {
   }
 
   @override
-  Future<Either<Failure, UserCreateModel>> signup(
-      SignupRequestModel model) async {
+  Future<Either<Failure, UserModel>> signup(SignupRequestModel model) async {
     try {
       var response = await _client.post('/users', data: model.toJson());
       if (response.statusCode == HttpStatus.created) {
-        return Right(UserCreateModel.fromJson(response.data));
+        return Right(UserModel.fromJson(response.data));
       }
       return Left(DioFailure(
           message: 'Ocorreu um erro por favor tente novamente',
@@ -73,10 +70,9 @@ class UserRepository implements IUserRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> updatePassword(
-      UpdatePasswordModel model) async {
+  Future<Either<Failure, bool>> updatePassword(UserModel model) async {
     try {
-      var response = await _client.patch('/users/${model.id}',
+      var response = await _client.patch('/users/${model.sId}',
           data: model.toJson(),
           options: Options(headers: {"requiresToken": "true"}));
       if (response.statusCode == HttpStatus.ok) {
@@ -92,7 +88,7 @@ class UserRepository implements IUserRepository {
   @override
   Future<Either<Failure, UserModel>> updateUser(UserModel model) async {
     try {
-      var response = await _client.patch('/users/${model.id}',
+      var response = await _client.patch('/users/${model.sId}',
           data: model.toJson(),
           options: Options(headers: {"requiresToken": "true"}));
       if (response.statusCode == HttpStatus.ok) {

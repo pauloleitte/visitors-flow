@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'signup_controller.dart';
+part of 'security_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,30 +8,17 @@ part of 'signup_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$SignupController on _SignupControllerBase, Store {
-  Computed<bool>? _$isValidComputed;
+mixin _$SecurityController on _SecurityControllerBase, Store {
+  Computed<UserUpdatePasswordViewModel>? _$vmPasswordComputed;
 
   @override
-  bool get isValid => (_$isValidComputed ??= Computed<bool>(() => super.isValid,
-          name: '_SignupControllerBase.isValid'))
+  UserUpdatePasswordViewModel get vmPassword => (_$vmPasswordComputed ??=
+          Computed<UserUpdatePasswordViewModel>(() => super.vmPassword,
+              name: '_SecurityControllerBase.vmPassword'))
       .value;
-  Computed<bool>? _$isValidEmailComputed;
-
-  @override
-  bool get isValidEmail =>
-      (_$isValidEmailComputed ??= Computed<bool>(() => super.isValidEmail,
-              name: '_SignupControllerBase.isValidEmail'))
-          .value;
-  Computed<SignupViewModel>? _$vmComputed;
-
-  @override
-  SignupViewModel get vm =>
-      (_$vmComputed ??= Computed<SignupViewModel>(() => super.vm,
-              name: '_SignupControllerBase.vm'))
-          .value;
 
   late final _$modelAtom =
-      Atom(name: '_SignupControllerBase.model', context: context);
+      Atom(name: '_SecurityControllerBase.model', context: context);
 
   @override
   UserModel get model {
@@ -47,7 +34,7 @@ mixin _$SignupController on _SignupControllerBase, Store {
   }
 
   late final _$busyAtom =
-      Atom(name: '_SignupControllerBase.busy', context: context);
+      Atom(name: '_SecurityControllerBase.busy', context: context);
 
   @override
   bool get busy {
@@ -67,9 +54,7 @@ mixin _$SignupController on _SignupControllerBase, Store {
     return '''
 model: ${model},
 busy: ${busy},
-isValid: ${isValid},
-isValidEmail: ${isValidEmail},
-vm: ${vm}
+vmPassword: ${vmPassword}
     ''';
   }
 }

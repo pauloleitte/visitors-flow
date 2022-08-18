@@ -1,13 +1,13 @@
-class UpdatePasswordModel {
-  UpdatePasswordModel({
+class UserUpdatePasswordViewModel {
+  UserUpdatePasswordViewModel({
     this.oldPassword,
     this.newPassword,
     this.id,
   });
 
-  final String? oldPassword;
-  final String? newPassword;
-  final String? id;
+  String? oldPassword;
+  String? newPassword;
+  String? id;
 
   Map<String, dynamic> toJson() => {
         'password': newPassword,

@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:visitors_flow_app/src/core/modules/start/submodules/configuration/widgets/body_security.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
+import '../../../../../config/app_routes.dart';
+import '../../../../auth/models/user_model.dart';
+import '../widgets/body_security.dart';
 
 class SecurityPage extends StatefulWidget {
-  SecurityPage({Key? key}) : super(key: key);
+  final UserModel? user;
+  const SecurityPage({Key? key, this.user}) : super(key: key);
 
   @override
   State<SecurityPage> createState() => _SecurityPageState();
@@ -18,8 +23,13 @@ class _SecurityPageState extends State<SecurityPage> {
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Theme.of(context).primaryColor,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back,
+              color: Theme.of(context).colorScheme.secondary),
+          onPressed: () => Modular.to.navigate(AppRoutes.CONFIG),
+        ),
       ),
-      body: BodySecurity(),
+      body: BodySecurity(user: widget.user),
     );
   }
 }

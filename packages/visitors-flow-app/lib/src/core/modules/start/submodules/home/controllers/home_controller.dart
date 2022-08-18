@@ -55,7 +55,7 @@ abstract class _HomeControllerBase with Store {
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (user) async {
         model = user;
-        _userService.saveLocalDB(user);
+        await _userService.saveLocalDB(user);
       });
     } catch (e) {
       asuka.showSnackBar(const SnackBar(

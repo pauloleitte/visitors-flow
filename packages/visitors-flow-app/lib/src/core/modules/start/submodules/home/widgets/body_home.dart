@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:visitors_flow_app/src/core/modules/start/submodules/ceremony/models/ceremony_model.dart';
-
-import '../../../../auth/stores/user_store.dart';
 import '../controllers/home_controller.dart';
 
 class BodyHome extends StatefulWidget {

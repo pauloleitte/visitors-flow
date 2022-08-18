@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:visitors_flow_app/src/core/modules/auth/stores/token_store.dart';
+import 'package:visitors_flow_app/src/core/modules/auth/stores/user_store.dart';
 import '../../../../../config/app_routes.dart';
-import '../controllers/profile_controller.dart';
+import '../controllers/configuration/configuration_controller.dart';
 
 class BodyConfiguration extends StatefulWidget {
   const BodyConfiguration({Key? key}) : super(key: key);
@@ -12,7 +14,7 @@ class BodyConfiguration extends StatefulWidget {
 }
 
 class _BodyConfigurationState
-    extends ModularState<BodyConfiguration, ProfileController> {
+    extends ModularState<BodyConfiguration, ConfigurationController> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -20,16 +22,18 @@ class _BodyConfigurationState
 
   @override
   void initState() {
+    _getUser();
     super.initState();
-    _init();
   }
 
-  void _init() async {
+  Future<void> _getUser() async {
     await controller.getUser();
   }
 
   @override
   Widget build(BuildContext context) {
+    final storeUser = Modular.get<UserStore>();
+    final storeToken = Modular.get<TokenStore>();
     return Observer(builder: (context) {
       return SingleChildScrollView(
         child: Stack(
@@ -74,7 +78,8 @@ class _BodyConfigurationState
                               color: Theme.of(context).primaryColor,
                             ),
                             onTap: () {
-                              Modular.to.navigate(AppRoutes.CONFIG_PROFILE);
+                              Modular.to.navigate(AppRoutes.CONFIG_PROFILE,
+                                  arguments: controller.model);
                             },
                           ),
                           ListTile(
@@ -82,7 +87,8 @@ class _BodyConfigurationState
                             leading: Icon(Icons.security,
                                 color: Theme.of(context).primaryColor),
                             onTap: () {
-                              Modular.to.navigate(AppRoutes.CONFIG_SECURITY);
+                              Modular.to.pushNamed(AppRoutes.CONFIG_SECURITY,
+                                  arguments: controller.model);
                             },
                           ),
                           ListTile(
@@ -92,6 +98,8 @@ class _BodyConfigurationState
                               color: Theme.of(context).primaryColor,
                             ),
                             onTap: () {
+                              storeToken.clearToken();
+                              storeUser.clearUser();
                               Modular.to.navigate(AppRoutes.AUTH);
                             },
                           ),

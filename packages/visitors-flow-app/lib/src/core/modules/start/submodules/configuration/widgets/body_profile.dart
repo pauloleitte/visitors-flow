@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../../../../../config/theme_helper.dart';
-import '../controllers/profile_controller.dart';
+import '../../../../auth/models/user_model.dart';
+import '../controllers/profile/profile_controller.dart';
 
 class BodyProfile extends StatefulWidget {
-  BodyProfile({Key? key}) : super(key: key);
+  final UserModel? user;
+  const BodyProfile({Key? key, this.user}) : super(key: key);
 
   @override
   State<BodyProfile> createState() => _BodyProfileState();
@@ -17,6 +19,12 @@ class _BodyProfileState extends ModularState<BodyProfile, ProfileController> {
       _formKey.currentState!.save();
       await controller.updateUser();
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    controller.model = widget.user!;
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -48,7 +56,7 @@ class _BodyProfileState extends ModularState<BodyProfile, ProfileController> {
                           return null;
                         },
                         onSaved: (value) {
-                          controller.vm.name = value;
+                          controller.model.name = value;
                         },
                       ),
                     ),
@@ -69,7 +77,7 @@ class _BodyProfileState extends ModularState<BodyProfile, ProfileController> {
                           return null;
                         },
                         onSaved: (value) {
-                          controller.vm.email = value;
+                          controller.model.email = value;
                         },
                       ),
                     ),
@@ -89,7 +97,7 @@ class _BodyProfileState extends ModularState<BodyProfile, ProfileController> {
                           return null;
                         },
                         onSaved: (value) {
-                          controller.vm.phone = value;
+                          controller.model.phone = value;
                         },
                       ),
                     ),

@@ -3,12 +3,11 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import '../../../../shared/errors/errors.dart';
 import '../../../../shared/services/local_storage_service.dart';
-import '../../start/submodules/configuration/models/update-password.model.dart';
+import '../../start/submodules/configuration/view-models/user_update_password_view_model.dart';
 import '../../start/submodules/configuration/view-models/user_view_model.dart';
 import '../models/login_request_model.dart';
 import '../models/signup_request_model.dart';
 import '../models/token_model.dart';
-import '../models/user_create_model.dart';
 import '../models/user_model.dart';
 import '../repositories/interfaces/user_repository_interface.dart';
 import '../view-models/login_view_model.dart';
@@ -50,7 +49,7 @@ class UserService implements IUserService {
   }
 
   @override
-  Future<Either<Failure, UserCreateModel>> signup(SignupViewModel model) async {
+  Future<Either<Failure, UserModel>> signup(SignupViewModel model) async {
     return await _userRepository.signup(SignupRequestModel(
         name: model.name,
         email: model.email,
@@ -65,15 +64,16 @@ class UserService implements IUserService {
   }
 
   @override
-  Future<Either<Failure, bool>> updatePassword(UserViewModel model) async {
-    return await _userRepository.updatePassword(
-        UpdatePasswordModel(oldPassword: model.password, id: model.id));
+  Future<Either<Failure, bool>> updatePassword(
+      UserUpdatePasswordViewModel model) async {
+    return await _userRepository
+        .updatePassword(UserModel(password: model.newPassword, sId: model.id));
   }
 
   @override
   Future<Either<Failure, UserModel>> updateUser(UserViewModel model) async {
     return await _userRepository.updateUser(UserModel(
-        id: model.id,
+        sId: model.id,
         name: model.name,
         email: model.email,
         phone: model.phone));

@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:visitors_flow_app/src/core/config/app_routes.dart';
 
-import '../../../../../config/app_messages.dart';
-import '../../../../auth/models/user_model.dart';
-import '../../../../auth/services/interfaces/user_service_interface.dart';
-import '../view-models/user_view_model.dart';
+import '../../../../../../config/app_messages.dart';
+import '../../../../../auth/models/user_model.dart';
+import '../../../../../auth/services/interfaces/user_service_interface.dart';
+import '../../view-models/user_view_model.dart';
 part 'profile_controller.g.dart';
 
 class ProfileController = _ProfileControllerBase with _$ProfileController;
@@ -18,6 +18,7 @@ abstract class _ProfileControllerBase with Store {
 
   @computed
   UserViewModel get vm => UserViewModel(
+        id: model.sId,
         name: model.name,
         email: model.email,
         phone: model.phone,
@@ -30,28 +31,6 @@ abstract class _ProfileControllerBase with Store {
 
   _ProfileControllerBase(this._userService);
 
-  updatePassword() async {
-    try {
-      busy = true;
-      var result = await _userService.updatePassword(vm);
-      result.fold((l) {
-        asuka.showSnackBar(
-            const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
-      }, (user) {
-        asuka.showSnackBar(
-            const SnackBar(content: Text(AppMessages.UPDATE_MESSAGE)));
-        Modular.to.navigate(AppRoutes.CONFIG);
-      });
-    } catch (e) {
-      asuka.showSnackBar(const SnackBar(
-          content: Text(
-        AppMessages.ERROR_MESSAGE,
-      )));
-    } finally {
-      busy = false;
-    }
-  }
-
   updateUser() async {
     try {
       busy = true;
@@ -59,8 +38,8 @@ abstract class _ProfileControllerBase with Store {
       result.fold((l) {
         asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
-      }, (user) {
-        _userService.saveLocalDB(user);
+      }, (user) async {
+        await _userService.saveLocalDB(user);
         asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.UPDATE_MESSAGE)));
         Modular.to.navigate(AppRoutes.CONFIG);
@@ -78,7 +57,13 @@ abstract class _ProfileControllerBase with Store {
   getUser() async {
     try {
       busy = true;
-      model = await _userService.getCurrentUser();
+      var result = await _userService.getUser();
+      result.fold((l) {
+        asuka.showSnackBar(
+            const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
+      }, (user) {
+        model = user;
+      });
     } catch (e) {
       asuka.showSnackBar(const SnackBar(
           content: Text(
