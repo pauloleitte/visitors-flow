@@ -48,9 +48,6 @@ class _BodySignupState extends ModularState<BodySignup, SignupController> {
                       key: _formKey,
                       child: Column(
                         children: [
-                          const SizedBox(
-                            height: 150,
-                          ),
                           const SizedBox(height: 30.0),
                           Container(
                             decoration:

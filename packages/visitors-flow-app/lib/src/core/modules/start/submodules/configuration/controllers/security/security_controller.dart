@@ -2,12 +2,12 @@ import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
+import 'package:visitors_flow_app/src/core/modules/start/submodules/configuration/view-models/user_view_model.dart';
 
 import '../../../../../../config/app_messages.dart';
 import '../../../../../../config/app_routes.dart';
 import '../../../../../auth/models/user_model.dart';
 import '../../../../../auth/services/interfaces/user_service_interface.dart';
-import '../../view-models/user_update_password_view_model.dart';
 part 'security_controller.g.dart';
 
 class SecurityController = _SecurityControllerBase with _$SecurityController;
@@ -20,11 +20,12 @@ abstract class _SecurityControllerBase with Store {
   bool busy = false;
 
   @computed
-  UserUpdatePasswordViewModel get vmPassword => UserUpdatePasswordViewModel(
-        id: model.sId,
-        oldPassword: model.password,
-        newPassword: model.password,
-      );
+  UserViewModel get vm => UserViewModel(
+      id: model.sId,
+      password: model.password,
+      email: model.email,
+      name: model.name,
+      phone: model.phone);
 
   final IUserService _userService;
 
@@ -33,7 +34,7 @@ abstract class _SecurityControllerBase with Store {
   updatePassword() async {
     try {
       busy = true;
-      var result = await _userService.updatePassword(vmPassword);
+      var result = await _userService.updatePassword(vm);
       result.fold((l) {
         asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));

@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import '../../../../shared/errors/errors.dart';
 import '../../../../shared/services/local_storage_service.dart';
-import '../../start/submodules/configuration/view-models/user_update_password_view_model.dart';
 import '../../start/submodules/configuration/view-models/user_view_model.dart';
 import '../models/login_request_model.dart';
 import '../models/signup_request_model.dart';
@@ -64,10 +63,13 @@ class UserService implements IUserService {
   }
 
   @override
-  Future<Either<Failure, bool>> updatePassword(
-      UserUpdatePasswordViewModel model) async {
-    return await _userRepository
-        .updatePassword(UserModel(password: model.newPassword, sId: model.id));
+  Future<Either<Failure, bool>> updatePassword(UserViewModel model) async {
+    return await _userRepository.updatePassword(UserModel(
+        sId: model.id,
+        name: model.name,
+        email: model.email,
+        password: model.password,
+        phone: model.phone));
   }
 
   @override

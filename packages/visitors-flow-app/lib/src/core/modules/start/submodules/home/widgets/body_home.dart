@@ -44,52 +44,54 @@ class _BodyHomeState extends ModularState<BodyHome, HomeController> {
     return Observer(builder: (context) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: Column(
-            children: [
-              Text(
-                'Olá, ${controller.model.name.toString().split(' ')[0]}',
-                style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 32),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              (controller.ceremonies.isNotEmpty
-                  ? SizedBox(
-                      height: MediaQuery.of(context).size.height / 4,
-                      child: Column(
-                        children: [
-                          Text('Cultos do dia',
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20)),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Expanded(
-                            child: SizedBox(
-                              child: ListView.builder(
-                                  itemCount: controller.ceremonies.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return getCard(
-                                        controller.ceremonies[index]);
-                                  }),
+        child: controller.busy
+            ? const Center(child: CircularProgressIndicator())
+            : SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: Column(
+                  children: [
+                    Text(
+                      'Olá, ${controller.model.name.toString().split(' ')[0]}',
+                      style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 32),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    (controller.ceremonies.isNotEmpty
+                        ? SizedBox(
+                            height: MediaQuery.of(context).size.height / 4,
+                            child: Column(
+                              children: [
+                                Text('Cultos do dia',
+                                    style: TextStyle(
+                                        color: Theme.of(context).primaryColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20)),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Expanded(
+                                  child: SizedBox(
+                                    child: ListView.builder(
+                                        itemCount: controller.ceremonies.length,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          return getCard(
+                                              controller.ceremonies[index]);
+                                        }),
+                                  ),
+                                )
+                              ],
                             ),
                           )
-                        ],
-                      ),
-                    )
-                  : const Text('Nenhum culto para o dia')),
-            ],
-          ),
-        ),
+                        : const Text('Nenhum culto para o dia')),
+                  ],
+                ),
+              ),
       );
     });
   }

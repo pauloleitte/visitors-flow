@@ -67,6 +67,10 @@ export class UserService {
   }
 
   async delete(id: string) {
-    return await this.userModel.findByIdAndDelete(id);
+     await this.userModel.findByIdAndDelete(id);
+     return {
+      status: HttpStatus.OK,
+      message: 'user deleted',
+    };
   }
 }

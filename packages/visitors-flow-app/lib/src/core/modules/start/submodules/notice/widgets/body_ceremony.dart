@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../controllers/ceremony_controller.dart';
-import 'ceremony_item.dart';
 
-class BodyCeremony extends StatefulWidget {
-  const BodyCeremony({Key? key}) : super(key: key);
+import '../controllers/notice_controller.dart';
+import 'notice_item.dart';
+
+class BodyNotice extends StatefulWidget {
+  BodyNotice({Key? key}) : super(key: key);
 
   @override
-  State<BodyCeremony> createState() => _BodyCeremonyState();
+  State<BodyNotice> createState() => _BodyNoticeState();
 }
 
-class _BodyCeremonyState
-    extends ModularState<BodyCeremony, CeremonyController> {
+class _BodyNoticeState extends ModularState<BodyNotice, NoticeController> {
   @override
   void initState() {
     super.initState();
@@ -20,11 +20,11 @@ class _BodyCeremonyState
   }
 
   init() async {
-    await controller.getCeremonies();
+    await controller.getNotices();
   }
 
   _handleCeremonies() async {
-    await controller.getCeremonies();
+    await controller.getNotices();
   }
 
   @override
@@ -34,7 +34,7 @@ class _BodyCeremonyState
         children: [
           controller.busy
               ? const Center(child: CircularProgressIndicator())
-              : controller.ceremonies.isNotEmpty
+              : controller.notices.isNotEmpty
                   ? Container(
                       margin: const EdgeInsets.fromLTRB(15, 25, 15, 25),
                       child: RefreshIndicator(
@@ -42,10 +42,10 @@ class _BodyCeremonyState
                           _handleCeremonies();
                         },
                         child: ListView.builder(
-                          itemCount: controller.ceremonies.length,
+                          itemCount: controller.notices.length,
                           itemBuilder: (ctx, i) => Column(
                             children: <Widget>[
-                              CeremonyItem(controller.ceremonies[i]),
+                              NoticeItem(controller.notices[i]),
                               const Divider(),
                             ],
                           ),
@@ -54,7 +54,7 @@ class _BodyCeremonyState
                     )
                   : const Center(
                       child: Text(
-                        'Nenhum culto cadastrado',
+                        'Nenhum aviso cadastrado',
                         style: TextStyle(fontSize: 20),
                       ),
                     ),

@@ -1,11 +1,12 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:visitors_flow_app/src/core/modules/start/pages/start_page.dart';
-import 'package:visitors_flow_app/src/core/modules/start/submodules/ceremony/ceremony_module.dart';
-import 'package:visitors_flow_app/src/core/modules/start/submodules/configuration/configuration_module.dart';
-import 'package:visitors_flow_app/src/core/modules/start/submodules/home/home_module.dart';
-import 'package:visitors_flow_app/src/core/modules/start/submodules/visitors/visitor_module.dart';
 
+import 'pages/start_page.dart';
 import 'store/start_store.dart';
+import 'submodules/ceremony/ceremony_module.dart';
+import 'submodules/configuration/configuration_module.dart';
+import 'submodules/home/home_module.dart';
+import 'submodules/notice/notice.module.dart';
+import 'submodules/visitors/visitor_module.dart';
 
 class StartModule extends Module {
   @override
@@ -27,6 +28,10 @@ class StartModule extends Module {
       ModuleRoute(
         '/visitor',
         module: VisitorModule(),
+      ),
+      ModuleRoute(
+        '/notice',
+        module: NoticeModule(),
       ),
       ModuleRoute(
         '/config',

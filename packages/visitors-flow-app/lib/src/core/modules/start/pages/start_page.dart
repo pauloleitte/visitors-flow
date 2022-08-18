@@ -41,6 +41,10 @@ class StartPageState extends State<StartPage> {
                 icon: Icon(Icons.person_outline),
               ),
               BottomNavigationBarItem(
+                label: 'Avisos',
+                icon: Icon(Icons.notifications_outlined),
+              ),
+              BottomNavigationBarItem(
                 label: 'Config',
                 icon: Icon(Icons.contact_page_outlined),
               ),
@@ -65,6 +69,9 @@ class StartPageState extends State<StartPage> {
                   Modular.to.navigate(AppRoutes.VISITOR);
                   break;
                 case 3:
+                  Modular.to.navigate(AppRoutes.NOTICE);
+                  break;
+                case 4:
                   Modular.to.navigate(AppRoutes.CONFIG);
                   break;
                 default:

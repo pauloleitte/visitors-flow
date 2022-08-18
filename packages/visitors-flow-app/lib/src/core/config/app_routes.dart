@@ -14,4 +14,6 @@ class AppRoutes {
   static const CEREMONY_FORM = '/start/ceremony/form';
   static const VISITOR = '/start/visitor';
   static const VISITOR_FORM = '/start/visitor/form';
+  static const NOTICE = '/start/notice';
+  static const NOTICE_FORM = '/start/notice/form';
 }
