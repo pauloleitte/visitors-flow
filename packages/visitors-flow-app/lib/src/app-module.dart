@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:visitors_flow_app/src/core/modules/auth/services/token_service.dart';
 import 'package:visitors_flow_app/src/core/modules/auth/stores/token_store.dart';
+import 'package:visitors_flow_app/src/core/modules/splash/splash_module.dart';
 import 'package:visitors_flow_app/src/core/modules/start/start_module.dart';
 import 'package:visitors_flow_app/src/shared/http/custom_dio.dart';
 
@@ -38,6 +39,6 @@ class AppModule extends Module {
   final List<ModularRoute> routes = [
     ModuleRoute(AppRoutes.AUTH, module: AuthModule()),
     ModuleRoute(AppRoutes.START, module: StartModule()),
-    ChildRoute(AppRoutes.SPLASH, child: (_, __) => const SplashPage()),
+    ModuleRoute(AppRoutes.SPLASH, module: SplashModule()),
   ];
 }

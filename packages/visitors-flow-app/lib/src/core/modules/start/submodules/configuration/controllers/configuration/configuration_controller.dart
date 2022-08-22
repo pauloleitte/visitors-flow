@@ -1,6 +1,8 @@
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:visitors_flow_app/src/core/modules/auth/models/token_model.dart';
+import 'package:visitors_flow_app/src/core/modules/auth/services/interfaces/token_service_interface.dart';
 
 import '../../../../../../config/app_messages.dart';
 import '../../../../../auth/models/user_model.dart';
@@ -18,8 +20,9 @@ abstract class _ConfigurationControllerBase with Store {
   bool busy = false;
 
   final IUserService _userService;
+  final ITokenService _tokenService;
 
-  _ConfigurationControllerBase(this._userService);
+  _ConfigurationControllerBase(this._userService, this._tokenService);
 
   getUser() async {
     try {
@@ -34,5 +37,10 @@ abstract class _ConfigurationControllerBase with Store {
     } finally {
       busy = false;
     }
+  }
+
+  logout() async {
+    await _userService.saveLocalDB(UserModel());
+    await _tokenService.saveLocalDB(TokenModel());
   }
 }

@@ -80,4 +80,7 @@ class UserService implements IUserService {
         email: model.email,
         phone: model.phone));
   }
+
+  @override
+  Future<void> logout() async {}
 }

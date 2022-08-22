@@ -15,20 +15,12 @@ class _ConfigurationPageState extends State<ConfigurationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text(
-            'Configurações',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          backgroundColor: Theme.of(context).primaryColor,
-          //actions logout
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.exit_to_app),
-              onPressed: () {
-                Modular.to.navigate(AppRoutes.AUTH);
-              },
-            )
-          ]),
+        title: const Text(
+          'Configurações',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Theme.of(context).primaryColor,
+      ),
       body: const BodyConfiguration(),
     );
   }

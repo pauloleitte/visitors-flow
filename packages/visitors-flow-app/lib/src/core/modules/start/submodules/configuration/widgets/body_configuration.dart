@@ -97,9 +97,8 @@ class _BodyConfigurationState
                               Icons.exit_to_app,
                               color: Theme.of(context).primaryColor,
                             ),
-                            onTap: () {
-                              storeToken.clearToken();
-                              storeUser.clearUser();
+                            onTap: () async {
+                              await controller.logout();
                               Modular.to.navigate(AppRoutes.AUTH);
                             },
                           ),

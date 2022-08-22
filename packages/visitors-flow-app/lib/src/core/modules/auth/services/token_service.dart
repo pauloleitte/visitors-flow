@@ -27,4 +27,7 @@ class TokenService implements ITokenService {
     LocalStorageService.setValue<String>(
         'current_token', jsonEncode(model.toJson()));
   }
+
+  @override
+  Future<void> logout() async {}
 }

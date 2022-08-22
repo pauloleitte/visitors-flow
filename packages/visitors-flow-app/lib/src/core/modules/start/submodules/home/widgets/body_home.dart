@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:visitors_flow_app/src/core/config/app_routes.dart';
 import 'package:visitors_flow_app/src/core/modules/start/submodules/ceremony/models/ceremony_model.dart';
 import '../controllers/home_controller.dart';
 
@@ -24,18 +25,22 @@ class _BodyHomeState extends ModularState<BodyHome, HomeController> {
   }
 
   Widget getCard(CeremonyModel model) {
-    return SizedBox(
-      height: 50,
-      child: Card(
-        child: Center(
-            child: Text(
-          model.name ?? '',
-          style: TextStyle(
-              color: Theme.of(context).primaryColor,
-              fontWeight: FontWeight.bold),
-        )),
-      ),
-    );
+    return GestureDetector(
+        onTap: () {
+          Modular.to.navigate(AppRoutes.CEREMONY_FORM, arguments: model);
+        },
+        child: SizedBox(
+          height: 50,
+          child: Card(
+            child: Center(
+                child: Text(
+              model.name ?? '',
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.bold),
+            )),
+          ),
+        ));
   }
 
   @override

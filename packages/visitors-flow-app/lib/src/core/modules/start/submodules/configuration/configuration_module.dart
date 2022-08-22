@@ -9,7 +9,7 @@ import 'pages/security_page.dart';
 class ConfigurationModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.factory((i) => ConfigurationController(i.get())),
+    Bind.factory((i) => ConfigurationController(i.get(), i.get())),
     Bind.factory((i) => SecurityController(i.get())),
     Bind.factory((i) => ProfileController(i.get())),
   ];

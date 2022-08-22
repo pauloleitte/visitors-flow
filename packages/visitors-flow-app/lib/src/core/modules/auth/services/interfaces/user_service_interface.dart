@@ -15,4 +15,5 @@ abstract class IUserService implements Disposable {
   Future<Either<Failure, UserModel>> getUser();
   Future<Either<Failure, bool>> updatePassword(UserViewModel model);
   Future<Either<Failure, UserModel>> updateUser(UserViewModel model);
+  Future<void> logout();
 }

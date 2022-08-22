@@ -4,4 +4,5 @@ import 'package:visitors_flow_app/src/core/modules/auth/models/token_model.dart'
 abstract class ITokenService implements Disposable {
   Future<TokenModel> getCurrentToken();
   Future<void> saveLocalDB(TokenModel model);
+  Future<void> logout();
 }
