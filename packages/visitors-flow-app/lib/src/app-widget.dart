@@ -17,14 +17,16 @@ class AppWidget extends StatelessWidget {
         Locale('pt', 'BR'),
       ],
       locale: const Locale('pt', 'BR'),
+      // ignore: prefer_const_literals_to_create_immutables
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      title: 'Visitors Flow',
+      title: 'AD Management',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: 'Oxygen',
         iconTheme: ThemeHelper().iconThemeData(),
         buttonTheme: ThemeHelper().buttonThemeData(),
         primaryColor: primaryColor,

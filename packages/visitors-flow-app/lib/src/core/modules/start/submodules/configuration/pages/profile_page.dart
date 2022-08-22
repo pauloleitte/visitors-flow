@@ -30,7 +30,6 @@ class _ProfilePageState extends State<ProfilePage> {
           onPressed: () => Modular.to.navigate(AppRoutes.CONFIG),
         ),
       ),
-      //actions logout),,
       body: BodyProfile(user: widget.user),
     );
   }

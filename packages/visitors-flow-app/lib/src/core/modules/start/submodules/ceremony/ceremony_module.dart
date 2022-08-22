@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:visitors_flow_app/src/core/modules/start/submodules/ceremony/pages/ceremony_report_page.dart';
 
 import 'controllers/ceremony_controller.dart';
 import 'pages/ceremony_form_page.dart';
@@ -22,6 +23,10 @@ class CeremonyModule extends Module {
     ),
     ChildRoute('/form',
         child: (_, args) => CeremonyFormPage(
+              ceremony: args.data,
+            )),
+    ChildRoute('/report',
+        child: (_, args) => CeremonyReportPage(
               ceremony: args.data,
             ))
   ];

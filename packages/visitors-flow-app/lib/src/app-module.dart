@@ -1,4 +1,3 @@
-// ignore: file_names
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:visitors_flow_app/src/core/modules/auth/services/token_service.dart';
@@ -12,7 +11,6 @@ import 'core/modules/auth/auth_module.dart';
 import 'core/modules/auth/repositories/user_repository.dart';
 import 'core/modules/auth/services/user_service.dart';
 import 'core/modules/auth/stores/user_store.dart';
-import 'core/modules/splash/pages/splash_page.dart';
 
 class AppModule extends Module {
   @override
@@ -25,10 +23,6 @@ class AppModule extends Module {
     Bind((i) => TokenStore(i.get())),
     Bind(
       (i) => BaseOptions(
-        followRedirects: false,
-        validateStatus: (status) {
-          return status! < 500;
-        },
         baseUrl: 'http://192.168.0.12:3333/api/v1',
         connectTimeout: 5000,
       ),

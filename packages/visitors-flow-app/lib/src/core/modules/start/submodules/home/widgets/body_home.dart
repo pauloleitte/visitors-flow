@@ -27,7 +27,7 @@ class _BodyHomeState extends ModularState<BodyHome, HomeController> {
   Widget getCard(CeremonyModel model) {
     return GestureDetector(
         onTap: () {
-          Modular.to.navigate(AppRoutes.CEREMONY_FORM, arguments: model);
+          Modular.to.navigate(AppRoutes.CEREMONY_REPORT, arguments: model);
         },
         child: SizedBox(
           height: 50,
