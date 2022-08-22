@@ -46,7 +46,7 @@ class CeremonyService implements ICeremonyService {
 
   @override
   Future<Either<Failure, List<CeremonyModel>>> getCeremoniesOfDay(
-          String date) async =>
+          DateTime date) async =>
       await _ceremonyRepository.getCeremoniesOfDay(date);
 
   @override

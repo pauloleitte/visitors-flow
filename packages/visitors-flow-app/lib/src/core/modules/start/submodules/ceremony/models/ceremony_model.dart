@@ -1,5 +1,7 @@
 import 'package:visitors_flow_app/src/core/modules/start/submodules/visitors/models/visitor_model.dart';
 
+import '../../notice/models/notice_model.dart';
+
 class ResponseCeremonies {
   late List<CeremonyModel> ceremonies;
   int? count;
@@ -28,30 +30,36 @@ class CeremonyModel {
   String? sId;
   String? name;
   String? description;
-  String? date;
+  DateTime? date;
   List<VisitorModel>? visitors;
-  int? iV;
+  List<NoticeModel>? notices;
 
-  CeremonyModel(
-      {this.sId,
-      this.name,
-      this.description,
-      this.date,
-      this.visitors,
-      this.iV});
+  CeremonyModel({
+    this.sId,
+    this.name,
+    this.description,
+    this.date,
+    this.visitors,
+    this.notices,
+  });
 
   CeremonyModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     name = json['name'];
     description = json['description'];
-    date = json['date'];
+    date = json["date"] == null ? null : DateTime.parse(json["date"]);
     if (json['visitors'] != null) {
       visitors = <VisitorModel>[];
       json['visitors'].forEach((v) {
         visitors!.add(VisitorModel.fromJson(v));
       });
     }
-    iV = json['__v'];
+    if (json['notices'] != null) {
+      notices = <NoticeModel>[];
+      json['notices'].forEach((v) {
+        notices!.add(NoticeModel.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -59,11 +67,13 @@ class CeremonyModel {
     data['_id'] = sId;
     data['name'] = name;
     data['description'] = description;
-    data['date'] = date;
+    data["date"] = date == null ? null : date?.toIso8601String();
     if (visitors != null) {
       data['visitors'] = visitors!.map((v) => v.toJson()).toList();
     }
-    data['__v'] = iV;
+    if (notices != null) {
+      data['notices'] = notices!.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }

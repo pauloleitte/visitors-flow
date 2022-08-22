@@ -10,7 +10,6 @@ import { Ceremony } from '../schema/ceremony.schema';
 import { CreateCeremonyDTO } from '../dto/create-ceremony.dto';
 import { UpdateCeremonyDTO } from '../dto/update-ceremony.dto';
 import { CeremonyOfDayDTO } from '../dto/ceremony-of-day.dto';
-import { endOfDay, startOfDay } from 'date-fns';
 
 @Injectable()
 export class CeremonyService {
@@ -24,10 +23,12 @@ export class CeremonyService {
       })
       .sort({ _id: 1 })
       .skip(documentsToSkip)
+      .select('-__v')
       .populate([
         { path: 'visitors', strictPopulate: false },
         { path: 'notices', strictPopulate: false },
-      ]);
+      ])
+      .select('-__v');
     if (limitOfDocuments) {
       findQuery.limit(limitOfDocuments);
     }
@@ -38,12 +39,13 @@ export class CeremonyService {
   }
 
   async getById(id: string) {
-    return await (
-      await this.ceremonyModel.findById(id)
-    ).populate([
-      { path: 'visitors', strictPopulate: false },
-      { path: 'notices', strictPopulate: false },
-    ]);
+    return await await this.ceremonyModel
+      .findById(id)
+      .select('-__v')
+      .populate([
+        { path: 'visitors', strictPopulate: false },
+        { path: 'notices', strictPopulate: false },
+      ]);
   }
 
   async delete(id: string) {
@@ -59,6 +61,11 @@ export class CeremonyService {
       if (exist) {
         return await this.ceremonyModel
           .findByIdAndUpdate(id, { $set: dto }, { new: true })
+          .select('-__v')
+          .populate([
+            { path: 'visitors', strictPopulate: false },
+            { path: 'notices', strictPopulate: false },
+          ])
           .exec();
       }
       throw new BadRequestException('ceremony does not exist');
@@ -68,15 +75,17 @@ export class CeremonyService {
   }
 
   async getCeremoniesOfDay(dto: CeremonyOfDayDTO) {
-    const paramDate = new Date(dto.date);
+    const startOfDay = new Date(dto.date + 'T00:00:00.000Z');
+    const endOfDay = new Date(dto.date + 'T23:59:59.999Z');
     const query = this.ceremonyModel
       .find({
-        date: { $gte: startOfDay(paramDate), $lte: endOfDay(paramDate) },
+        date: { $gte: startOfDay, $lte: endOfDay },
       })
       .populate([
         { path: 'visitors', strictPopulate: false },
         { path: 'notices', strictPopulate: false },
-      ]);
+      ])
+      .select('-__v');
     const ceremonies = await query;
     return { ceremonies };
   }

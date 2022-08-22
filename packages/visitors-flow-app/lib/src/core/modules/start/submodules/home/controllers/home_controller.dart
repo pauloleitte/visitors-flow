@@ -26,7 +26,7 @@ abstract class _HomeControllerBase with Store {
   @observable
   bool busy = false;
 
-  getCeremoniesOfDay(String date) async {
+  getCeremoniesOfDay(DateTime date) async {
     try {
       busy = true;
       var result = await _ceremonyService.getCeremoniesOfDay(date);

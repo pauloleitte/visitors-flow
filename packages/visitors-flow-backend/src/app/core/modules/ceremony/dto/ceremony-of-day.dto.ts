@@ -1,3 +1,3 @@
 export class CeremonyOfDayDTO {
-  date: Date;
+  date: string;
 }

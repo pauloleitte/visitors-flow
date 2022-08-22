@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'package:intl/intl.dart';
 import '../../../../../config/theme_helper.dart';
 import '../controllers/ceremony_controller.dart';
 import '../models/ceremony_model.dart';
@@ -17,11 +18,13 @@ class BodyCeremonyForm extends StatefulWidget {
 class _BodyCeremonyFormState
     extends ModularState<BodyCeremonyForm, CeremonyController> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController dateinput = TextEditingController();
   @override
   void initState() {
     super.initState();
     if (widget.ceremony != null) {
       controller.ceremony = widget.ceremony!;
+      dateinput.text = DateFormat('dd/MM/yyyy').format(widget.ceremony!.date!);
     }
   }
 
@@ -91,20 +94,53 @@ class _BodyCeremonyFormState
                       Container(
                         decoration: ThemeHelper().inputBoxDecorationShaddow(),
                         child: TextFormField(
-                          initialValue: controller.ceremony.date,
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Data é obrigatório';
                             }
                             return null;
                           },
-                          keyboardType: TextInputType.datetime,
-                          decoration: ThemeHelper().textInputDecoration(
-                              'Data', 'Insira a data do culto'),
+                          controller:
+                              dateinput, //editing controller of this TextField
+                          decoration: ThemeHelper()
+                              .textInputDecoration('Data', 'Insira uma data'),
+                          readOnly:
+                              true, //set it true, so that user will not able to edit text
+                          onTap: () async {
+                            DateTime? pickedDate = await showDatePicker(
+                                context: context,
+                                firstDate: DateTime(2000),
+                                lastDate: DateTime(2101),
+                                initialDate: controller.model.date!);
+                            if (pickedDate != null) {
+                              setState(() {
+                                dateinput.text =
+                                    DateFormat('dd/MM/yyyy').format(pickedDate);
+                              });
+                            } else {
+                              print("Date is not selected");
+                            }
+                          },
                           onSaved: (value) {
-                            controller.ceremony.date = value;
+                            controller.ceremony.date =
+                                DateFormat('dd/MM/yyyy').parse(value!);
                           },
                         ),
+                        // child: TextFormField(
+                        //   initialValue: controller.ceremony.date,
+                        //   validator: (value) {
+                        //     if (value!.isEmpty) {
+                        //       return 'Data é obrigatório';
+                        //     }
+                        //     return null;
+                        //   },
+                        //   keyboardType: TextInputType.datetime,
+                        //   decoration: ThemeHelper().textInputDecoration(
+                        //       'Data', 'Insira a data do culto'),
+                        //   onSaved: (value) {
+                        //     controller.ceremony.date = value;
+                        //   },
+                        // ),
                       ),
                       const SizedBox(height: 20.0),
                       Container(

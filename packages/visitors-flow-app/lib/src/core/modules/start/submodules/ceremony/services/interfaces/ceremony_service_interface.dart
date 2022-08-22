@@ -13,5 +13,6 @@ abstract class ICeremonyService implements Disposable {
   Future<Either<Failure, CeremonyModel>> updateCeremony(
       CeremonyViewModel model);
   Future<Either<Failure, bool>> deleteCeremony(CeremonyViewModel model);
-  Future<Either<Failure, List<CeremonyModel>>> getCeremoniesOfDay(String date);
+  Future<Either<Failure, List<CeremonyModel>>> getCeremoniesOfDay(
+      DateTime date);
 }

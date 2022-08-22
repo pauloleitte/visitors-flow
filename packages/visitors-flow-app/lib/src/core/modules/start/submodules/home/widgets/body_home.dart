@@ -19,8 +19,7 @@ class _BodyHomeState extends ModularState<BodyHome, HomeController> {
   }
 
   void _init() async {
-    await controller
-        .getCeremoniesOfDay(DateTime.now().toUtc().toLocal().toString());
+    await controller.getCeremoniesOfDay(DateTime.now().toUtc().toLocal());
     await controller.getUser();
   }
 

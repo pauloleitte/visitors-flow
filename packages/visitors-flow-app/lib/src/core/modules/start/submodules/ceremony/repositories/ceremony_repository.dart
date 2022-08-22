@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/native_imp.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../../shared/errors/errors.dart';
 import '../models/ceremony_model.dart';
@@ -98,10 +99,11 @@ class CeremonyRepository implements ICeremonyRepository {
 
   @override
   Future<Either<Failure, List<CeremonyModel>>> getCeremoniesOfDay(
-      String date) async {
+      DateTime date) async {
     try {
       final Map<String, dynamic> data = <String, dynamic>{};
-      data['date'] = date;
+      String formattedDate = DateFormat('yyyy-MM-dd').format(date);
+      data['date'] = formattedDate;
       var response = await _client.post('/ceremonys/of-day',
           data: data, options: Options(headers: {"requiresToken": true}));
       if (response.statusCode == HttpStatus.created) {
