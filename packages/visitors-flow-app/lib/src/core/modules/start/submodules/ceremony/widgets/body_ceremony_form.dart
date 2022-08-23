@@ -111,7 +111,8 @@ class _BodyCeremonyFormState
                                 context: context,
                                 firstDate: DateTime(2000),
                                 lastDate: DateTime(2101),
-                                initialDate: controller.model.date!);
+                                initialDate:
+                                    controller.model.date ?? DateTime.now());
                             if (pickedDate != null) {
                               setState(() {
                                 dateinput.text =
