@@ -2,6 +2,7 @@ import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:visitors_flow_app/src/core/config/app_messages.dart';
 import 'package:visitors_flow_app/src/core/modules/auth/stores/token_store.dart';
 
 import '../../../../config/app_routes.dart';
@@ -37,15 +38,16 @@ abstract class _LoginControllerBase with Store {
       busy = true;
       var result = await service.login(model);
       result.fold((failure) {
-        asuka.showSnackBar(
-            const SnackBar(content: Text('Usuário ou senha inválidos!')));
+        asuka.showSnackBar(SnackBar(
+            content: Text(failure.message ?? AppMessages.ERROR_HTTP_MESSAGE)));
       }, (token) {
         tokenStore.setToken(token);
         Modular.to.navigate(AppRoutes.HOME);
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(SnackBar(content: Text(e.toString())));
+      asuka.showSnackBar(
+          const SnackBar(content: Text(AppMessages.ERROR_HTTP_MESSAGE)));
     } finally {
       busy = false;
     }

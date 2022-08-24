@@ -3,7 +3,12 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:visitors_flow_app/src/core/config/app_routes.dart';
 import 'package:visitors_flow_app/src/core/modules/auth/services/interfaces/token_service_interface.dart';
+import 'package:visitors_flow_app/src/core/modules/auth/services/interfaces/user_service_interface.dart';
+
+import '../../../core/modules/auth/models/token_model.dart';
+import '../../../core/modules/auth/models/user_model.dart';
 
 class CustomInterceptors extends InterceptorsWrapper {
   @override
@@ -30,6 +35,16 @@ class CustomInterceptors extends InterceptorsWrapper {
       return super.onRequest(options, handler);
     }
     return super.onRequest(options, handler);
+  }
+
+  @override
+  void onError(DioError err, ErrorInterceptorHandler handler) async {
+    if (err.error.runtimeType != 'String') {
+      Modular.get<ITokenService>().saveLocalDB(TokenModel());
+      Modular.get<IUserService>().saveLocalDB(UserModel());
+      Modular.to.navigate(AppRoutes.AUTH);
+    }
+    return super.onError(err, handler);
   }
 
   String genToken(String? token) {

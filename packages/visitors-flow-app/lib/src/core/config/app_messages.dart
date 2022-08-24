@@ -5,4 +5,6 @@ class AppMessages {
   static const CREATE_MESSAGE = 'Criado com sucesso';
   static const ERROR_MESSAGE = 'Erro ao realizar operação';
   static const SUCCESS_MESSAGE = 'Operação realizada com sucesso';
+  static const ERROR_HTTP_MESSAGE = 'Ocorreu um erro durante a requisição';
+  static const ERROR_MESSAGE_AUTH = 'Usuário ou senha inválidos';
 }

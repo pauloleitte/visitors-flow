@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/native_imp.dart';
+import 'package:visitors_flow_app/src/core/config/app_enum.dart';
+import 'package:visitors_flow_app/src/core/config/app_messages.dart';
 import 'package:visitors_flow_app/src/core/modules/auth/models/user_model.dart';
 import '../../../../shared/errors/errors.dart';
 import '../models/login_request_model.dart';
@@ -27,12 +29,17 @@ class UserRepository implements IUserRepository {
         return Right(result);
       }
       return Left(DioFailure(
-          message: 'Usuário ou senha inválidos',
+          message: AppMessages.ERROR_MESSAGE_AUTH,
           statusCode: response.statusCode));
     } on DioError catch (err) {
-      return Left(DioFailure(
-          message: err.response!.data[0].message,
-          statusCode: err.response!.statusCode));
+      if (err.response != null &&
+          err.response?.statusCode != null &&
+          err.response?.statusMessage != null) {
+        return Left(DioFailure(
+            message: AppEnum.statusCodeMap[err.response?.statusCode],
+            statusCode: err.response?.statusCode));
+      }
+      return Left(DioFailure(message: AppMessages.ERROR_HTTP_MESSAGE));
     }
   }
 
@@ -44,11 +51,17 @@ class UserRepository implements IUserRepository {
         return Right(UserModel.fromJson(response.data));
       }
       return Left(DioFailure(
-          message: 'Ocorreu um erro por favor tente novamente',
+          message: AppMessages.ERROR_HTTP_MESSAGE,
           statusCode: response.statusCode));
     } on DioError catch (err) {
-      return Left(DioFailure(
-          message: err.response!.data, statusCode: err.response!.statusCode));
+      if (err.response != null &&
+          err.response?.statusCode != null &&
+          err.response?.statusMessage != null) {
+        return Left(DioFailure(
+            message: AppEnum.statusCodeMap[err.response?.statusCode],
+            statusCode: err.response?.statusCode));
+      }
+      return Left(DioFailure(message: AppMessages.ERROR_HTTP_MESSAGE));
     }
   }
 
@@ -61,11 +74,17 @@ class UserRepository implements IUserRepository {
         return Right(UserModel.fromJson(response.data));
       }
       return Left(DioFailure(
-          message: 'Ocorreu um erro por favor tente novamente',
+          message: AppMessages.ERROR_HTTP_MESSAGE,
           statusCode: response.statusCode));
     } on DioError catch (err) {
-      return Left(DioFailure(
-          message: err.response!.data, statusCode: err.response!.statusCode));
+      if (err.response != null &&
+          err.response?.statusCode != null &&
+          err.response?.statusMessage != null) {
+        return Left(DioFailure(
+            message: AppEnum.statusCodeMap[err.response?.statusCode],
+            statusCode: err.response?.statusCode));
+      }
+      return Left(DioFailure(message: AppMessages.ERROR_HTTP_MESSAGE));
     }
   }
 
@@ -78,10 +97,18 @@ class UserRepository implements IUserRepository {
       if (response.statusCode == HttpStatus.ok) {
         return const Right(true);
       }
-      return Left(
-          DioFailure(message: 'ocorreu um erro durante o processamento'));
+      return Left(DioFailure(
+          message: AppMessages.ERROR_HTTP_MESSAGE,
+          statusCode: response.statusCode));
     } on DioError catch (err) {
-      return Left(DioFailure(message: err.message.toString()));
+      if (err.response != null &&
+          err.response?.statusCode != null &&
+          err.response?.statusMessage != null) {
+        return Left(DioFailure(
+            message: AppEnum.statusCodeMap[err.response?.statusCode],
+            statusCode: err.response?.statusCode));
+      }
+      return Left(DioFailure(message: AppMessages.ERROR_HTTP_MESSAGE));
     }
   }
 
@@ -95,10 +122,18 @@ class UserRepository implements IUserRepository {
         var result = UserModel.fromJson(response.data);
         return Right(result);
       }
-      return Left(
-          DioFailure(message: 'ocorreu um erro durante o processamento'));
+      return Left(DioFailure(
+          message: AppMessages.ERROR_HTTP_MESSAGE,
+          statusCode: response.statusCode));
     } on DioError catch (err) {
-      return Left(DioFailure(message: err.message.toString()));
+      if (err.response != null &&
+          err.response?.statusCode != null &&
+          err.response?.statusMessage != null) {
+        return Left(DioFailure(
+            message: AppEnum.statusCodeMap[err.response?.statusCode],
+            statusCode: err.response?.statusCode));
+      }
+      return Left(DioFailure(message: AppMessages.ERROR_HTTP_MESSAGE));
     }
   }
 }
