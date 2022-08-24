@@ -9,6 +9,7 @@ import '../../../../../auth/models/user_model.dart';
 import '../../../../../auth/services/interfaces/user_service_interface.dart';
 part 'configuration_controller.g.dart';
 
+// ignore: library_private_types_in_public_api
 class ConfigurationController = _ConfigurationControllerBase
     with _$ConfigurationController;
 

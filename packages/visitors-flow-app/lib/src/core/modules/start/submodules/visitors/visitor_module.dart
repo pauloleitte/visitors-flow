@@ -16,7 +16,7 @@ class VisitorModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => VisitorPage()),
+    ChildRoute('/', child: (_, args) => const VisitorPage()),
     ChildRoute('/form',
         child: (_, args) => VisitorPageForm(
               visitor: args.data,

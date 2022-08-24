@@ -10,6 +10,7 @@ import '../services/interfaces/notice_service_interface.dart';
 import '../view-model/notice_view_model.dart';
 part 'notice_controller.g.dart';
 
+// ignore: library_private_types_in_public_api
 class NoticeController = _NoticeControllerBase with _$NoticeController;
 
 abstract class _NoticeControllerBase with Store {

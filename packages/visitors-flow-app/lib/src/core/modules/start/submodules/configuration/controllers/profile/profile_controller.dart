@@ -10,6 +10,7 @@ import '../../../../../auth/services/interfaces/user_service_interface.dart';
 import '../../view-models/user_view_model.dart';
 part 'profile_controller.g.dart';
 
+// ignore: library_private_types_in_public_api
 class ProfileController = _ProfileControllerBase with _$ProfileController;
 
 abstract class _ProfileControllerBase with Store {

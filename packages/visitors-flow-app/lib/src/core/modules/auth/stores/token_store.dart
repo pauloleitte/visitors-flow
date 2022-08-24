@@ -5,6 +5,7 @@ import '../services/interfaces/token_service_interface.dart';
 
 part 'token_store.g.dart';
 
+// ignore: library_private_types_in_public_api
 class TokenStore = _TokenStoreBase with _$TokenStore;
 
 abstract class _TokenStoreBase with Store {

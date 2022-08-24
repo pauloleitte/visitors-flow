@@ -116,7 +116,5 @@ class VisitorRepository implements IVisitorRepository {
   }
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-  }
+  void dispose() {}
 }

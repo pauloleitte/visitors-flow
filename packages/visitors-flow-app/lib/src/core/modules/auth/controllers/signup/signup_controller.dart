@@ -10,6 +10,7 @@ import '../../services/user_service.dart';
 import '../../view-models/signup_view_model.dart';
 part 'signup_controller.g.dart';
 
+// ignore: library_private_types_in_public_api
 class SignupController = _SignupControllerBase with _$SignupController;
 
 abstract class _SignupControllerBase with Store {

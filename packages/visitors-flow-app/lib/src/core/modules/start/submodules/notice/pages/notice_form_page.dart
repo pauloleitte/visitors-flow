@@ -8,7 +8,7 @@ import '../widgets/body_notice_form.dart';
 
 class NoticeFormPage extends StatefulWidget {
   final NoticeModel? notice;
-  NoticeFormPage({Key? key, this.notice}) : super(key: key);
+  const NoticeFormPage({Key? key, this.notice}) : super(key: key);
 
   @override
   State<NoticeFormPage> createState() => _NoticeFormPageState();

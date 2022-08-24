@@ -10,6 +10,7 @@ import '../../stores/user_store.dart';
 import '../../view-models/login_view_model.dart';
 part 'login_controller.g.dart';
 
+// ignore: library_private_types_in_public_api
 class LoginController = _LoginControllerBase with _$LoginController;
 
 abstract class _LoginControllerBase with Store {

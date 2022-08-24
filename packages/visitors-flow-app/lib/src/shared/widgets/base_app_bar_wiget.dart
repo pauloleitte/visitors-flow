@@ -13,7 +13,8 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(
         '$title',
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        style:
+            const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       ),
       elevation: 0.5,
       iconTheme: const IconThemeData(color: Colors.white),

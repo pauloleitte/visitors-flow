@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../../config/app_routes.dart';
-import '../../../../../config/theme_helper.dart';
 import '../../../../auth/models/user_model.dart';
 import '../widgets/body_profile.dart';
 

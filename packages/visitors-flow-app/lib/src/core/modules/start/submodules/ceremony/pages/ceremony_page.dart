@@ -14,12 +14,6 @@ class _CeremonyPageState extends State<CeremonyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: const Text(
-            'Cultos',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          backgroundColor: Theme.of(context).primaryColor),
       body: const BodyCeremony(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

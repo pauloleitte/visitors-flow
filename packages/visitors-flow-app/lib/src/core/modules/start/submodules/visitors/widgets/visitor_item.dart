@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:visitors_flow_app/src/core/config/app_routes.dart';
-
-import '../../../../../config/theme_helper.dart';
 import '../controllers/visitor_controller.dart';
 import '../models/visitor_model.dart';
 

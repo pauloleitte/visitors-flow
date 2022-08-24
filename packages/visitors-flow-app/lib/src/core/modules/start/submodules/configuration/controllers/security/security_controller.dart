@@ -10,6 +10,7 @@ import '../../../../../auth/models/user_model.dart';
 import '../../../../../auth/services/interfaces/user_service_interface.dart';
 part 'security_controller.g.dart';
 
+// ignore: library_private_types_in_public_api
 class SecurityController = _SecurityControllerBase with _$SecurityController;
 
 abstract class _SecurityControllerBase with Store {

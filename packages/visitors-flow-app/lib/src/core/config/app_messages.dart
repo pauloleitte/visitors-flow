@@ -1,7 +1,8 @@
+// ignore_for_file: constant_identifier_names
 class AppMessages {
-  static const String EXCLUSION_MESSAGE = 'Excluído com sucesso';
-  static const String UPDATE_MESSAGE = 'Atualizado com sucesso';
-  static const String CREATE_MESSAGE = 'Criado com sucesso';
-  static const String ERROR_MESSAGE = 'Erro ao realizar operação';
-  static const String SUCCESS_MESSAGE = 'Operação realizada com sucesso';
+  static const EXCLUSION_MESSAGE = 'Excluído com sucesso';
+  static const UPDATE_MESSAGE = 'Atualizado com sucesso';
+  static const CREATE_MESSAGE = 'Criado com sucesso';
+  static const ERROR_MESSAGE = 'Erro ao realizar operação';
+  static const SUCCESS_MESSAGE = 'Operação realizada com sucesso';
 }

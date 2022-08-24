@@ -10,6 +10,7 @@ import '../services/ceremony_service.dart';
 import '../view-models/ceremony_view_model.dart';
 part 'ceremony_controller.g.dart';
 
+// ignore: library_private_types_in_public_api
 class CeremonyController = _CeremonyControllerBase with _$CeremonyController;
 
 abstract class _CeremonyControllerBase with Store {

@@ -7,6 +7,7 @@ import '../services/interfaces/user_service_interface.dart';
 part 'user_store.g.dart';
 
 @Injectable(singleton: false)
+// ignore: library_private_types_in_public_api
 class UserStore = _UserStoreBase with _$UserStore;
 
 abstract class _UserStoreBase with Store {

@@ -57,7 +57,5 @@ class VisitorService implements IVisitorService {
   }
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-  }
+  void dispose() {}
 }

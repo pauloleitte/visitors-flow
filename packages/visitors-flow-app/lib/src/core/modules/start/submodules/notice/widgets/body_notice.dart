@@ -1,46 +1,32 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../../../shared/widgets/title_widget.dart';
-import '../controllers/visitor_controller.dart';
-import 'visitor_item.dart';
+import '../controllers/notice_controller.dart';
+import 'notice_item.dart';
 
-class BodyVisitor extends StatefulWidget {
-  const BodyVisitor({Key? key}) : super(key: key);
+class BodyNotice extends StatefulWidget {
+  const BodyNotice({Key? key}) : super(key: key);
 
   @override
-  State<BodyVisitor> createState() => _BodyVisitorState();
+  State<BodyNotice> createState() => _BodyNoticeState();
 }
 
-class _BodyVisitorState extends ModularState<BodyVisitor, VisitorController> {
-  Timer? _debounce;
-
+class _BodyNoticeState extends ModularState<BodyNotice, NoticeController> {
   @override
   void initState() {
     super.initState();
-    _handleVisitors();
+    init();
   }
 
-  @override
-  void dispose() {
-    _debounce?.cancel();
-    super.dispose();
+  init() async {
+    await controller.getNotices();
   }
 
-  _handleVisitors() async {
-    await controller.getVisitors();
+  _handleCeremonies() async {
+    await controller.getNotices();
   }
-
-  // _onSearchChanged(String query) {
-  //   if (_debounce?.isActive ?? false) _debounce?.cancel();
-  //   _debounce = Timer(const Duration(milliseconds: 500), () {
-  //     controller.filter = query;
-  //     controller.getVisitorsByName();
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -48,25 +34,25 @@ class _BodyVisitorState extends ModularState<BodyVisitor, VisitorController> {
       return SafeArea(
         child: controller.busy
             ? const Center(child: CircularProgressIndicator())
-            : controller.visitors.isNotEmpty
+            : controller.notices.isNotEmpty
                 ? Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Column(
                       children: [
-                        buildTitle(title: 'Visitantes'),
+                        buildTitle(title: 'Avisos'),
                         const SizedBox(
                           height: 10,
                         ),
                         Expanded(
                           child: RefreshIndicator(
                             onRefresh: () async {
-                              await _handleVisitors();
+                              _handleCeremonies();
                             },
                             child: ListView.builder(
-                              itemCount: controller.visitors.length,
+                              itemCount: controller.notices.length,
                               itemBuilder: (ctx, i) => Column(
                                 children: <Widget>[
-                                  VisitorItem(controller.visitors[i]),
+                                  NoticeItem(controller.notices[i]),
                                   const Divider(),
                                 ],
                               ),
@@ -78,7 +64,7 @@ class _BodyVisitorState extends ModularState<BodyVisitor, VisitorController> {
                   )
                 : const Center(
                     child: Text(
-                      'Nenhum visitante cadastrado',
+                      'Nenhum aviso cadastrado',
                       style: TextStyle(fontSize: 20),
                     ),
                   ),

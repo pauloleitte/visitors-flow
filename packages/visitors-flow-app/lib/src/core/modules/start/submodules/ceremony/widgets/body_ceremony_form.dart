@@ -9,7 +9,7 @@ import '../models/ceremony_model.dart';
 
 class BodyCeremonyForm extends StatefulWidget {
   final CeremonyModel? ceremony;
-  BodyCeremonyForm({Key? key, this.ceremony}) : super(key: key);
+  const BodyCeremonyForm({Key? key, this.ceremony}) : super(key: key);
 
   @override
   State<BodyCeremonyForm> createState() => _BodyCeremonyFormState();
@@ -118,8 +118,6 @@ class _BodyCeremonyFormState
                                 dateinput.text =
                                     DateFormat('dd/MM/yyyy').format(pickedDate);
                               });
-                            } else {
-                              print("Date is not selected");
                             }
                           },
                           onSaved: (value) {
@@ -127,21 +125,6 @@ class _BodyCeremonyFormState
                                 DateFormat('dd/MM/yyyy').parse(value!);
                           },
                         ),
-                        // child: TextFormField(
-                        //   initialValue: controller.ceremony.date,
-                        //   validator: (value) {
-                        //     if (value!.isEmpty) {
-                        //       return 'Data é obrigatório';
-                        //     }
-                        //     return null;
-                        //   },
-                        //   keyboardType: TextInputType.datetime,
-                        //   decoration: ThemeHelper().textInputDecoration(
-                        //       'Data', 'Insira a data do culto'),
-                        //   onSaved: (value) {
-                        //     controller.ceremony.date = value;
-                        //   },
-                        // ),
                       ),
                       const SizedBox(height: 20.0),
                       Container(

@@ -5,8 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:visitors_flow_app/src/core/modules/auth/services/interfaces/token_service_interface.dart';
 
-import '../../../core/modules/auth/services/interfaces/user_service_interface.dart';
-
 class CustomInterceptors extends InterceptorsWrapper {
   @override
   void onRequest(

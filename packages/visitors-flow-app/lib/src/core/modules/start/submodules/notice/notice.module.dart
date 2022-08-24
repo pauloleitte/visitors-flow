@@ -16,7 +16,7 @@ class NoticeModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => NoticePage()),
+    ChildRoute('/', child: (_, args) => const NoticePage()),
     ChildRoute('/form', child: (_, args) => NoticeFormPage(notice: args.data)),
   ];
 }

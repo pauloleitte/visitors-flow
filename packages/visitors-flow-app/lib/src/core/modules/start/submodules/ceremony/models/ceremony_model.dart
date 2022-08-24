@@ -67,7 +67,11 @@ class CeremonyModel {
     data['_id'] = sId;
     data['name'] = name;
     data['description'] = description;
-    data["date"] = date == null ? null : date?.toIso8601String();
+    if (date == null) {
+      data["date"] = null;
+    } else {
+      data["date"] = date?.toIso8601String();
+    }
     if (visitors != null) {
       data['visitors'] = visitors!.map((v) => v.toJson()).toList();
     }

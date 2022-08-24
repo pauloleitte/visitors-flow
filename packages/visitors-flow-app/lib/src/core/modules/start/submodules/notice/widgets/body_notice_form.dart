@@ -8,7 +8,7 @@ import '../models/notice_model.dart';
 
 class BodyNoticeForm extends StatefulWidget {
   final NoticeModel? notice;
-  BodyNoticeForm({Key? key, this.notice}) : super(key: key);
+  const BodyNoticeForm({Key? key, this.notice}) : super(key: key);
 
   @override
   State<BodyNoticeForm> createState() => _BodyNoticeFormState();

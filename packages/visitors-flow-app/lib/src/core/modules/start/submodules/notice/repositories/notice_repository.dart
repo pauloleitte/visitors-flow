@@ -45,9 +45,7 @@ class NoticeRepository implements INoticeRepository {
   }
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-  }
+  void dispose() {}
 
   @override
   Future<Either<Failure, NoticeModel>> getNotice(String id) async {

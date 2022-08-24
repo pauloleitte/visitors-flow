@@ -50,7 +50,5 @@ class CeremonyService implements ICeremonyService {
       await _ceremonyRepository.getCeremoniesOfDay(date);
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-  }
+  void dispose() {}
 }

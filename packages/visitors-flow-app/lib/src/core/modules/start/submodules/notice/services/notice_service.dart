@@ -26,9 +26,7 @@ class NoticeService implements INoticeService {
   }
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-  }
+  void dispose() {}
 
   @override
   Future<Either<Failure, NoticeModel>> getNotice(NoticeViewModel notice) {

@@ -9,6 +9,7 @@ import '../services/visitor_service.dart';
 import '../view-model/visitor_view_model.dart';
 part 'visitor_controller.g.dart';
 
+// ignore: library_private_types_in_public_api
 class VisitorController = _VisitorControllerBase with _$VisitorController;
 
 abstract class _VisitorControllerBase with Store {

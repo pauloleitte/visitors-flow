@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:visitors_flow_app/src/core/modules/auth/stores/token_store.dart';
-import 'package:visitors_flow_app/src/core/modules/auth/stores/user_store.dart';
+import '../../../../../../shared/widgets/title_widget.dart';
 import '../../../../../config/app_routes.dart';
 import '../controllers/configuration/configuration_controller.dart';
 
@@ -32,15 +31,17 @@ class _BodyConfigurationState
 
   @override
   Widget build(BuildContext context) {
-    final storeUser = Modular.get<UserStore>();
-    final storeToken = Modular.get<TokenStore>();
     return Observer(builder: (context) {
-      return SingleChildScrollView(
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-              child: Card(
+      return SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              buildTitle(title: 'Configurações'),
+              const SizedBox(
+                height: 10,
+              ),
+              Card(
                 child: Column(
                   children: [
                     Padding(
@@ -108,9 +109,8 @@ class _BodyConfigurationState
                   ],
                 ),
               ),
-            ),
-            //myProfile(context),
-          ],
+            ],
+          ),
         ),
       );
     });

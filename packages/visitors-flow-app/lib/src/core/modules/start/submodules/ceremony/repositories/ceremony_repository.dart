@@ -118,7 +118,5 @@ class CeremonyRepository implements ICeremonyRepository {
   }
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-  }
+  void dispose() {}
 }
