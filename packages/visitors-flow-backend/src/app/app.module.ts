@@ -9,6 +9,7 @@ import { CeremonyModule } from './core/modules/ceremony/ceremony.module';
 import { HealthModule } from './core/modules/health/health.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { NoticeModule } from './core/modules/notice/notice.module';
+import { MemberModule } from './core/modules/member/member.module';
 @Module({
   imports: [
     AuthModule,
@@ -22,6 +23,7 @@ import { NoticeModule } from './core/modules/notice/notice.module';
     VisitorModule,
     CeremonyModule,
     NoticeModule,
+    MemberModule,
   ],
   controllers: [AppController],
   providers: [AppService],

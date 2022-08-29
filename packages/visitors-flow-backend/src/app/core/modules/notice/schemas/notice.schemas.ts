@@ -8,10 +8,10 @@ const schemaOptions = {
 };
 @Schema(schemaOptions)
 export class Notice {
-  @Prop()
+  @Prop({required: true})
   name: string;
 
-  @Prop()
+  @Prop({required: true})
   description: string;
 
   @Prop()
