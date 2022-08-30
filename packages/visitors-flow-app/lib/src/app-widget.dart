@@ -10,7 +10,7 @@ class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color primaryColor = HexColor('#173D70');
+    Color primaryColor = HexColor('#000000');
     return MaterialApp(
       supportedLocales: const [
         Locale('pt', 'BR'),
@@ -25,6 +25,7 @@ class AppWidget extends StatelessWidget {
       title: 'AD Management',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        snackBarTheme: ThemeHelper().snackBarThemeData(),
         fontFamily: 'Oxygen',
         iconTheme: ThemeHelper().iconThemeData(),
         buttonTheme: ThemeHelper().buttonThemeData(),

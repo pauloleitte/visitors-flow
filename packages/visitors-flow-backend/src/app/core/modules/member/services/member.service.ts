@@ -13,8 +13,10 @@ export class MemberService {
   async getAll(documentsToSkip = 0, limitOfDocuments?: number, name?: string) {
     const query = this.memberModel
       .find(name ? { name: { $regex: name, $options: 'i' } } : {})
+      .select('-__v')
       .sort({ _id: 1 })
       .skip(documentsToSkip);
+      
 
     if (limitOfDocuments) {
       query.limit(limitOfDocuments);

@@ -5,6 +5,7 @@ import 'store/start_store.dart';
 import 'submodules/ceremony/ceremony_module.dart';
 import 'submodules/configuration/configuration_module.dart';
 import 'submodules/home/home_module.dart';
+import 'submodules/member/member.module.dart';
 import 'submodules/notice/notice.module.dart';
 import 'submodules/visitors/visitor_module.dart';
 
@@ -32,6 +33,10 @@ class StartModule extends Module {
       ModuleRoute(
         '/notice',
         module: NoticeModule(),
+      ),
+      ModuleRoute(
+        '/member',
+        module: MemberModule(),
       ),
       ModuleRoute(
         '/config',

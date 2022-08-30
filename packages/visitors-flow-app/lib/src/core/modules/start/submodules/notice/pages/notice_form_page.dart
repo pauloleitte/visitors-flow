@@ -20,14 +20,19 @@ class _NoticeFormPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text(
+          title: Text(
             'Aviso',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontWeight: FontWeight.bold),
           ),
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back,
-                color: Theme.of(context).colorScheme.secondary),
+            icon: Icon(
+              Icons.arrow_back,
+            ),
             onPressed: () => Modular.to.navigate(AppRoutes.NOTICE),
           ),
           actions: [
@@ -35,7 +40,7 @@ class _NoticeFormPageState
                 ? [
                     IconButton(
                       icon: Icon(Icons.delete,
-                          color: Theme.of(context).colorScheme.secondary),
+                          color: Theme.of(context).primaryColor),
                       onPressed: () async {
                         controller.notice = widget.notice!;
                         await controller.deleteNotice();

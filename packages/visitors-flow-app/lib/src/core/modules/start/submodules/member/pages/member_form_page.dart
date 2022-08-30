@@ -1,33 +1,27 @@
-// ignore_for_file: unnecessary_new
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:visitors_flow_app/src/core/modules/start/submodules/visitors/controllers/visitor_controller.dart';
-import '../../../../../config/app_routes.dart';
-import '../models/visitor_model.dart';
-import '../widgets/body_visitor_form.dart';
+import 'package:visitors_flow_app/src/core/modules/start/submodules/member/widgets/body_member_form.dart';
 
-class VisitorPageForm extends StatefulWidget {
-  final VisitorModel? visitor;
-  const VisitorPageForm({Key? key, this.visitor}) : super(key: key);
+import '../../../../../config/app_routes.dart';
+import '../controllers/member_controller.dart';
+import '../models/member_model.dart';
+
+class MemberFormPage extends StatefulWidget {
+  final MemberModel? member;
+  const MemberFormPage({Key? key, this.member}) : super(key: key);
 
   @override
-  State<VisitorPageForm> createState() => _VisitorPageFormState();
+  State<MemberFormPage> createState() => _MemberFormPageState();
 }
 
-class _VisitorPageFormState
-    extends ModularState<VisitorPageForm, VisitorController> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class _MemberFormPageState
+    extends ModularState<MemberFormPage, MemberController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
           title: Text(
-            'Visitante',
+            'Membro',
             style: TextStyle(
                 color: Theme.of(context).primaryColor,
                 fontWeight: FontWeight.bold),
@@ -39,26 +33,24 @@ class _VisitorPageFormState
             icon: Icon(
               Icons.arrow_back,
             ),
-            onPressed: () => Modular.to.navigate(AppRoutes.VISITOR),
+            onPressed: () => Modular.to.navigate(AppRoutes.MEMBER),
           ),
           actions: [
-            ...(widget.visitor?.name != null
+            ...(widget.member?.name != null
                 ? [
                     IconButton(
                       icon: Icon(Icons.delete,
                           color: Theme.of(context).primaryColor),
                       onPressed: () async {
-                        controller.visitor = widget.visitor!;
-                        await controller.deleteVisitor();
-                        Modular.to.navigate(AppRoutes.VISITOR);
+                        controller.member = widget.member!;
+                        await controller.deleteMembers();
+                        Modular.to.navigate(AppRoutes.MEMBER);
                       },
                     ),
                   ]
                 : [])
           ]),
-      body: BodyVisitorForm(
-        visitor: widget.visitor,
-      ),
+      body: BodyMemberForm(member: widget.member),
     );
   }
 }
