@@ -10,13 +10,13 @@ class AppRoutes {
   static const CONFIG = '/start/config';
   static const CONFIG_PROFILE = '/start/config/profile';
   static const CONFIG_SECURITY = '/start/config/security';
-  static const CEREMONY = '/start/ceremony';
-  static const CEREMONY_FORM = '/start/ceremony/form';
-  static const CEREMONY_REPORT = '/start/ceremony/report';
-  static const VISITOR = '/start/visitor';
-  static const VISITOR_FORM = '/start/visitor/form';
-  static const NOTICE = '/start/notice';
-  static const NOTICE_FORM = '/start/notice/form';
-  static const MEMBER = '/start/member';
-  static const MEMBER_FORM = '/start/member/form';
+  static const CEREMONY = '/start/management/ceremony';
+  static const CEREMONY_FORM = '/start/management/ceremony/form';
+  static const VISITOR = '/start/management/visitor';
+  static const VISITOR_FORM = '/start/management/visitor/form';
+  static const NOTICE = '/start/management/notice';
+  static const NOTICE_FORM = '/start/management/notice/form';
+  static const MEMBER = '/start/management/member';
+  static const MEMBER_FORM = '/start/management/member/form';
+  static const MANAGEMENT = '/start/management';
 }

@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:visitors_flow_app/src/core/modules/start/submodules/ceremony/repositories/ceremony_repository.dart';
-import 'package:visitors_flow_app/src/core/modules/start/submodules/ceremony/services/ceremony_service.dart';
 
+import '../management/modules/ceremony/repositories/ceremony_repository.dart';
+import '../management/modules/ceremony/services/ceremony_service.dart';
 import 'controllers/home_controller.dart';
 import 'pages/home_page.dart';
 

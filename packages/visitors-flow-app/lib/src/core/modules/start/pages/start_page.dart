@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter/material.dart';
 
 import '../../../config/app_routes.dart';
 import '../store/start_store.dart';
@@ -33,20 +33,12 @@ class StartPageState extends State<StartPage> {
                 icon: Icon(Icons.home_outlined),
               ),
               BottomNavigationBarItem(
-                label: 'Cultos',
-                icon: Icon(Icons.church_outlined),
+                label: 'Gerenciamento',
+                icon: Icon(Icons.app_registration),
               ),
               BottomNavigationBarItem(
-                label: 'Visitantes',
-                icon: Icon(Icons.person_outline),
-              ),
-              BottomNavigationBarItem(
-                label: 'Avisos',
-                icon: Icon(Icons.notifications_outlined),
-              ),
-              BottomNavigationBarItem(
-                label: 'Membros',
-                icon: Icon(Icons.contact_page_outlined),
+                label: 'Configuração',
+                icon: Icon(Icons.settings),
               ),
             ],
             currentIndex: store.currentIndex,
@@ -63,16 +55,10 @@ class StartPageState extends State<StartPage> {
                   Modular.to.navigate(AppRoutes.HOME);
                   break;
                 case 1:
-                  Modular.to.navigate(AppRoutes.CEREMONY);
+                  Modular.to.navigate(AppRoutes.MANAGEMENT);
                   break;
                 case 2:
-                  Modular.to.navigate(AppRoutes.VISITOR);
-                  break;
-                case 3:
-                  Modular.to.navigate(AppRoutes.NOTICE);
-                  break;
-                case 4:
-                  Modular.to.navigate(AppRoutes.MEMBER);
+                  Modular.to.navigate(AppRoutes.CONFIG);
                   break;
                 default:
                   Modular.to.navigate(AppRoutes.HOME);

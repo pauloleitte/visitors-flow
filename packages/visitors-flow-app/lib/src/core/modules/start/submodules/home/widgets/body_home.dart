@@ -3,9 +3,10 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:visitors_flow_app/src/core/config/app_routes.dart';
-import 'package:visitors_flow_app/src/core/modules/start/submodules/ceremony/models/ceremony_model.dart';
+
 import '../../../../../../shared/widgets/subtitle_widget.dart';
 import '../../../../../../shared/widgets/title_widget.dart';
+import '../../management/modules/ceremony/models/ceremony_model.dart';
 import '../controllers/home_controller.dart';
 
 class BodyHome extends StatefulWidget {

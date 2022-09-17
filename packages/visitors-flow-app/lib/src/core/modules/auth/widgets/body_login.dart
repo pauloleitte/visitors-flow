@@ -2,9 +2,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
 import '../../../config/app_routes.dart';
-import '../controllers/login/login_controller.dart';
 import '../../../config/theme_helper.dart';
+import '../controllers/login/login_controller.dart';
 
 class BodyLogin extends StatefulWidget {
   const BodyLogin({Key? key}) : super(key: key);
@@ -42,7 +43,8 @@ class _BodyLoginState extends ModularState<BodyLogin, LoginController> {
           child: Column(
             children: [
               SizedBox(
-                child: Image.asset('assets/images/logo_vila_yara.png'),
+                child: Image.asset('assets/images/logo_vila_yara.png',
+                    height: MediaQuery.of(context).size.height / 2),
               ),
               Container(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
