@@ -1,4 +1,4 @@
-import 'package:asuka/asuka.dart' as asuka;
+import 'package:asuka/asuka.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -41,7 +41,7 @@ abstract class _NoticeControllerBase with Store {
       busy = true;
       var result = await _noticeService.getNotices();
       result.fold((l) {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (notices) async {
         busy = false;
@@ -49,7 +49,7 @@ abstract class _NoticeControllerBase with Store {
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));
@@ -63,15 +63,15 @@ abstract class _NoticeControllerBase with Store {
       busy = true;
       var result = await _noticeService.deleteNotice(model);
       result.fold((l) {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (_) async {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.EXCLUSION_MESSAGE)));
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));
@@ -85,16 +85,16 @@ abstract class _NoticeControllerBase with Store {
       busy = true;
       var result = await _noticeService.createNotice(model);
       result.fold((l) {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (_) async {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.CREATE_MESSAGE)));
         Modular.to.navigate(AppRoutes.NOTICE);
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));
@@ -108,16 +108,16 @@ abstract class _NoticeControllerBase with Store {
       busy = true;
       var result = await _noticeService.updateNotice(model);
       result.fold((l) {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (_) async {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.UPDATE_MESSAGE)));
         Modular.to.navigate(AppRoutes.NOTICE);
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));
@@ -131,7 +131,7 @@ abstract class _NoticeControllerBase with Store {
       busy = true;
       var result = await _noticeService.getNotice(model);
       result.fold((l) {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (notice) async {
         busy = false;
@@ -139,7 +139,7 @@ abstract class _NoticeControllerBase with Store {
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));

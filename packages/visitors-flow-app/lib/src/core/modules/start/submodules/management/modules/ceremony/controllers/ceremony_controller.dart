@@ -1,4 +1,4 @@
-import 'package:asuka/asuka.dart' as asuka;
+import 'package:asuka/asuka.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -41,7 +41,7 @@ abstract class _CeremonyControllerBase with Store {
       busy = true;
       var result = await service.getCeremonies();
       result.fold((l) {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (ceremonies) async {
         busy = false;
@@ -49,7 +49,7 @@ abstract class _CeremonyControllerBase with Store {
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));
@@ -63,15 +63,15 @@ abstract class _CeremonyControllerBase with Store {
       busy = true;
       var result = await service.deleteCeremony(model);
       result.fold((l) {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (_) async {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.EXCLUSION_MESSAGE)));
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));
@@ -85,16 +85,16 @@ abstract class _CeremonyControllerBase with Store {
       busy = true;
       var result = await service.updateCeremony(model);
       result.fold((l) {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (_) async {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.UPDATE_MESSAGE)));
         Modular.to.navigate(AppRoutes.CEREMONY);
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));
@@ -108,16 +108,16 @@ abstract class _CeremonyControllerBase with Store {
       busy = true;
       var result = await service.createCeremony(model);
       result.fold((l) {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (_) async {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.CREATE_MESSAGE)));
         Modular.to.navigate(AppRoutes.CEREMONY);
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));

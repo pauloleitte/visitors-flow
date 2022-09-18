@@ -1,4 +1,4 @@
-import 'package:asuka/asuka.dart' as asuka;
+import 'package:asuka/asuka.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
@@ -33,13 +33,13 @@ abstract class _HomeControllerBase with Store {
       busy = true;
       var result = await _ceremonyService.getCeremoniesOfDay(date);
       result.fold((l) {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (ceremonies) async {
         this.ceremonies = ceremonies;
       });
     } catch (e) {
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));
@@ -53,14 +53,14 @@ abstract class _HomeControllerBase with Store {
       busy = true;
       var result = await _userService.getUser();
       result.fold((l) {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (user) async {
         model = user;
         await _userService.saveLocalDB(user);
       });
     } catch (e) {
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));

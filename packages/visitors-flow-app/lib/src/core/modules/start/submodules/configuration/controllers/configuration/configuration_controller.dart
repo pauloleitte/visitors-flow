@@ -1,4 +1,4 @@
-import 'package:asuka/asuka.dart' as asuka;
+import 'package:asuka/asuka.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:visitors_flow_app/src/core/modules/auth/models/token_model.dart';
@@ -31,7 +31,7 @@ abstract class _ConfigurationControllerBase with Store {
       var result = await _userService.getCurrentUser();
       model = result;
     } catch (e) {
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));

@@ -12,6 +12,13 @@ class SignupPage extends StatefulWidget {
 class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: BodySignup());
+    return Scaffold(
+      body: const BodySignup(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
+      ),
+    );
   }
 }

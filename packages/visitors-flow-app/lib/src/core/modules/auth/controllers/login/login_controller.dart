@@ -1,4 +1,4 @@
-import 'package:asuka/asuka.dart' as asuka;
+import 'package:asuka/asuka.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -38,7 +38,7 @@ abstract class _LoginControllerBase with Store {
       busy = true;
       var result = await service.login(model);
       result.fold((failure) {
-        asuka.showSnackBar(SnackBar(
+        Asuka.showSnackBar(SnackBar(
             content: Text(failure.message ?? AppMessages.ERROR_HTTP_MESSAGE)));
       }, (token) {
         tokenStore.setToken(token);
@@ -46,7 +46,7 @@ abstract class _LoginControllerBase with Store {
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(
+      Asuka.showSnackBar(
           const SnackBar(content: Text(AppMessages.ERROR_HTTP_MESSAGE)));
     } finally {
       busy = false;

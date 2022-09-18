@@ -1,4 +1,4 @@
-import 'package:asuka/asuka.dart' as asuka;
+import 'package:asuka/asuka.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -43,10 +43,10 @@ abstract class _SignupControllerBase with Store {
       busy = true;
       var result = await service.signup(vm);
       result.fold((l) {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (userCreateModel) async {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.CREATE_MESSAGE)));
         Future.delayed(const Duration(seconds: 2), () {
           Modular.to.navigate(AppRoutes.AUTH);
@@ -54,7 +54,7 @@ abstract class _SignupControllerBase with Store {
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));

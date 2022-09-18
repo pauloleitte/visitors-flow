@@ -1,4 +1,4 @@
-import 'package:asuka/asuka.dart' as asuka;
+import 'package:asuka/asuka.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -47,13 +47,13 @@ abstract class _VisitorControllerBase with Store {
       busy = true;
       var result = await service.getVisitorsByName(filter);
       result.fold((l) {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (visitors) async {
         this.visitors = visitors;
       });
     } catch (e) {
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));
@@ -67,14 +67,14 @@ abstract class _VisitorControllerBase with Store {
       busy = true;
       var result = await service.getVisitors();
       result.fold((l) {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (visitors) async {
         busy = false;
         this.visitors = visitors;
       });
     } catch (e) {
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));
@@ -88,15 +88,15 @@ abstract class _VisitorControllerBase with Store {
       busy = true;
       var result = await service.deleteVisitor(model);
       result.fold((l) {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (_) async {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.EXCLUSION_MESSAGE)));
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));
@@ -110,10 +110,10 @@ abstract class _VisitorControllerBase with Store {
       busy = true;
       var result = await service.updateVisitor(model);
       result.fold((l) {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (_) async {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.UPDATE_MESSAGE)));
         Future.delayed(const Duration(seconds: 2), () {
           Modular.to.navigate(AppRoutes.VISITOR);
@@ -121,7 +121,7 @@ abstract class _VisitorControllerBase with Store {
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));
@@ -135,16 +135,16 @@ abstract class _VisitorControllerBase with Store {
       busy = true;
       var result = await service.createVisitor(model);
       result.fold((l) {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (userCreateModel) async {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.CREATE_MESSAGE)));
         Modular.to.navigate(AppRoutes.VISITOR);
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));

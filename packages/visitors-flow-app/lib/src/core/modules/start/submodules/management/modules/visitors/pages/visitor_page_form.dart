@@ -36,12 +36,12 @@ class _VisitorPageFormState
           backgroundColor: Colors.transparent,
           elevation: 0,
           iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-            ),
-            onPressed: () => Modular.to.navigate(AppRoutes.VISITOR),
-          ),
+          // leading: IconButton(
+          //   icon: const Icon(
+          //     Icons.arrow_back,
+          //   ),
+          //   onPressed: () => Modular.to.navigate(AppRoutes.VISITOR),
+          // ),
           actions: [
             ...(widget.visitor?.name != null
                 ? [

@@ -30,7 +30,7 @@ class _MemberFormPageState
           elevation: 0,
           iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
             ),
             onPressed: () => Modular.to.navigate(AppRoutes.MEMBER),

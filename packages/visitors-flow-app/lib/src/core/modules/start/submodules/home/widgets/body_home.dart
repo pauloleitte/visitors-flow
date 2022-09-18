@@ -78,7 +78,7 @@ class _BodyHomeState extends ModularState<BodyHome, HomeController> {
                       ),
                       (controller.ceremonies.isNotEmpty
                           ? SizedBox(
-                              height: MediaQuery.of(context).size.height / 4,
+                              height: MediaQuery.of(context).size.height / 2,
                               child: Column(
                                 children: [
                                   subTitle(title: 'Cultos'),

@@ -51,7 +51,6 @@ class ThemeHelper {
     BuildContext context,
   ) {
     Color c1 = Theme.of(context).primaryColor;
-    Color c2 = Theme.of(context).colorScheme.secondary;
     return BoxDecoration(
       boxShadow: <BoxShadow>[
         BoxShadow(

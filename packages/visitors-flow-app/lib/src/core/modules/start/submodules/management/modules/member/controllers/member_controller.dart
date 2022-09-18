@@ -1,4 +1,6 @@
-import 'package:asuka/asuka.dart' as asuka;
+// ignore_for_file: library_private_types_in_public_api
+
+import 'package:asuka/asuka.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -41,7 +43,7 @@ abstract class _MemberControllerBase with Store {
       busy = true;
       var result = await _service.getMembers();
       result.fold((l) {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (members) async {
         busy = false;
@@ -49,7 +51,7 @@ abstract class _MemberControllerBase with Store {
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));
@@ -63,15 +65,15 @@ abstract class _MemberControllerBase with Store {
       busy = true;
       var result = await _service.deleteMember(model);
       result.fold((l) {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (_) async {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.EXCLUSION_MESSAGE)));
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));
@@ -85,16 +87,16 @@ abstract class _MemberControllerBase with Store {
       busy = true;
       var result = await _service.updateMember(model);
       result.fold((l) {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (_) async {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.UPDATE_MESSAGE)));
         Modular.to.navigate(AppRoutes.MEMBER);
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));
@@ -108,16 +110,16 @@ abstract class _MemberControllerBase with Store {
       busy = true;
       var result = await _service.createMember(model);
       result.fold((l) {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (_) async {
-        asuka.showSnackBar(
+        Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.CREATE_MESSAGE)));
         Modular.to.navigate(AppRoutes.MEMBER);
       });
     } catch (e) {
       busy = false;
-      asuka.showSnackBar(const SnackBar(
+      Asuka.showSnackBar(const SnackBar(
           content: Text(
         AppMessages.ERROR_MESSAGE,
       )));

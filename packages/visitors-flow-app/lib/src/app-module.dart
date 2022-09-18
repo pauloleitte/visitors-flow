@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:visitors_flow_app/src/core/modules/auth/services/token_service.dart';
@@ -23,7 +25,7 @@ class AppModule extends Module {
     Bind((i) => TokenStore(i.get())),
     Bind(
       (i) => BaseOptions(
-        baseUrl: 'http://192.168.0.40:3333/api/v1',
+        baseUrl: 'http://192.168.0.38:3333/api/v1',
         connectTimeout: 5000,
       ),
     ),
