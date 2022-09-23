@@ -20,7 +20,7 @@ class _VisitorPageState extends State<VisitorPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Modular.to
-              .navigate(AppRoutes.VISITOR_FORM, arguments: VisitorModel());
+              .pushNamed(AppRoutes.VISITOR_FORM, arguments: VisitorModel());
         },
         backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(Icons.add, color: Colors.white),

@@ -18,7 +18,7 @@ class _NoticePageState extends State<NoticePage> {
       body: const BodyNotice(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Modular.to.navigate(AppRoutes.NOTICE_FORM);
+          Modular.to.pushNamed(AppRoutes.NOTICE_FORM);
         },
         backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(Icons.add, color: Colors.white),

@@ -29,12 +29,12 @@ class _CeremonyFormPageState
           backgroundColor: Colors.transparent,
           elevation: 0,
           iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
-            ),
-            onPressed: () => Modular.to.navigate(AppRoutes.CEREMONY),
-          ),
+          // leading: IconButton(
+          //   icon: const Icon(
+          //     Icons.arrow_back,
+          //   ),
+          //   onPressed: () => Modular.to.navigate(AppRoutes.CEREMONY),
+          // ),
           actions: [
             ...(widget.ceremony?.name != null
                 ? [

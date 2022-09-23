@@ -1,4 +1,6 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:visitors_flow_app/src/shared/widgets/subtitle_widget.dart';
@@ -95,9 +97,12 @@ class _BodySignupState extends ModularState<BodySignup, SignupController> {
                             decoration: ThemeHelper().textInputDecoration(
                                 "Celular", "Insira o número do seu celular"),
                             keyboardType: TextInputType.phone,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              TelefoneInputFormatter()
+                            ],
                             validator: (val) {
-                              if ((val!.isEmpty) ||
-                                  !RegExp(r"^(\d+)*$").hasMatch(val)) {
+                              if ((val!.isEmpty)) {
                                 return "Insira um número de celular válido";
                               }
                               return null;

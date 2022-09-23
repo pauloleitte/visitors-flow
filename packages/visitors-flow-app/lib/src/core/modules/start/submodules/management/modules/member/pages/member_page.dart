@@ -18,7 +18,7 @@ class _MemeberPageState extends State<MemeberPage> {
       body: const BodyMember(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Modular.to.navigate(AppRoutes.MEMBER_FORM);
+          Modular.to.pushNamed(AppRoutes.MEMBER_FORM);
         },
         backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(Icons.add, color: Colors.white),

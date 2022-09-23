@@ -42,7 +42,7 @@ class _BodyCeremonyFormState
   }
 
   Widget _buildListNotices() {
-    if (controller.ceremony.notices!.isNotEmpty) {
+    if (controller.ceremony.notices != null) {
       return Column(
         children: [
           Row(
@@ -104,7 +104,7 @@ class _BodyCeremonyFormState
   }
 
   Widget _buildListVisitors() {
-    if (controller.ceremony.visitors!.isNotEmpty) {
+    if (controller.ceremony.visitors != null) {
       return Column(
         children: [
           Row(
@@ -171,13 +171,12 @@ class _BodyCeremonyFormState
     return Observer(builder: (context) {
       return SingleChildScrollView(
         child: Container(
-          margin: const EdgeInsets.fromLTRB(25, 50, 25, 30),
+          margin: const EdgeInsets.fromLTRB(25, 10, 25, 10),
           padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
           alignment: Alignment.center,
           child: Form(
               key: _formKey,
               child: Column(children: [
-                const SizedBox(height: 30.0),
                 Container(
                   decoration: ThemeHelper().inputBoxDecorationShaddow(),
                   child: TextFormField(

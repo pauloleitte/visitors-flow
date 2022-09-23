@@ -1,4 +1,6 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -45,13 +47,12 @@ class _BodyVisitorFormState
           children: [
             Center(
               child: Container(
-                margin: const EdgeInsets.fromLTRB(25, 50, 25, 10),
+                margin: const EdgeInsets.fromLTRB(25, 10, 25, 10),
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 alignment: Alignment.center,
                 child: Form(
                     key: _formKey,
                     child: Column(children: [
-                      const SizedBox(height: 30.0),
                       Container(
                         decoration: ThemeHelper().inputBoxDecorationShaddow(),
                         child: TextFormField(
@@ -86,6 +87,11 @@ class _BodyVisitorFormState
                         decoration: ThemeHelper().inputBoxDecorationShaddow(),
                         child: TextFormField(
                           initialValue: controller.visitor.telephone,
+                          keyboardType: TextInputType.phone,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            TelefoneInputFormatter()
+                          ],
                           decoration: ThemeHelper().textInputDecoration(
                               'Telefone', 'Insira seu telefone'),
                           onSaved: (value) {
