@@ -1,3 +1,5 @@
+import '../../ceremony/models/ceremony_model.dart';
+
 class VisitorViewModel {
   String? id;
   String? name;
@@ -6,14 +8,15 @@ class VisitorViewModel {
   bool? isChurchgoer;
   String? church;
   String? observations;
+  List<CeremonyModel>? ceremonies;
 
-  VisitorViewModel({
-    this.id,
-    this.name,
-    this.email,
-    this.telephone,
-    this.isChurchgoer,
-    this.church,
-    this.observations,
-  });
+  VisitorViewModel(
+      {this.id,
+      this.name,
+      this.email,
+      this.telephone,
+      this.isChurchgoer,
+      this.church,
+      this.observations,
+      this.ceremonies});
 }

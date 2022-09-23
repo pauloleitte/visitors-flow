@@ -1,3 +1,5 @@
+import 'package:visitors_flow_app/src/core/modules/start/submodules/management/modules/ceremony/models/ceremony_model.dart';
+
 class ResponseVisitors {
   late List<VisitorModel> visitors;
   int? count;
@@ -29,7 +31,7 @@ class VisitorModel {
   bool? isChurchgoer;
   String? church;
   String? observations;
-  int? iV;
+  List<CeremonyModel>? ceremonies;
 
   VisitorModel(
       {this.sId,
@@ -39,7 +41,7 @@ class VisitorModel {
       this.isChurchgoer,
       this.church,
       this.observations,
-      this.iV});
+      this.ceremonies});
 
   VisitorModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -49,7 +51,12 @@ class VisitorModel {
     isChurchgoer = json['isChurchgoer'];
     church = json['church'];
     observations = json['observations'];
-    iV = json['__v'];
+    if (json['ceremonies'] != null) {
+      ceremonies = <CeremonyModel>[];
+      json['ceremonies'].forEach((v) {
+        ceremonies!.add(CeremonyModel.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -61,7 +68,9 @@ class VisitorModel {
     data['isChurchgoer'] = isChurchgoer;
     data['church'] = church;
     data['observations'] = observations;
-    data['__v'] = iV;
+    if (ceremonies != null) {
+      data['ceremonies'] = ceremonies!.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }

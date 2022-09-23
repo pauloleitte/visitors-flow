@@ -18,15 +18,13 @@ export class Ceremony {
   description: string;
 
   @Prop({
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: Visitor.name }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Visitor" }],
   })
-  @Type(() => Visitor)
   visitors: Visitor;
 
   @Prop({
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: Notice.name }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Notice" }],
   })
-  @Type(() => Visitor)
   notices: Notice;
 
   @Prop({ default: new Date() })

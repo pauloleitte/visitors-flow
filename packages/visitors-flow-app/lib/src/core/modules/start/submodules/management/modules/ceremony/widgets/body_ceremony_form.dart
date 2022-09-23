@@ -248,8 +248,8 @@ class _BodyCeremonyFormState
                     },
                   ),
                 ),
-                _buildListVisitors(),
-                _buildListNotices(),
+                //_buildListVisitors(),
+                //_buildListNotices(),
                 const SizedBox(height: 20.0),
                 Container(
                   decoration: ThemeHelper().buttonBoxDecoration(context),

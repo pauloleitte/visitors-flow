@@ -14,13 +14,13 @@ class VisitorService implements IVisitorService {
   @override
   Future<Either<Failure, VisitorModel>> createVisitor(VisitorViewModel model) {
     return _repository.createVisitor(VisitorModel(
-      church: model.church,
-      name: model.name,
-      email: model.email,
-      telephone: model.telephone,
-      isChurchgoer: model.isChurchgoer,
-      observations: model.observations,
-    ));
+        church: model.church,
+        name: model.name,
+        email: model.email,
+        telephone: model.telephone,
+        isChurchgoer: model.isChurchgoer,
+        observations: model.observations,
+        ceremonies: model.ceremonies));
   }
 
   @override
@@ -46,14 +46,14 @@ class VisitorService implements IVisitorService {
   @override
   Future<Either<Failure, VisitorModel>> updateVisitor(VisitorViewModel model) {
     return _repository.updateVisitor(VisitorModel(
-      sId: model.id,
-      church: model.church,
-      name: model.name,
-      email: model.email,
-      telephone: model.telephone,
-      isChurchgoer: model.isChurchgoer,
-      observations: model.observations,
-    ));
+        sId: model.id,
+        church: model.church,
+        name: model.name,
+        email: model.email,
+        telephone: model.telephone,
+        isChurchgoer: model.isChurchgoer,
+        observations: model.observations,
+        ceremonies: model.ceremonies));
   }
 
   @override

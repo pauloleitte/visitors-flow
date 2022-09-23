@@ -14,6 +14,7 @@ export class VisitorService {
   async getAll(documentsToSkip = 0, limitOfDocuments?: number, name?: string) {
     const query = this.visitorModel
       .find(name ? { name: { $regex: name, $options: 'i' } } : {})
+      .populate([{ path: 'ceremonies', strictPopulate: false }])
       .sort({ _id: 1 })
       .skip(documentsToSkip);
 
@@ -39,10 +40,8 @@ export class VisitorService {
   }
 
   async findByIdAndUpdate(id: string, visitor: UpdateVisitorDTO) {
-    return await this.visitorModel.findByIdAndUpdate(
-      id,
-      { $set: visitor },
-      { new: true }
-    );
+    return await this.visitorModel
+      .findByIdAndUpdate(id, { $set: visitor }, { new: true })
+      .populate([{ path: 'ceremonies', strictPopulate: false }]);
   }
 }
