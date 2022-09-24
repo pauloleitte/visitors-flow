@@ -19,8 +19,7 @@ class VisitorService implements IVisitorService {
         email: model.email,
         telephone: model.telephone,
         isChurchgoer: model.isChurchgoer,
-        observations: model.observations,
-        ceremonies: model.ceremonies));
+        observations: model.observations));
   }
 
   @override
@@ -52,8 +51,7 @@ class VisitorService implements IVisitorService {
         email: model.email,
         telephone: model.telephone,
         isChurchgoer: model.isChurchgoer,
-        observations: model.observations,
-        ceremonies: model.ceremonies));
+        observations: model.observations));
   }
 
   @override

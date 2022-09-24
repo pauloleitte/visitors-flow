@@ -31,7 +31,6 @@ class VisitorModel {
   bool? isChurchgoer;
   String? church;
   String? observations;
-  List<CeremonyModel>? ceremonies;
 
   VisitorModel(
       {this.sId,
@@ -40,8 +39,7 @@ class VisitorModel {
       this.telephone,
       this.isChurchgoer,
       this.church,
-      this.observations,
-      this.ceremonies});
+      this.observations});
 
   VisitorModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -51,12 +49,6 @@ class VisitorModel {
     isChurchgoer = json['isChurchgoer'];
     church = json['church'];
     observations = json['observations'];
-    if (json['ceremonies'] != null) {
-      ceremonies = <CeremonyModel>[];
-      json['ceremonies'].forEach((v) {
-        ceremonies!.add(CeremonyModel.fromJson(v));
-      });
-    }
   }
 
   Map<String, dynamic> toJson() {
@@ -68,9 +60,6 @@ class VisitorModel {
     data['isChurchgoer'] = isChurchgoer;
     data['church'] = church;
     data['observations'] = observations;
-    if (ceremonies != null) {
-      data['ceremonies'] = ceremonies!.map((v) => v.toJson()).toList();
-    }
     return data;
   }
 }

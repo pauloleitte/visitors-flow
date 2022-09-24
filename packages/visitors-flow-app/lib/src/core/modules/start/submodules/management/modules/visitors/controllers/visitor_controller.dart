@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:visitors_flow_app/src/core/config/app_messages.dart';
-import 'package:visitors_flow_app/src/core/modules/start/submodules/management/modules/ceremony/models/ceremony_model.dart';
-import 'package:visitors_flow_app/src/core/modules/start/submodules/management/modules/ceremony/services/interfaces/ceremony_service_interface.dart';
 
 import '../../../../../../../config/app_routes.dart';
 import '../models/visitor_model.dart';
@@ -21,9 +19,6 @@ abstract class _VisitorControllerBase with Store {
   VisitorModel visitor = VisitorModel();
 
   @observable
-  List<CeremonyModel> ceremonies = [];
-
-  @observable
   List<VisitorModel> visitors = [];
 
   @observable
@@ -33,9 +28,8 @@ abstract class _VisitorControllerBase with Store {
   String filter = "";
 
   IVisitorService service;
-  ICeremonyService ceremonyService;
 
-  _VisitorControllerBase(this.service, this.ceremonyService);
+  _VisitorControllerBase(this.service);
 
   @computed
   VisitorViewModel get model => VisitorViewModel(
@@ -46,7 +40,6 @@ abstract class _VisitorControllerBase with Store {
         isChurchgoer: visitor.isChurchgoer,
         church: visitor.church,
         observations: visitor.observations,
-        ceremonies: visitor.ceremonies,
       );
 
   Future<void> getVisitorsByName() async {
@@ -58,28 +51,6 @@ abstract class _VisitorControllerBase with Store {
             const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
       }, (visitors) async {
         this.visitors = visitors;
-      });
-    } catch (e) {
-      Asuka.showSnackBar(const SnackBar(
-          content: Text(
-        AppMessages.ERROR_MESSAGE,
-      )));
-    } finally {
-      busy = false;
-    }
-  }
-
-  Future<void> getCeremonies() async {
-    try {
-      busy = true;
-      var result = await ceremonyService
-          .getCeremoniesOfDay(DateTime.now().toUtc().toLocal());
-      result.fold((l) {
-        Asuka.showSnackBar(
-            const SnackBar(content: Text(AppMessages.ERROR_MESSAGE)));
-      }, (ceremonies) async {
-        busy = false;
-        this.ceremonies = ceremonies;
       });
     } catch (e) {
       Asuka.showSnackBar(const SnackBar(

@@ -14,10 +14,11 @@ class CeremonyService implements ICeremonyService {
   Future<Either<Failure, CeremonyModel>> createCeremony(
       CeremonyViewModel model) async {
     return await _ceremonyRepository.createCeremony(CeremonyModel(
-      name: model.name,
-      description: model.description,
-      date: model.date,
-    ));
+        name: model.name,
+        description: model.description,
+        date: model.date,
+        notices: model.notices,
+        visitors: model.visitors));
   }
 
   @override
@@ -36,6 +37,8 @@ class CeremonyService implements ICeremonyService {
         sId: model.id,
         name: model.name,
         date: model.date,
+        visitors: model.visitors,
+        notices: model.notices,
         description: model.description));
   }
 

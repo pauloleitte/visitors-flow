@@ -8,7 +8,6 @@ class VisitorViewModel {
   bool? isChurchgoer;
   String? church;
   String? observations;
-  List<CeremonyModel>? ceremonies;
 
   VisitorViewModel(
       {this.id,
@@ -17,6 +16,5 @@ class VisitorViewModel {
       this.telephone,
       this.isChurchgoer,
       this.church,
-      this.observations,
-      this.ceremonies});
+      this.observations});
 }

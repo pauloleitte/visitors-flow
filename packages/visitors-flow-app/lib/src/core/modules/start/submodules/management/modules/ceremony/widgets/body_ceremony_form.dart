@@ -4,8 +4,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:visitors_flow_app/src/core/config/app_routes.dart';
+import 'package:visitors_flow_app/src/core/modules/start/submodules/management/modules/notice/models/notice_model.dart';
 
+import '../../../../../../../../shared/widgets/multi_selection_widget.dart';
 import '../../../../../../../config/theme_helper.dart';
+import '../../visitors/models/visitor_model.dart';
 import '../controllers/ceremony_controller.dart';
 import '../models/ceremony_model.dart';
 
@@ -24,10 +27,16 @@ class _BodyCeremonyFormState
   @override
   void initState() {
     super.initState();
+    _init();
+  }
+
+  void _init() async {
     if (widget.ceremony != null) {
       controller.ceremony = widget.ceremony!;
       dateinput.text = DateFormat('dd/MM/yyyy').format(widget.ceremony!.date!);
     }
+    await controller.getVisitors();
+    await controller.getNotices();
   }
 
   Future<void> save() async {
@@ -41,8 +50,44 @@ class _BodyCeremonyFormState
     }
   }
 
+  void _showMultiSelectVisitor() async {
+    final results = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return MultiSelect(
+          items: controller.visitors,
+          title: 'Visitantes',
+        );
+      },
+    );
+
+    if (results != null) {
+      final result = List<VisitorModel>.from(results);
+      controller.ceremony.visitors = result;
+      setState(() {});
+    }
+  }
+
+  void _showMultiSelectNotice() async {
+    final results = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return MultiSelect(
+          items: controller.notices,
+          title: 'Avisos',
+        );
+      },
+    );
+
+    if (results != null) {
+      final result = List<NoticeModel>.from(results);
+      controller.ceremony.notices = result;
+      setState(() {});
+    }
+  }
+
   Widget _buildListNotices() {
-    if (controller.ceremony.notices != null) {
+    if (controller.ceremony.visitors != null) {
       return Column(
         children: [
           Row(
@@ -53,9 +98,7 @@ class _BodyCeremonyFormState
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               IconButton(
-                  onPressed: () {
-                    Modular.to.pushNamed(AppRoutes.NOTICE_FORM);
-                  },
+                  onPressed: _showMultiSelectNotice,
                   icon: Icon(
                     Icons.add,
                     color: Theme.of(context).primaryColor,
@@ -93,7 +136,7 @@ class _BodyCeremonyFormState
           TextSpan(
             text: 'aviso',
             recognizer: TapGestureRecognizer()
-              ..onTap = () => {Modular.to.pushNamed(AppRoutes.VISITOR_FORM)},
+              ..onTap = () => {Modular.to.pushNamed(AppRoutes.NOTICE_FORM)},
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).primaryColor),
@@ -115,9 +158,7 @@ class _BodyCeremonyFormState
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               IconButton(
-                  onPressed: () {
-                    Modular.to.pushNamed(AppRoutes.VISITOR_FORM);
-                  },
+                  onPressed: _showMultiSelectVisitor,
                   icon: Icon(
                     Icons.add,
                     color: Theme.of(context).primaryColor,
@@ -248,8 +289,8 @@ class _BodyCeremonyFormState
                     },
                   ),
                 ),
-                //_buildListVisitors(),
-                //_buildListNotices(),
+                _buildListVisitors(),
+                _buildListNotices(),
                 const SizedBox(height: 20.0),
                 Container(
                   decoration: ThemeHelper().buttonBoxDecoration(context),

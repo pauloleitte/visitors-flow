@@ -4,17 +4,18 @@ import { Model } from 'mongoose';
 import { Visitor } from '../schema/visitor.schema';
 import { CreateVisitorDTO } from '../dto/create-visitor.dto';
 import { UpdateVisitorDTO } from '../dto/update-visitor.dto';
+import { CeremonyService } from '../../ceremony/services/ceremony.service';
+import { Ceremony } from '../../ceremony/schema/ceremony.schema';
 
 @Injectable()
 export class VisitorService {
   constructor(
-    @InjectModel('Visitor') private readonly visitorModel: Model<Visitor>
+    @InjectModel('Visitor') private readonly visitorModel: Model<Visitor>,
   ) {}
 
   async getAll(documentsToSkip = 0, limitOfDocuments?: number, name?: string) {
     const query = this.visitorModel
       .find(name ? { name: { $regex: name, $options: 'i' } } : {})
-      .populate([{ path: 'ceremonies', strictPopulate: false }])
       .sort({ _id: 1 })
       .skip(documentsToSkip);
 
@@ -40,8 +41,7 @@ export class VisitorService {
   }
 
   async findByIdAndUpdate(id: string, visitor: UpdateVisitorDTO) {
-    return await this.visitorModel
+   return this.visitorModel
       .findByIdAndUpdate(id, { $set: visitor }, { new: true })
-      .populate([{ path: 'ceremonies', strictPopulate: false }]);
   }
 }
