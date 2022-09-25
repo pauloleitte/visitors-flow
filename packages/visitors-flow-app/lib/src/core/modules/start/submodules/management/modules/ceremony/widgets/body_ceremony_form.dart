@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:visitors_flow_app/src/core/config/app_routes.dart';
-import 'package:visitors_flow_app/src/core/modules/start/submodules/management/modules/notice/models/notice_model.dart';
-
 import '../../../../../../../../shared/widgets/multi_selection_widget.dart';
 import '../../../../../../../config/theme_helper.dart';
+import '../../notice/models/notice_model.dart';
 import '../../visitors/models/visitor_model.dart';
 import '../controllers/ceremony_controller.dart';
 import '../models/ceremony_model.dart';
@@ -24,6 +24,7 @@ class _BodyCeremonyFormState
     extends ModularState<BodyCeremonyForm, CeremonyController> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController dateinput = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -54,9 +55,10 @@ class _BodyCeremonyFormState
     final results = await showDialog(
       context: context,
       builder: (BuildContext context) {
-        return MultiSelect(
+        return MultiSelect<VisitorModel>(
           items: controller.visitors,
           title: 'Visitantes',
+          initialValue: controller.ceremony.visitors!,
         );
       },
     );
@@ -72,10 +74,10 @@ class _BodyCeremonyFormState
     final results = await showDialog(
       context: context,
       builder: (BuildContext context) {
-        return MultiSelect(
-          items: controller.notices,
-          title: 'Avisos',
-        );
+        return MultiSelect<NoticeModel>(
+            items: controller.notices,
+            title: 'Avisos',
+            initialValue: controller.ceremony.notices!);
       },
     );
 
@@ -87,7 +89,7 @@ class _BodyCeremonyFormState
   }
 
   Widget _buildListNotices() {
-    if (controller.ceremony.visitors != null) {
+    if (controller.ceremony.notices != null) {
       return Column(
         children: [
           Row(

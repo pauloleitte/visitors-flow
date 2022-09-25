@@ -58,6 +58,7 @@ class _BodyLoginState extends ModularState<BodyLogin, LoginController> {
                                 decoration:
                                     ThemeHelper().inputBoxDecorationShaddow(),
                                 child: TextFormField(
+                                  keyboardType: TextInputType.emailAddress,
                                   decoration: ThemeHelper().textInputDecoration(
                                       'Email', 'Insira seu email'),
                                   onSaved: (value) {

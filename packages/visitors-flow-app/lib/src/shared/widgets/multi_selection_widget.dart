@@ -2,11 +2,16 @@
 // This widget is reusable
 import 'package:flutter/material.dart';
 
-class MultiSelect extends StatefulWidget {
+class MultiSelect<T> extends StatefulWidget {
   final List<dynamic> items;
   final String title;
-  const MultiSelect({Key? key, required this.items, required this.title})
-      : super(key: key);
+  final List<T> initialValue;
+  const MultiSelect({
+    Key? key,
+    required this.initialValue,
+    required this.items,
+    required this.title,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _MultiSelectState();
@@ -15,6 +20,20 @@ class MultiSelect extends StatefulWidget {
 class _MultiSelectState extends State<MultiSelect> {
   // this variable holds the selected items
   final List<dynamic> _selectedItems = [];
+
+  @override
+  void initState() {
+    addInitalValueInSelectedItems();
+    super.initState();
+  }
+
+  void addInitalValueInSelectedItems() {
+    setState(() {
+      for (var element in widget.initialValue) {
+        if (!_selectedItems.contains(element)) _selectedItems.add(element);
+      }
+    });
+  }
 
 // This function is triggered when a checkbox is checked or unchecked
   void _itemChange(dynamic itemValue, bool isSelected) {
@@ -55,12 +74,12 @@ class _MultiSelectState extends State<MultiSelect> {
       ),
       actions: [
         TextButton(
-          child: const Text('Cancel'),
           onPressed: _cancel,
+          child: const Text('Cancelar'),
         ),
         ElevatedButton(
-          child: const Text('Submit'),
           onPressed: _submit,
+          child: const Text('Salvar'),
         ),
       ],
     );

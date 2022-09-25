@@ -25,7 +25,7 @@ class AppModule extends Module {
     Bind((i) => TokenStore(i.get())),
     Bind(
       (i) => BaseOptions(
-        baseUrl: 'http://192.168.0.40:3333/api/v1',
+        baseUrl: 'http://192.168.121.131:3333/api/v1',
         connectTimeout: 5000,
       ),
     ),
