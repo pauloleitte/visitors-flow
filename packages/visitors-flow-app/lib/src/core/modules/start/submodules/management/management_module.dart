@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'modules/ceremony/ceremony_module.dart';
+import 'modules/departament/departament_module.dart';
 import 'modules/member/member.module.dart';
 import 'modules/notice/notice.module.dart';
 import 'modules/visitors/visitor_module.dart';
@@ -28,6 +29,10 @@ class ManagementModule extends Module {
     ModuleRoute(
       '/member',
       module: MemberModule(),
+    ),
+    ModuleRoute(
+      '/departament',
+      module: DepartamentModule(),
     ),
   ];
 }

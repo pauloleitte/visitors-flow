@@ -33,6 +33,38 @@ mixin _$CeremonyController on _CeremonyControllerBase, Store {
     });
   }
 
+  late final _$visitorsAtom =
+      Atom(name: '_CeremonyControllerBase.visitors', context: context);
+
+  @override
+  List<VisitorModel> get visitors {
+    _$visitorsAtom.reportRead();
+    return super.visitors;
+  }
+
+  @override
+  set visitors(List<VisitorModel> value) {
+    _$visitorsAtom.reportWrite(value, super.visitors, () {
+      super.visitors = value;
+    });
+  }
+
+  late final _$noticesAtom =
+      Atom(name: '_CeremonyControllerBase.notices', context: context);
+
+  @override
+  List<NoticeModel> get notices {
+    _$noticesAtom.reportRead();
+    return super.notices;
+  }
+
+  @override
+  set notices(List<NoticeModel> value) {
+    _$noticesAtom.reportWrite(value, super.notices, () {
+      super.notices = value;
+    });
+  }
+
   late final _$busyAtom =
       Atom(name: '_CeremonyControllerBase.busy', context: context);
 
@@ -69,6 +101,8 @@ mixin _$CeremonyController on _CeremonyControllerBase, Store {
   String toString() {
     return '''
 ceremony: ${ceremony},
+visitors: ${visitors},
+notices: ${notices},
 busy: ${busy},
 ceremonies: ${ceremonies},
 model: ${model}

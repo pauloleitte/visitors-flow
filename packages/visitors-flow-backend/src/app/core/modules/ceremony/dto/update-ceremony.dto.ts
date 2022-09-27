@@ -3,4 +3,5 @@ export class UpdateCeremonyDTO {;
   description?: string;
   date?: string;
   visitors?: string[];
+  notices?: string[];
 }

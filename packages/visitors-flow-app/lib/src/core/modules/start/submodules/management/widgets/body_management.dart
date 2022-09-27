@@ -69,6 +69,13 @@ class _BodyManagementState extends State<BodyManagement> {
                   color: Colors.white,
                 ),
                 AppRoutes.NOTICE),
+            getCardItem(
+                'Departamentos',
+                const Icon(
+                  Icons.people_alt_outlined,
+                  color: Colors.white,
+                ),
+                AppRoutes.DEPARTAMENT),
           ],
         ),
       ),

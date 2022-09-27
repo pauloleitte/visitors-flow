@@ -10,6 +10,7 @@ import { HealthModule } from './core/modules/health/health.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { NoticeModule } from './core/modules/notice/notice.module';
 import { MemberModule } from './core/modules/member/member.module';
+import { DepartamentModule } from './core/modules/departament/departament.module';
 @Module({
   imports: [
     AuthModule,
@@ -24,6 +25,7 @@ import { MemberModule } from './core/modules/member/member.module';
     CeremonyModule,
     NoticeModule,
     MemberModule,
+    DepartamentModule
   ],
   controllers: [AppController],
   providers: [AppService],
