@@ -62,6 +62,7 @@ export class UserService {
       }
       throw new BadRequestException('user does not exist');
     } catch (e) {
+      console.log(e)
       throw new InternalServerErrorException(e);
     }
   }

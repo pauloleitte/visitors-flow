@@ -1,8 +1,24 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
+import { Roles } from '../../auth/decorators/role.decorator';
+import { Role } from '../../auth/enums/role.enum';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
+import { RoleGuard } from '../../auth/guards/role.guard';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { UserService } from '../services/user.service';
 
+
+@Roles(Role.Admin)
+@UseGuards(JwtAuthGuard, RoleGuard)
 @Controller('users')
 export class UserController {
   constructor(private readonly service: UserService) {}
