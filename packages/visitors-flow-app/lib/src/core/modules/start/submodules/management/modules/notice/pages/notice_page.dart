@@ -15,13 +15,22 @@ class _NoticePageState extends State<NoticePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Avisos',
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back,
+              color: Theme.of(context).colorScheme.secondary),
+          onPressed: () => Modular.to.navigate(AppRoutes.MANAGEMENT),
+        ),
+      ),
       body: const BodyNotice(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Modular.to.pushNamed(AppRoutes.NOTICE_FORM);
         },
-        backgroundColor: Theme.of(context).primaryColor,
-        child: const Icon(Icons.add, color: Colors.white),
+        child: const Icon(Icons.add),
       ),
     );
   }

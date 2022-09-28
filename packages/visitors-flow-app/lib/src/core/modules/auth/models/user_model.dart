@@ -4,8 +4,10 @@ class UserModel {
   String? email;
   String? phone;
   String? password;
+  List<String>? roles;
 
-  UserModel({this.sId, this.name, this.email, this.phone, this.password});
+  UserModel(
+      {this.sId, this.name, this.email, this.phone, this.password, this.roles});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];

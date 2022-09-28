@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-Widget subTitle({required String title}) {
+Widget subTitle({required String title, required BuildContext context}) {
   return Row(
     children: [
       Padding(
         padding: const EdgeInsets.only(top: 6.0),
         child: Text(
           title,
-          style: const TextStyle(
+          style: TextStyle(
               fontSize: 24,
-              color: Color(0xff0a1034),
-              fontWeight: FontWeight.w200),
+              color: Theme.of(context).colorScheme.secondary,
+              fontWeight: FontWeight.bold),
         ),
       ),
     ],

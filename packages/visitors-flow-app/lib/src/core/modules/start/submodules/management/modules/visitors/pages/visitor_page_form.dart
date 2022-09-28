@@ -27,27 +27,15 @@ class _VisitorPageFormState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(
+          title: const Text(
             'Visitante',
-            style: TextStyle(
-                color: Theme.of(context).primaryColor,
-                fontWeight: FontWeight.bold),
           ),
-          backgroundColor: Colors.transparent,
           elevation: 0,
-          iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
-          // leading: IconButton(
-          //   icon: const Icon(
-          //     Icons.arrow_back,
-          //   ),
-          //   onPressed: () => Modular.to.navigate(AppRoutes.VISITOR),
-          // ),
           actions: [
             ...(widget.visitor?.name != null
                 ? [
                     IconButton(
-                      icon: Icon(Icons.delete,
-                          color: Theme.of(context).primaryColor),
+                      icon: const Icon(Icons.delete),
                       onPressed: () async {
                         controller.visitor = widget.visitor!;
                         await controller.deleteVisitor();

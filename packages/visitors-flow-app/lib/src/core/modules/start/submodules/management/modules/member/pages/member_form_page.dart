@@ -28,19 +28,13 @@ class _MemberFormPageState
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
-          iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
-          // leading: IconButton(
-          //   icon: const Icon(
-          //     Icons.arrow_back,
-          //   ),
-          //   onPressed: () => Modular.to.navigate(AppRoutes.MEMBER),
-          // ),
           actions: [
             ...(widget.member?.name != null
                 ? [
                     IconButton(
-                      icon: Icon(Icons.delete,
-                          color: Theme.of(context).primaryColor),
+                      icon: const Icon(
+                        Icons.delete,
+                      ),
                       onPressed: () async {
                         controller.member = widget.member!;
                         await controller.deleteMembers();

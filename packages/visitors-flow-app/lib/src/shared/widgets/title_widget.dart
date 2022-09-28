@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-Widget buildTitle({required String title}) {
+Widget buildTitle({required String title, required BuildContext context}) {
   return Row(
     children: [
       Padding(
         padding: const EdgeInsets.only(top: 28.0),
         child: Text(
           title,
-          style: const TextStyle(
+          style: TextStyle(
               fontSize: 32,
-              color: Color(0xff0a1034),
+              color: Theme.of(context).primaryColor,
               fontWeight: FontWeight.bold),
         ),
       ),

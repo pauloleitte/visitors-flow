@@ -86,29 +86,17 @@ class _BodyNoticeFormState
                           },
                         ),
                       ),
-                      // CheckboxListTile(
-                      //   controlAffinity: ListTileControlAffinity.leading,
-                      //   title: const Text('Ativo'),
-                      //   value: controller.notice.isDone,
-                      //   onChanged: (value) {
-                      //     controller.notice.isDone = value;
-                      //   },
-                      // ),
                       const SizedBox(height: 20.0),
                       Container(
                         decoration: ThemeHelper().buttonBoxDecoration(context),
                         child: ElevatedButton(
-                          style: ThemeHelper().buttonStyle(),
+                          style: ThemeHelper().buttonStyle(context),
                           onPressed: controller.busy ? null : save,
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
                             child: Text(
                               "Salvar".toUpperCase(),
-                              style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
+                              style: ThemeHelper().buttonTextStyle(context),
                             ),
                           ),
                         ),

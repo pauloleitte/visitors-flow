@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../../../../../../shared/widgets/title_widget.dart';
 import '../../../../../config/app_routes.dart';
 import '../controllers/configuration/configuration_controller.dart';
 
@@ -37,10 +36,6 @@ class _BodyConfigurationState
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              buildTitle(title: 'Configurações'),
-              const SizedBox(
-                height: 10,
-              ),
               Card(
                 child: Column(
                   children: [
@@ -79,7 +74,7 @@ class _BodyConfigurationState
                               color: Theme.of(context).primaryColor,
                             ),
                             onTap: () {
-                              Modular.to.navigate(AppRoutes.CONFIG_PROFILE,
+                              Modular.to.pushNamed(AppRoutes.CONFIG_PROFILE,
                                   arguments: controller.model);
                             },
                           ),

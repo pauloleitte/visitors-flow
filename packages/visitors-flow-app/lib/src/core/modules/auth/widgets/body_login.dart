@@ -1,9 +1,7 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../config/app_routes.dart';
 import '../../../config/theme_helper.dart';
 import '../controllers/login/login_controller.dart';
 
@@ -84,41 +82,38 @@ class _BodyLoginState extends ModularState<BodyLogin, LoginController> {
                                 decoration:
                                     ThemeHelper().buttonBoxDecoration(context),
                                 child: ElevatedButton(
-                                  style: ThemeHelper().buttonStyle(),
+                                  style: ThemeHelper().buttonStyle(context),
                                   onPressed: controller.busy ? null : login,
                                   child: Padding(
                                     padding: const EdgeInsets.fromLTRB(
                                         40, 10, 40, 10),
                                     child: Text(
                                       'Entrar'.toUpperCase(),
-                                      style: const TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
+                                      style: ThemeHelper().buttonTextStyle(context)
                                     ),
                                   ),
                                 ),
                               ),
-                              Container(
-                                margin:
-                                    const EdgeInsets.fromLTRB(10, 20, 10, 20),
-                                //child: Text('Don\'t have an account? Create'),
-                                child: Text.rich(TextSpan(children: [
-                                  const TextSpan(
-                                      text: "Não possui uma conta? "),
-                                  TextSpan(
-                                    text: 'Criar',
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () => {
-                                            Modular.to.pushNamed(
-                                                AppRoutes.AUTH_SIGNUP)
-                                          },
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Theme.of(context).primaryColor),
-                                  ),
-                                ])),
-                              ),
+                              // Container(
+                              //   margin:
+                              //       const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                              //   //child: Text('Don\'t have an account? Create'),
+                              //   child: Text.rich(TextSpan(children: [
+                              //     const TextSpan(
+                              //         text: "Não possui uma conta? "),
+                              //     TextSpan(
+                              //       text: 'Criar',
+                              //       recognizer: TapGestureRecognizer()
+                              //         ..onTap = () => {
+                              //               Modular.to.pushNamed(
+                              //                   AppRoutes.AUTH_SIGNUP)
+                              //             },
+                              //       style: TextStyle(
+                              //           fontWeight: FontWeight.bold,
+                              //           color: Theme.of(context).primaryColor),
+                              //     ),
+                              //   ])),
+                              // ),
                             ],
                           )),
                     ],

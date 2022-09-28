@@ -16,9 +16,9 @@ class NoticeItem extends StatelessWidget {
         leading: CircleAvatar(
           radius: 25,
           backgroundColor: Theme.of(context).primaryColor,
-          child: const Icon(
+          child: Icon(
             Icons.notifications_outlined,
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.secondary,
           ),
         ),
         title: Text(
@@ -26,7 +26,7 @@ class NoticeItem extends StatelessWidget {
           style: const TextStyle(color: Colors.black),
         ),
         onTap: () {
-          Modular.to.navigate(AppRoutes.NOTICE_FORM, arguments: notice);
+          Modular.to.pushNamed(AppRoutes.NOTICE_FORM, arguments: notice);
         },
         subtitle: Text(
           '${notice.description}',

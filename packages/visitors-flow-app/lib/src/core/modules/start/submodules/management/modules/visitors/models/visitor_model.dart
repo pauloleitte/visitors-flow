@@ -1,5 +1,3 @@
-import 'package:visitors_flow_app/src/core/modules/start/submodules/management/modules/ceremony/models/ceremony_model.dart';
-
 class ResponseVisitors {
   late List<VisitorModel> visitors;
   int? count;

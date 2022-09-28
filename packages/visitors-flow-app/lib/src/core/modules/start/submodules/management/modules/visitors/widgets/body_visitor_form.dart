@@ -1,13 +1,8 @@
 import 'package:brasil_fields/brasil_fields.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:visitors_flow_app/src/core/modules/start/submodules/management/modules/ceremony/models/ceremony_model.dart';
-import 'package:visitors_flow_app/src/shared/widgets/multi_selection_widget.dart';
-
-import '../../../../../../../config/app_routes.dart';
 import '../../../../../../../config/theme_helper.dart';
 import '../controllers/visitor_controller.dart';
 import '../models/visitor_model.dart';
@@ -139,17 +134,13 @@ class _BodyVisitorFormState
                       Container(
                         decoration: ThemeHelper().buttonBoxDecoration(context),
                         child: ElevatedButton(
-                          style: ThemeHelper().buttonStyle(),
+                          style: ThemeHelper().buttonStyle(context),
                           onPressed: controller.busy ? null : save,
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
                             child: Text(
                               "Salvar".toUpperCase(),
-                              style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
+                              style: ThemeHelper().buttonTextStyle(context),
                             ),
                           ),
                         ),

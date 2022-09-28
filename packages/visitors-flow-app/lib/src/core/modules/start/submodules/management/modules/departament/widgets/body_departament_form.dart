@@ -2,13 +2,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:intl/intl.dart';
 import 'package:visitors_flow_app/src/core/config/app_routes.dart';
 import 'package:visitors_flow_app/src/core/modules/start/submodules/management/modules/member/models/member_model.dart';
 import '../../../../../../../../shared/widgets/multi_selection_widget.dart';
 import '../../../../../../../config/theme_helper.dart';
 import '../../notice/models/notice_model.dart';
-import '../../visitors/models/visitor_model.dart';
 import '../controllers/departament_controller.dart';
 import '../models/departament_model.dart';
 
@@ -254,24 +252,19 @@ class _BodyDepartamentFormState
                     },
                   ),
                 ),
-                const SizedBox(height: 30.0),
-                _buildListMembers(),
-                _buildListNotices(),
+                // _buildListMembers(),
+                // _buildListNotices(),
                 const SizedBox(height: 20.0),
                 Container(
                   decoration: ThemeHelper().buttonBoxDecoration(context),
                   child: ElevatedButton(
-                    style: ThemeHelper().buttonStyle(),
+                    style: ThemeHelper().buttonStyle(context),
                     onPressed: controller.busy ? null : save,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
                       child: Text(
                         "Salvar".toUpperCase(),
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                        style: ThemeHelper().buttonTextStyle(context),
                       ),
                     ),
                   ),

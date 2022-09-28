@@ -28,19 +28,11 @@ class _CeremonyFormPageState
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
-          iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
-          // leading: IconButton(
-          //   icon: const Icon(
-          //     Icons.arrow_back,
-          //   ),
-          //   onPressed: () => Modular.to.navigate(AppRoutes.CEREMONY),
-          // ),
           actions: [
             ...(widget.ceremony?.name != null
                 ? [
                     IconButton(
-                      icon: Icon(Icons.delete,
-                          color: Theme.of(context).primaryColor),
+                      icon: const Icon(Icons.delete),
                       onPressed: () async {
                         controller.ceremony = widget.ceremony!;
                         await controller.deleteCeremony();

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:visitors_flow_app/src/core/config/app_routes.dart';
-import 'package:visitors_flow_app/src/shared/widgets/title_widget.dart';
 
 class BodyManagement extends StatefulWidget {
   const BodyManagement({super.key});
@@ -17,7 +16,10 @@ class _BodyManagementState extends State<BodyManagement> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListTile(
-            title: Text(name),
+            title: Text(
+              name,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
             leading: CircleAvatar(
               radius: 25,
               backgroundColor: Theme.of(context).primaryColor,
@@ -37,43 +39,39 @@ class _BodyManagementState extends State<BodyManagement> {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
-            buildTitle(title: 'Gerenciamento'),
-            const SizedBox(
-              height: 10,
-            ),
             getCardItem(
                 'Membros',
-                const Icon(
+                Icon(
                   Icons.contact_page_outlined,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
                 AppRoutes.MEMBER),
             getCardItem(
                 'Cultos',
-                const Icon(
+                Icon(
                   Icons.church_outlined,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
                 AppRoutes.CEREMONY),
             getCardItem(
                 'Visitantes',
-                const Icon(
+                Icon(
                   Icons.person_outline,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
                 AppRoutes.VISITOR),
             getCardItem(
                 'Avisos',
-                const Icon(
+                Icon(
                   Icons.notifications_outlined,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
                 AppRoutes.NOTICE),
             getCardItem(
                 'Departamentos',
-                const Icon(
+                Icon(
                   Icons.people_alt_outlined,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
                 AppRoutes.DEPARTAMENT),
           ],

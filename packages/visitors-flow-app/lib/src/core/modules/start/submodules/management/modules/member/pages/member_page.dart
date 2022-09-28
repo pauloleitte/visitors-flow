@@ -15,13 +15,22 @@ class _MemeberPageState extends State<MemeberPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Membros',
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back,
+              color: Theme.of(context).colorScheme.secondary),
+          onPressed: () => Modular.to.navigate(AppRoutes.MANAGEMENT),
+        ),
+      ),
       body: const BodyMember(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Modular.to.pushNamed(AppRoutes.MEMBER_FORM);
         },
-        backgroundColor: Theme.of(context).primaryColor,
-        child: const Icon(Icons.add, color: Colors.white),
+        child: const Icon(Icons.add),
       ),
     );
   }

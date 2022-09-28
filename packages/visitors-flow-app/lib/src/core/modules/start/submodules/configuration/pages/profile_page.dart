@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-
-import '../../../../../config/app_routes.dart';
 import '../../../../auth/models/user_model.dart';
 import '../widgets/body_profile.dart';
 
@@ -18,16 +15,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Meu Perfil',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back,
-              color: Theme.of(context).colorScheme.secondary),
-          onPressed: () => Modular.to.navigate(AppRoutes.CONFIG),
-        ),
+        title: const Text('Meu Perfil')
       ),
       body: BodyProfile(user: widget.user),
     );

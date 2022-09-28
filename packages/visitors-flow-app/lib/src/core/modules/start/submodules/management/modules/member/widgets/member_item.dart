@@ -16,9 +16,9 @@ class MemberItem extends StatelessWidget {
         leading: CircleAvatar(
           radius: 25,
           backgroundColor: Theme.of(context).primaryColor,
-          child: const Icon(
+          child:  Icon(
             Icons.notifications_outlined,
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.secondary,
           ),
         ),
         title: Text(
@@ -26,7 +26,7 @@ class MemberItem extends StatelessWidget {
           style: const TextStyle(color: Colors.black),
         ),
         onTap: () {
-          Modular.to.navigate(AppRoutes.MEMBER_FORM, arguments: member);
+          Modular.to.pushNamed(AppRoutes.MEMBER_FORM, arguments: member);
         },
         subtitle: Text(
           '${member.job}',

@@ -12,8 +12,13 @@ class ConfigurationPage extends StatefulWidget {
 class _ConfigurationPageState extends State<ConfigurationPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: BodyConfiguration(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Configurações',
+        ),
+      ),
+      body: const BodyConfiguration(),
     );
   }
 }

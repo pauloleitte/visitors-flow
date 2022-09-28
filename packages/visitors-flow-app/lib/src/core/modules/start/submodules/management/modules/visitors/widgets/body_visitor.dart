@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
-import '../../../../../../../../shared/widgets/title_widget.dart';
 import '../controllers/visitor_controller.dart';
 import 'visitor_item.dart';
 
@@ -53,10 +51,6 @@ class _BodyVisitorState extends ModularState<BodyVisitor, VisitorController> {
                     padding: const EdgeInsets.all(10.0),
                     child: Column(
                       children: [
-                        buildTitle(title: 'Visitantes'),
-                        const SizedBox(
-                          height: 10,
-                        ),
                         Expanded(
                           child: RefreshIndicator(
                             onRefresh: () async {

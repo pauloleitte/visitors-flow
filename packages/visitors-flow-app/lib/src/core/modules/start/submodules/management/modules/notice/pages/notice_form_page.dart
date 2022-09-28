@@ -17,7 +17,6 @@ class NoticeFormPage extends StatefulWidget {
 class _NoticeFormPageState
     extends ModularState<NoticeFormPage, NoticeController> {
   @override
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,19 +29,13 @@ class _NoticeFormPageState
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
-          iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
-          // leading: IconButton(
-          //   icon: const Icon(
-          //     Icons.arrow_back,
-          //   ),
-          //   onPressed: () => Modular.to.navigate(AppRoutes.NOTICE),
-          // ),
           actions: [
             ...(widget.notice?.name != null
                 ? [
                     IconButton(
-                      icon: Icon(Icons.delete,
-                          color: Theme.of(context).primaryColor),
+                      icon: const Icon(
+                        Icons.delete,
+                      ),
                       onPressed: () async {
                         controller.notice = widget.notice!;
                         await controller.deleteNotice();

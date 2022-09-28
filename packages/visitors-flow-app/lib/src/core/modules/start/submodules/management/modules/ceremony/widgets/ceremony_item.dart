@@ -18,9 +18,9 @@ class CeremonyItem extends StatelessWidget {
         leading: CircleAvatar(
           radius: 25,
           backgroundColor: Theme.of(context).primaryColor,
-          child: const Icon(
+          child: Icon(
             Icons.church,
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.secondary,
           ),
         ),
         title: Text(
@@ -28,7 +28,7 @@ class CeremonyItem extends StatelessWidget {
           style: const TextStyle(color: Colors.black),
         ),
         onTap: () {
-          Modular.to.navigate(AppRoutes.CEREMONY_FORM, arguments: ceremony);
+          Modular.to.pushNamed(AppRoutes.CEREMONY_FORM, arguments: ceremony);
         },
         subtitle: Text(
           DateFormat('dd/MM/yyyy').format(ceremony.date!),

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
-import '../../../../../../../../shared/widgets/title_widget.dart';
 import '../controllers/notice_controller.dart';
 import 'notice_item.dart';
 
@@ -39,10 +37,6 @@ class _BodyNoticeState extends ModularState<BodyNotice, NoticeController> {
                     padding: const EdgeInsets.all(10.0),
                     child: Column(
                       children: [
-                        buildTitle(title: 'Avisos'),
-                        const SizedBox(
-                          height: 10,
-                        ),
                         Expanded(
                           child: RefreshIndicator(
                             onRefresh: () async {

@@ -78,17 +78,13 @@ class _BodySecurityState
                 Container(
                   decoration: ThemeHelper().buttonBoxDecoration(context),
                   child: ElevatedButton(
-                    style: ThemeHelper().buttonStyle(),
+                    style: ThemeHelper().buttonStyle(context),
                     onPressed: controller.busy ? null : save,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
                       child: Text(
                         "Alterar".toUpperCase(),
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                        style: ThemeHelper().buttonTextStyle(context),
                       ),
                     ),
                   ),

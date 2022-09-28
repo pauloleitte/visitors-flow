@@ -22,9 +22,9 @@ class _VisitorItemState extends ModularState<VisitorItem, VisitorController> {
         leading: CircleAvatar(
           radius: 25,
           backgroundColor: Theme.of(context).primaryColor,
-          child: const Icon(
+          child: Icon(
             Icons.person,
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.secondary,
           ),
         ),
         title: Text(
@@ -33,7 +33,7 @@ class _VisitorItemState extends ModularState<VisitorItem, VisitorController> {
         ),
         onTap: () {
           Modular.to
-              .navigate(AppRoutes.VISITOR_FORM, arguments: widget.visitor);
+              .pushNamed(AppRoutes.VISITOR_FORM, arguments: widget.visitor);
         },
         subtitle: Text(
           '${widget.visitor.email}',

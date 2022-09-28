@@ -46,8 +46,8 @@ class _BodySignupState extends ModularState<BodySignup, SignupController> {
             padding: const EdgeInsets.all(10.0),
             child: Column(
               children: [
-                buildTitle(title: 'Crie sua conta'),
-                subTitle(title: 'É fácil e rápido'),
+                buildTitle(title: 'Crie sua conta', context: context),
+                subTitle(title: 'É fácil e rápido', context: context),
                 Padding(
                   padding: const EdgeInsets.only(top: 25),
                   child: Form(
@@ -135,18 +135,14 @@ class _BodySignupState extends ModularState<BodySignup, SignupController> {
                           decoration:
                               ThemeHelper().buttonBoxDecoration(context),
                           child: ElevatedButton(
-                            style: ThemeHelper().buttonStyle(),
+                            style: ThemeHelper().buttonStyle(context),
                             onPressed: controller.busy ? null : signup,
                             child: Padding(
                               padding:
                                   const EdgeInsets.fromLTRB(40, 10, 40, 10),
                               child: Text(
                                 "Cadastrar".toUpperCase(),
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
+                                style: ThemeHelper().buttonTextStyle(context),
                               ),
                             ),
                           ),

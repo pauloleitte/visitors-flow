@@ -17,9 +17,9 @@ class DepartamentItem extends StatelessWidget {
         leading: CircleAvatar(
           radius: 25,
           backgroundColor: Theme.of(context).primaryColor,
-          child: const Icon(
+          child: Icon(
             Icons.people_alt_outlined,
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.secondary,
           ),
         ),
         title: Text(

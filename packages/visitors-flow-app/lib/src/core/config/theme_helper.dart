@@ -1,23 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class ThemeHelper {
-  final primaryColor = const MaterialColor(
-    0xFF000000,
-    <int, Color>{
-      50: Color(0xFF000000),
-      100: Color(0xFF000000),
-      200: Color(0xFF000000),
-      300: Color(0xFF000000),
-      400: Color(0xFF000000),
-      500: Color(0xFF000000),
-      600: Color(0xFF000000),
-      700: Color(0xFF000000),
-      800: Color(0xFF000000),
-      900: Color(0xFF000000),
-    },
-  );
+import 'app_constants.dart';
 
+class ThemeHelper {
   InputDecoration textInputDecoration(
       [String lableText = "", String hintText = ""]) {
     return InputDecoration(
@@ -26,15 +13,31 @@ class ThemeHelper {
       fillColor: Colors.white,
       filled: true,
       contentPadding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-      focusedBorder:
-          const OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+      focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: HexColor(AppConstants.PRIMARY_COLOR))),
       enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey.shade400)),
+          borderSide: BorderSide(color: HexColor(AppConstants.PRIMARY_COLOR))),
       errorBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.red, width: 2.0)),
       focusedErrorBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.red, width: 2.0)),
     );
+  }
+
+  AppBarTheme appBarTheme() {
+    return AppBarTheme(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        actionsIconTheme:
+            IconThemeData(color: HexColor(AppConstants.SECONDARY_COLOR)),
+        iconTheme: IconThemeData(color: HexColor(AppConstants.SECONDARY_COLOR)),
+        centerTitle: true,
+        titleTextStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 24,
+          color: HexColor(AppConstants.PRIMARY_COLOR),
+        ));
   }
 
   BoxDecoration inputBoxDecorationShaddow() {
@@ -63,32 +66,46 @@ class ThemeHelper {
     );
   }
 
-  ButtonStyle buttonStyle() {
+  ButtonStyle buttonStyle(BuildContext context) {
     return ButtonStyle(
       minimumSize: MaterialStateProperty.all(const Size.fromRadius(10)),
-      backgroundColor: MaterialStateProperty.all(HexColor('#000000')),
+      backgroundColor:
+          MaterialStateProperty.all(Theme.of(context).primaryColor),
     );
   }
 
+  TextStyle buttonTextStyle(BuildContext context) {
+    return TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        color: Theme.of(context).colorScheme.secondary);
+  }
+
+  FloatingActionButtonThemeData floatingActionButtonThemeData() {
+    return FloatingActionButtonThemeData(
+        backgroundColor: HexColor(AppConstants.PRIMARY_COLOR),
+        foregroundColor: HexColor(AppConstants.SECONDARY_COLOR));
+  }
+
   IconThemeData iconThemeData() {
-    return const IconThemeData(
-      color: Colors.white,
+    return IconThemeData(
+      color: HexColor(AppConstants.SECONDARY_COLOR),
     );
   }
 
   SnackBarThemeData snackBarThemeData() {
-    return const SnackBarThemeData(
+    return SnackBarThemeData(
         elevation: 2,
-        backgroundColor: Colors.white,
+        backgroundColor: HexColor(AppConstants.SECONDARY_COLOR),
         contentTextStyle: TextStyle(
-          color: Colors.black,
-        ));
+            color: HexColor(AppConstants.PRIMARY_COLOR),
+            fontWeight: FontWeight.bold));
   }
 
   ButtonThemeData buttonThemeData() {
     return ButtonThemeData(
         disabledColor: Colors.grey.shade400,
-        buttonColor: HexColor('#000000'),
+        buttonColor: HexColor(AppConstants.PRIMARY_COLOR),
         textTheme: ButtonTextTheme.accent,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
@@ -97,8 +114,8 @@ class ThemeHelper {
 
   ColorScheme colorScheme() {
     return ColorScheme.fromSwatch(
-      primarySwatch: primaryColor,
-      accentColor: HexColor('#FFFFFF'),
+      primarySwatch: AppConstants.PRIMARY_COLOR_SWATCH,
+      accentColor: HexColor(AppConstants.SECONDARY_COLOR),
       errorColor: Colors.red,
     );
   }

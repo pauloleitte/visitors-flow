@@ -14,13 +14,17 @@ class _DepartamentPageState extends State<DepartamentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Departamentos',
+        ),
+      ),
       body: const BodyDepartament(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Modular.to.pushNamed(AppRoutes.DEPARTAMENT_FORM);
         },
-        backgroundColor: Theme.of(context).primaryColor,
-        child: const Icon(Icons.add, color: Colors.white),
+        child: const Icon(Icons.add),
       ),
     );
   }

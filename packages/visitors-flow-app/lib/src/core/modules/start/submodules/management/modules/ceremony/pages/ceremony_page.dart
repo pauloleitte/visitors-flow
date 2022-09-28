@@ -14,13 +14,17 @@ class _CeremonyPageState extends State<CeremonyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Cultos',
+        ),
+      ),
       body: const BodyCeremony(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Modular.to.pushNamed(AppRoutes.CEREMONY_FORM);
         },
-        backgroundColor: Theme.of(context).primaryColor,
-        child: const Icon(Icons.add, color: Colors.white),
+        child: const Icon(Icons.add),
       ),
     );
   }

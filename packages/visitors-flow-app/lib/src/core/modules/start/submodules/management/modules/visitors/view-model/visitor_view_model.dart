@@ -1,5 +1,3 @@
-import '../../ceremony/models/ceremony_model.dart';
-
 class VisitorViewModel {
   String? id;
   String? name;
