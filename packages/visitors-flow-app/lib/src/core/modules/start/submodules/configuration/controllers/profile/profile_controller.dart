@@ -1,8 +1,6 @@
 import 'package:asuka/asuka.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:visitors_flow_app/src/core/config/app_routes.dart';
 
 import '../../../../../../config/app_messages.dart';
 import '../../../../../auth/models/user_model.dart';

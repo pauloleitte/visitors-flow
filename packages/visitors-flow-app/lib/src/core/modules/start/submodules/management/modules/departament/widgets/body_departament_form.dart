@@ -107,41 +107,43 @@ class _BodyDepartamentFormState
             height: 100,
             child: ListView.builder(
               itemCount: controller.departament.notices!.length,
-              itemBuilder: (context, index) {
+              itemBuilder: (context, i) {
+                final model = controller.departament.notices![i];
                 return Card(
-                  color: Theme.of(context).colorScheme.secondary,
+                  elevation: 10,
                   child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 25,
+                      backgroundColor: Theme.of(context).primaryColor,
+                      child: Icon(
+                        Icons.notifications,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
                     title: Text(
-                      controller.departament.notices![index].name!,
+                      model.name!,
                       style: const TextStyle(color: Colors.black),
                     ),
                     onTap: () {
-                      Modular.to.pushNamed(AppRoutes.NOTICE_FORM,
-                          arguments: controller.departament.notices![index]);
+                      Modular.to
+                          .navigate(AppRoutes.VISITOR_FORM, arguments: model);
                     },
+                    subtitle: Text(
+                      '${model.description}',
+                      style: const TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
                   ),
                 );
+                ;
               },
             ),
           ),
         ],
       );
-    } else {
-      return Container(
-        margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
-        child: Text.rich(TextSpan(children: [
-          const TextSpan(text: "Clique aqui para cadastar um "),
-          TextSpan(
-            text: 'aviso',
-            recognizer: TapGestureRecognizer()
-              ..onTap = () => {Modular.to.pushNamed(AppRoutes.NOTICE_FORM)},
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).primaryColor),
-          ),
-        ])),
-      );
     }
+    return Container();
   }
 
   Widget _buildListMembers() {
@@ -167,18 +169,32 @@ class _BodyDepartamentFormState
             height: 100,
             child: ListView.builder(
               itemCount: controller.departament.members!.length,
-              itemBuilder: (context, index) {
+              itemBuilder: (context, i) {
+                final model = controller.departament.members![i];
                 return Card(
-                  color: Theme.of(context).colorScheme.secondary,
                   child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 25,
+                      backgroundColor: Theme.of(context).primaryColor,
+                      child: Icon(
+                        Icons.person,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
                     title: Text(
-                      controller.departament.members![index].name!,
+                      model.name!,
                       style: const TextStyle(color: Colors.black),
                     ),
                     onTap: () {
-                      Modular.to.pushNamed(AppRoutes.MEMBER_FORM,
-                          arguments: controller.departament.members![index]);
+                      Modular.to
+                          .pushNamed(AppRoutes.MEMBER_FORM, arguments: model);
                     },
+                    subtitle: Text(
+                      '${model.phone}',
+                      style: const TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
                   ),
                 );
               },
@@ -187,21 +203,7 @@ class _BodyDepartamentFormState
         ],
       );
     } else {
-      return Container(
-        margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
-        //child: Text('Don\'t have an account? Create'),
-        child: Text.rich(TextSpan(children: [
-          const TextSpan(text: "Clique aqui para cadastar um "),
-          TextSpan(
-            text: 'membro',
-            recognizer: TapGestureRecognizer()
-              ..onTap = () => {Modular.to.pushNamed(AppRoutes.VISITOR_FORM)},
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).primaryColor),
-          ),
-        ])),
-      );
+      return Container();
     }
   }
 
@@ -252,8 +254,8 @@ class _BodyDepartamentFormState
                     },
                   ),
                 ),
-                // _buildListMembers(),
-                // _buildListNotices(),
+                _buildListMembers(),
+                _buildListNotices(),
                 const SizedBox(height: 20.0),
                 Container(
                   decoration: ThemeHelper().buttonBoxDecoration(context),

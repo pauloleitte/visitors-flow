@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:visitors_flow_app/src/core/config/app_constants.dart';
 import '../../../../../config/app_routes.dart';
 import '../controllers/configuration/configuration_controller.dart';
 
@@ -37,6 +39,7 @@ class _BodyConfigurationState
           child: Column(
             children: [
               Card(
+                color: Theme.of(context).primaryColor,
                 child: Column(
                   children: [
                     Padding(
@@ -48,12 +51,12 @@ class _BodyConfigurationState
                                 width: 50,
                                 child: CircleAvatar(
                                   backgroundColor:
-                                      Theme.of(context).primaryColor,
+                                      Theme.of(context).colorScheme.secondary,
                                   radius: 50,
-                                  child: const Icon(
+                                  child: Icon(
                                     Icons.person,
                                     size: 50,
-                                    color: Colors.white,
+                                    color: Theme.of(context).primaryColor,
                                   ),
                                 )),
                             Padding(
@@ -62,16 +65,22 @@ class _BodyConfigurationState
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
-                                      color: Theme.of(context).primaryColor)),
+                                      color: HexColor(AppConstants
+                                          .SCAFFOLD_BACKGROUND_COLOR))),
                             ),
                           ]),
                           const SizedBox(height: 10.0),
                           // list item menus
                           ListTile(
-                            title: const Text('Editar dados do perfil'),
+                            title: Text('Editar dados do perfil',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: HexColor(AppConstants
+                                        .SCAFFOLD_BACKGROUND_COLOR))),
                             leading: Icon(
                               Icons.person,
-                              color: Theme.of(context).primaryColor,
+                              color: Theme.of(context).colorScheme.secondary,
                             ),
                             onTap: () {
                               Modular.to
@@ -84,19 +93,29 @@ class _BodyConfigurationState
                             },
                           ),
                           ListTile(
-                            title: const Text('Segurança'),
+                            title: Text('Segurança',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: HexColor(AppConstants
+                                        .SCAFFOLD_BACKGROUND_COLOR))),
                             leading: Icon(Icons.security,
-                                color: Theme.of(context).primaryColor),
+                                color: Theme.of(context).colorScheme.secondary),
                             onTap: () {
                               Modular.to.pushNamed(AppRoutes.CONFIG_SECURITY,
                                   arguments: controller.model);
                             },
                           ),
                           ListTile(
-                            title: const Text('Sair'),
+                            title: Text('Sair',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: HexColor(AppConstants
+                                        .SCAFFOLD_BACKGROUND_COLOR))),
                             leading: Icon(
                               Icons.exit_to_app,
-                              color: Theme.of(context).primaryColor,
+                              color: Theme.of(context).colorScheme.secondary,
                             ),
                             onTap: () async {
                               await controller.logout();
