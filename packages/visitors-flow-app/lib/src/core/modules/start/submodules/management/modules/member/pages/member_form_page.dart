@@ -28,6 +28,12 @@ class _MemberFormPageState
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+            ),
+            onPressed: () => Modular.to.navigate(AppRoutes.MEMBER),
+          ),
           actions: [
             ...(widget.member?.name != null
                 ? [

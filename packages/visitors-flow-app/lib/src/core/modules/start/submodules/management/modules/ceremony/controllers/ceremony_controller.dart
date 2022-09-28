@@ -126,6 +126,7 @@ abstract class _CeremonyControllerBase with Store {
       }, (_) async {
         Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.EXCLUSION_MESSAGE)));
+        Modular.to.navigate(AppRoutes.CEREMONY);
       });
     } catch (e) {
       busy = false;
@@ -148,6 +149,7 @@ abstract class _CeremonyControllerBase with Store {
       }, (_) async {
         Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.UPDATE_MESSAGE)));
+        Modular.to.navigate(AppRoutes.CEREMONY);
       });
     } catch (e) {
       busy = false;

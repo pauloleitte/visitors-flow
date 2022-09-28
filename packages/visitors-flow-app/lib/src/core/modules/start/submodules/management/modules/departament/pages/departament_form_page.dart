@@ -24,6 +24,12 @@ class _DepartamentFormPageState
             'Departamento',
           ),
           elevation: 0,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+            ),
+            onPressed: () => Modular.to.navigate(AppRoutes.DEPARTAMENT),
+          ),
           actions: [
             ...(widget.departament?.name != null
                 ? [

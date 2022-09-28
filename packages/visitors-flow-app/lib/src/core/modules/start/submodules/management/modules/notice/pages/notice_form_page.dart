@@ -29,6 +29,12 @@ class _NoticeFormPageState
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+            ),
+            onPressed: () => Modular.to.navigate(AppRoutes.NOTICE),
+          ),
           actions: [
             ...(widget.notice?.name != null
                 ? [

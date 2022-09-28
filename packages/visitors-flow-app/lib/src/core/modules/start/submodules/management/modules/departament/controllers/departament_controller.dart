@@ -148,6 +148,7 @@ abstract class _DepartamentControllerBase with Store {
       }, (_) async {
         Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.UPDATE_MESSAGE)));
+        Modular.to.navigate(AppRoutes.DEPARTAMENT);
       });
     } catch (e) {
       busy = false;

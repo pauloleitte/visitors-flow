@@ -31,6 +31,12 @@ class _VisitorPageFormState
             'Visitante',
           ),
           elevation: 0,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+            ),
+            onPressed: () => Modular.to.navigate(AppRoutes.VISITOR),
+          ),
           actions: [
             ...(widget.visitor?.name != null
                 ? [

@@ -18,11 +18,7 @@ class _BodyCeremonyState
   @override
   void initState() {
     super.initState();
-    _init();
-  }
-
-  _init() async {
-    await controller.getCeremonies();
+    _handleCeremonies();
   }
 
   _handleCeremonies() async {
@@ -46,11 +42,7 @@ class _BodyCeremonyState
           style: const TextStyle(color: Colors.black),
         ),
         onTap: () {
-          Modular.to
-              .pushNamed(AppRoutes.CEREMONY_FORM, arguments: ceremony)
-              .then((_) {
-            _init();
-          });
+          Modular.to.navigate(AppRoutes.CEREMONY_FORM, arguments: ceremony);
         },
         subtitle: Text(
           DateFormat('dd/MM/yyyy').format(ceremony.date!),

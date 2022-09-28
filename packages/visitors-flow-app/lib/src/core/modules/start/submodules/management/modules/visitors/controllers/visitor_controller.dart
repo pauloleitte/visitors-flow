@@ -115,6 +115,8 @@ abstract class _VisitorControllerBase with Store {
       }, (_) async {
         Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.UPDATE_MESSAGE)));
+
+        Modular.to.navigate(AppRoutes.VISITOR);
       });
     } catch (e) {
       busy = false;

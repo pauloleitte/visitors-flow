@@ -26,8 +26,8 @@ class _BodyCeremonyFormState
 
   @override
   void initState() {
-    super.initState();
     _init();
+    super.initState();
   }
 
   void _init() async {
@@ -296,7 +296,7 @@ class _BodyCeremonyFormState
                 Container(
                   decoration: ThemeHelper().buttonBoxDecoration(context),
                   child: ElevatedButton(
-                      style: ThemeHelper().buttonStyle(context),
+                    style: ThemeHelper().buttonStyle(context),
                     onPressed: controller.busy ? null : save,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),

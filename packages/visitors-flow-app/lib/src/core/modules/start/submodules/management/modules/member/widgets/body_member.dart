@@ -45,11 +45,7 @@ class _BodyMemberState extends ModularState<BodyMember, MemberController> {
           style: const TextStyle(color: Colors.black),
         ),
         onTap: () {
-          Modular.to
-              .pushNamed(AppRoutes.MEMBER_FORM, arguments: member)
-              .then((_) {
-            _init();
-          });
+          Modular.to.navigate(AppRoutes.MEMBER_FORM, arguments: member);
         },
         subtitle: Text(
           '${member.job}',

@@ -44,11 +44,7 @@ class _BodyNoticeState extends ModularState<BodyNotice, NoticeController> {
           style: const TextStyle(color: Colors.black),
         ),
         onTap: () {
-          Modular.to
-              .pushNamed(AppRoutes.NOTICE_FORM, arguments: notice)
-              .then((_) {
-            _init();
-          });
+          Modular.to.navigate(AppRoutes.NOTICE_FORM, arguments: notice);
         },
         subtitle: Text(
           '${notice.description}',

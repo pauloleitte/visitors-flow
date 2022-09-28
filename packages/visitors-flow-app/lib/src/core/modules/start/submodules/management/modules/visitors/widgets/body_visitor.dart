@@ -47,11 +47,7 @@ class _BodyVisitorState extends ModularState<BodyVisitor, VisitorController> {
           style: const TextStyle(color: Colors.black),
         ),
         onTap: () {
-          Modular.to
-              .pushNamed(AppRoutes.VISITOR_FORM, arguments: visitor)
-              .then((_) {
-            _handleVisitors();
-          });
+          Modular.to.navigate(AppRoutes.VISITOR_FORM, arguments: visitor);
         },
         subtitle: Text(
           '${visitor.email}',

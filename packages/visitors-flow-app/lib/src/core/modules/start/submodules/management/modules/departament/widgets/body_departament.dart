@@ -48,10 +48,7 @@ class _BodyDepartamentState
         ),
         onTap: () {
           Modular.to
-              .pushNamed(AppRoutes.DEPARTAMENT_FORM, arguments: departament)
-              .then((_) {
-            _init();
-          });
+              .navigate(AppRoutes.DEPARTAMENT_FORM, arguments: departament);
         },
         subtitle: Text(departament.description!,
             style: const TextStyle(
