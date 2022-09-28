@@ -92,7 +92,6 @@ abstract class _MemberControllerBase with Store {
       }, (_) async {
         Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.UPDATE_MESSAGE)));
-        Modular.to.navigate(AppRoutes.MEMBER);
       });
     } catch (e) {
       busy = false;

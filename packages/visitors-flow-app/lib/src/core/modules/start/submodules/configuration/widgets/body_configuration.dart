@@ -74,8 +74,13 @@ class _BodyConfigurationState
                               color: Theme.of(context).primaryColor,
                             ),
                             onTap: () {
-                              Modular.to.pushNamed(AppRoutes.CONFIG_PROFILE,
-                                  arguments: controller.model);
+                              Modular.to
+                                  .pushNamed(AppRoutes.CONFIG_PROFILE,
+                                      arguments: controller.model)
+                                  .then((_) {
+                                // you have come back to your Settings screen
+                                _getUser();
+                              });
                             },
                           ),
                           ListTile(

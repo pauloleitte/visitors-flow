@@ -43,7 +43,6 @@ abstract class _ProfileControllerBase with Store {
         await _userService.saveLocalDB(user);
         Asuka.showSnackBar(
             const SnackBar(content: Text(AppMessages.UPDATE_MESSAGE)));
-        Modular.to.navigate(AppRoutes.CONFIG);
       });
     } catch (e) {
       Asuka.showSnackBar(const SnackBar(

@@ -4,7 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:visitors_flow_app/src/core/modules/start/submodules/management/modules/departament/controllers/departament_controller.dart';
 import 'package:visitors_flow_app/src/core/modules/start/submodules/management/modules/departament/models/departament_model.dart';
 
-import 'departament_item.dart';
+import '../../../../../../../config/app_routes.dart';
 
 class BodyDepartament extends StatefulWidget {
   final DepartamentModel? departament;
@@ -19,15 +19,46 @@ class _BodyDepartamentState
   @override
   void initState() {
     super.initState();
-    init();
+    _init();
   }
 
-  init() async {
+  _init() async {
     await controller.getDepartaments();
   }
 
   _handleDepartaments() async {
     await controller.getDepartaments();
+  }
+
+  Widget getCardDepartament(DepartamentModel departament) {
+    return Card(
+      elevation: 10,
+      child: ListTile(
+        leading: CircleAvatar(
+          radius: 25,
+          backgroundColor: Theme.of(context).primaryColor,
+          child: Icon(
+            Icons.people_alt_outlined,
+            color: Theme.of(context).colorScheme.secondary,
+          ),
+        ),
+        title: Text(
+          departament.name!,
+          style: const TextStyle(color: Colors.black),
+        ),
+        onTap: () {
+          Modular.to
+              .pushNamed(AppRoutes.DEPARTAMENT_FORM, arguments: departament)
+              .then((_) {
+            _init();
+          });
+        },
+        subtitle: Text(departament.description!,
+            style: const TextStyle(
+              color: Colors.black,
+            )),
+      ),
+    );
   }
 
   @override
@@ -50,7 +81,8 @@ class _BodyDepartamentState
                               itemCount: controller.departaments.length,
                               itemBuilder: (ctx, i) => Column(
                                 children: <Widget>[
-                                  DepartamentItem(controller.departaments[i]),
+                                  getCardDepartament(
+                                      controller.departaments[i]),
                                   const Divider(),
                                 ],
                               ),

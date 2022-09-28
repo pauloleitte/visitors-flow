@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import '../../../../../../../config/app_routes.dart';
 import '../controllers/notice_controller.dart';
-import 'notice_item.dart';
+import '../models/notice_model.dart';
 
 class BodyNotice extends StatefulWidget {
   const BodyNotice({Key? key}) : super(key: key);
@@ -15,15 +16,48 @@ class _BodyNoticeState extends ModularState<BodyNotice, NoticeController> {
   @override
   void initState() {
     super.initState();
-    init();
+    _init();
   }
 
-  init() async {
+  _init() async {
     await controller.getNotices();
   }
 
   _handleCeremonies() async {
     await controller.getNotices();
+  }
+
+  Widget getCardNotice(NoticeModel notice) {
+    return Card(
+      elevation: 10,
+      child: ListTile(
+        leading: CircleAvatar(
+          radius: 25,
+          backgroundColor: Theme.of(context).primaryColor,
+          child: Icon(
+            Icons.notifications_outlined,
+            color: Theme.of(context).colorScheme.secondary,
+          ),
+        ),
+        title: Text(
+          notice.name!,
+          style: const TextStyle(color: Colors.black),
+        ),
+        onTap: () {
+          Modular.to
+              .pushNamed(AppRoutes.NOTICE_FORM, arguments: notice)
+              .then((_) {
+            _init();
+          });
+        },
+        subtitle: Text(
+          '${notice.description}',
+          style: const TextStyle(
+            color: Colors.black,
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -46,7 +80,7 @@ class _BodyNoticeState extends ModularState<BodyNotice, NoticeController> {
                               itemCount: controller.notices.length,
                               itemBuilder: (ctx, i) => Column(
                                 children: <Widget>[
-                                  NoticeItem(controller.notices[i]),
+                                  getCardNotice(controller.notices[i]),
                                   const Divider(),
                                 ],
                               ),

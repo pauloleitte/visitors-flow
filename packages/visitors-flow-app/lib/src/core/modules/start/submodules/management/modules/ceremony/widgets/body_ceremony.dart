@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:intl/intl.dart';
+import '../../../../../../../config/app_routes.dart';
 import '../controllers/ceremony_controller.dart';
-import 'ceremony_item.dart';
+import '../models/ceremony_model.dart';
 
 class BodyCeremony extends StatefulWidget {
   const BodyCeremony({Key? key}) : super(key: key);
@@ -16,15 +18,48 @@ class _BodyCeremonyState
   @override
   void initState() {
     super.initState();
-    init();
+    _init();
   }
 
-  init() async {
+  _init() async {
     await controller.getCeremonies();
   }
 
   _handleCeremonies() async {
     await controller.getCeremonies();
+  }
+
+  Widget getCardCeremony(CeremonyModel ceremony) {
+    return Card(
+      elevation: 10,
+      child: ListTile(
+        leading: CircleAvatar(
+          radius: 25,
+          backgroundColor: Theme.of(context).primaryColor,
+          child: Icon(
+            Icons.church,
+            color: Theme.of(context).colorScheme.secondary,
+          ),
+        ),
+        title: Text(
+          ceremony.name!,
+          style: const TextStyle(color: Colors.black),
+        ),
+        onTap: () {
+          Modular.to
+              .pushNamed(AppRoutes.CEREMONY_FORM, arguments: ceremony)
+              .then((_) {
+            _init();
+          });
+        },
+        subtitle: Text(
+          DateFormat('dd/MM/yyyy').format(ceremony.date!),
+          style: const TextStyle(
+            color: Colors.black,
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -47,7 +82,7 @@ class _BodyCeremonyState
                               itemCount: controller.ceremonies.length,
                               itemBuilder: (ctx, i) => Column(
                                 children: <Widget>[
-                                  CeremonyItem(controller.ceremonies[i]),
+                                  getCardCeremony(controller.ceremonies[i]),
                                   const Divider(),
                                 ],
                               ),
