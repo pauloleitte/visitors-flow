@@ -106,11 +106,7 @@ class _BodyHomeState extends ModularState<BodyHome, HomeController> {
                         const SizedBox(
                           height: 10,
                         ),
-                        subTitle(title: 'Agenda da semana', context: context),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        getCalendarOfWeek(),
+                        //getCalendarOfWeek(),
                         (controller.ceremonies.isNotEmpty
                             ? SizedBox(
                                 height: controller.ceremonies.length == 1
@@ -139,7 +135,7 @@ class _BodyHomeState extends ModularState<BodyHome, HomeController> {
                                 ),
                               )
                             : subTitle(
-                                title: 'Nenhum culto para o dia',
+                                title: 'Nenhum culto para hoje',
                                 context: context)),
                       ],
                     ),

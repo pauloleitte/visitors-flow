@@ -6,6 +6,8 @@ import 'package:visitors_flow_app/src/core/modules/start/submodules/management/m
 import '../notice/repositories/notice_repository.dart';
 import '../notice/services/notice_service.dart';
 import 'controllers/departament_controller.dart';
+import 'pages/departament_member_page.dart';
+import 'pages/departament_notice_page.dart';
 import 'pages/departament_page.dart';
 import 'pages/departament_form_page.dart';
 import 'repositories/departament_repository_dart.dart';
@@ -31,6 +33,14 @@ class DepartamentModule extends Module {
     ChildRoute('/form',
         child: (_, args) => DepartamentFormPage(
               departament: args.data,
+            )),
+    ChildRoute('/members',
+        child: (_, args) => DepartamentMemberPage(
+              members: args.data,
+            )),
+    ChildRoute('/notices',
+        child: (_, args) => DepartamentNoticePage(
+              notices: args.data,
             )),
   ];
 }

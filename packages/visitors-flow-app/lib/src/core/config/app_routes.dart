@@ -20,5 +20,7 @@ class AppRoutes {
   static const MEMBER_FORM = '/start/management/member/form';
   static const DEPARTAMENT = '/start/management/departament';
   static const DEPARTAMENT_FORM = '/start/management/departament/form';
+  static const DEPARTAMENT_MEMBERS = '/start/management/departament/members';
+  static const DEPARTAMENT_NOTICES = '/start/management/departament/notices';
   static const MANAGEMENT = '/start/management';
 }
