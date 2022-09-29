@@ -70,7 +70,10 @@ class _DepartamentMemberPageState
   Widget build(BuildContext context) {
     return Scaffold(
       body: _buildListMembers(),
-      appBar: AppBar(title: const Text('Membros')),
+      appBar: AppBar(
+        title: const Text('Membros'),
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.add))],
+      ),
     );
   }
 }

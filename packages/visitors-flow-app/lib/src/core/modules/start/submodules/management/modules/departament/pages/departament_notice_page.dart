@@ -70,7 +70,10 @@ class _DepartamentNoticePageState
   Widget build(BuildContext context) {
     return Scaffold(
       body: _buildListNotices(),
-      appBar: AppBar(title: Text('Avisos')),
+      appBar: AppBar(
+        title: const Text('Avisos'),
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.add))],
+      ),
     );
   }
 }
