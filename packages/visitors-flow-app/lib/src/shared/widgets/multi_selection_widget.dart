@@ -1,5 +1,3 @@
-// Multi Select widget
-// This widget is reusable
 import 'package:flutter/material.dart';
 
 class MultiSelect<T> extends StatefulWidget {
@@ -20,6 +18,7 @@ class MultiSelect<T> extends StatefulWidget {
 class _MultiSelectState extends State<MultiSelect> {
   // this variable holds the selected items
   final List<dynamic> _selectedItems = [];
+  final List<dynamic> _values = [];
 
   @override
   void initState() {
@@ -30,7 +29,12 @@ class _MultiSelectState extends State<MultiSelect> {
   void addInitalValueInSelectedItems() {
     setState(() {
       for (var element in widget.initialValue) {
-        if (!_selectedItems.contains(element)) _selectedItems.add(element);
+        if (!_selectedItems.contains(element.sId)) {
+          _selectedItems.add(element.sId);
+        }
+        if (!_values.contains(element)) {
+          _values.add(element);
+        }
       }
     });
   }
@@ -39,9 +43,11 @@ class _MultiSelectState extends State<MultiSelect> {
   void _itemChange(dynamic itemValue, bool isSelected) {
     setState(() {
       if (isSelected) {
-        _selectedItems.add(itemValue);
+        _values.add(itemValue);
+        _selectedItems.add(itemValue.sId);
       } else {
-        _selectedItems.remove(itemValue);
+        _values.removeWhere((model) => model.sId == itemValue.sId);
+        _selectedItems.remove(itemValue.sId);
       }
     });
   }
@@ -53,7 +59,7 @@ class _MultiSelectState extends State<MultiSelect> {
 
 // this function is called when the Submit button is tapped
   void _submit() {
-    Navigator.pop(context, _selectedItems);
+    Navigator.pop(context, _values);
   }
 
   @override
@@ -64,7 +70,7 @@ class _MultiSelectState extends State<MultiSelect> {
         child: ListBody(
           children: widget.items
               .map((item) => CheckboxListTile(
-                    value: _selectedItems.contains(item),
+                    value: _selectedItems.contains(item.sId),
                     title: Text(item.name),
                     controlAffinity: ListTileControlAffinity.leading,
                     onChanged: (isChecked) => _itemChange(item, isChecked!),

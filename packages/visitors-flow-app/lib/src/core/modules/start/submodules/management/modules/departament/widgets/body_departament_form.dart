@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:visitors_flow_app/src/core/config/app_routes.dart';
+import 'package:visitors_flow_app/src/core/modules/start/submodules/management/modules/notice/models/notice_model.dart';
+import 'package:visitors_flow_app/src/shared/widgets/multi_selection_widget.dart';
+
 import '../../../../../../../config/theme_helper.dart';
+import '../../member/models/member_model.dart';
 import '../controllers/departament_controller.dart';
 import '../models/departament_model.dart';
 
@@ -40,6 +43,134 @@ class _BodyDepartamentFormState
       } else {
         await controller.updateDepartament();
       }
+    }
+  }
+
+  Widget _getCardMember(MemberModel member) {
+    return Card(
+      elevation: 10,
+      child: ListTile(
+        title: Text(
+          member.name!,
+          style:
+              const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+        onTap: null,
+      ),
+    );
+  }
+
+  Widget _getCardNotice(NoticeModel notice) {
+    return Card(
+      elevation: 10,
+      child: ListTile(
+        title: Text(
+          notice.name!,
+          style:
+              const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+        onTap: null,
+      ),
+    );
+  }
+
+  Widget _buildListMembers() {
+    final members = controller.departament.members;
+    if (members != null) {
+      return Column(
+        children: [
+          InkWell(
+              onTap: _showMultiSelectMember,
+              child: const Text('Vincular membros +')),
+          const SizedBox(
+            height: 10,
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: members.length,
+              itemBuilder: (ctx, i) => Column(
+                children: <Widget>[
+                  _getCardMember(members[i]),
+                  const Divider(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      );
+    } else {
+      return InkWell(
+          onTap: _showMultiSelectMember,
+          child: const Text('Vincular membros +'));
+    }
+  }
+
+  Widget _buildListNotices() {
+    final notices = controller.departament.notices;
+    if (notices != null) {
+      return Column(
+        children: [
+          InkWell(
+              onTap: _showMultiSelectNotice,
+              child: const Text('Vincular avisos +')),
+          const SizedBox(
+            height: 10,
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: notices.length,
+              itemBuilder: (ctx, i) => Column(
+                children: <Widget>[
+                  _getCardNotice(notices[i]),
+                  const Divider(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      );
+    } else {
+      return InkWell(
+          onTap: _showMultiSelectMember,
+          child: const Text('Vincular membros +'));
+    }
+  }
+
+  void _showMultiSelectMember() async {
+    final results = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return MultiSelect<MemberModel>(
+          items: controller.members,
+          title: 'Membros',
+          initialValue: controller.departament.members ?? [],
+        );
+      },
+    );
+
+    if (results != null) {
+      final result = List<MemberModel>.from(results);
+      controller.departament.members = result;
+      setState(() {});
+    }
+  }
+
+  void _showMultiSelectNotice() async {
+    final results = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return MultiSelect<NoticeModel>(
+          items: controller.notices,
+          title: 'Avisos',
+          initialValue: controller.departament.notices ?? [],
+        );
+      },
+    );
+
+    if (results != null) {
+      final result = List<NoticeModel>.from(results);
+      controller.departament.notices = result;
+      setState(() {});
     }
   }
 
@@ -90,42 +221,10 @@ class _BodyDepartamentFormState
                     },
                   ),
                 ),
-                const SizedBox(height: 30.0),
-                Container(
-                  decoration: ThemeHelper().buttonBoxDecoration(context),
-                  child: ElevatedButton(
-                    style: ThemeHelper().buttonStyle(context),
-                    onPressed: () {
-                      Modular.to.pushNamed(AppRoutes.DEPARTAMENT_MEMBERS,
-                          arguments: controller.departament.members);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
-                      child: Text(
-                        "Ver Membros".toUpperCase(),
-                        style: ThemeHelper().buttonTextStyle(context),
-                      ),
-                    ),
-                  ),
-                ),
                 const SizedBox(height: 20.0),
-                Container(
-                  decoration: ThemeHelper().buttonBoxDecoration(context),
-                  child: ElevatedButton(
-                    style: ThemeHelper().buttonStyle(context),
-                    onPressed: () {
-                      Modular.to.pushNamed(AppRoutes.DEPARTAMENT_NOTICES,
-                          arguments: controller.departament.notices);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
-                      child: Text(
-                        "Ver Avisos".toUpperCase(),
-                        style: ThemeHelper().buttonTextStyle(context),
-                      ),
-                    ),
-                  ),
-                ),
+                SizedBox(height: 150, child: _buildListMembers()),
+                const SizedBox(height: 20.0),
+                SizedBox(height: 150, child: _buildListNotices()),
                 const SizedBox(height: 20.0),
                 Container(
                   decoration: ThemeHelper().buttonBoxDecoration(context),

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:hexcolor/hexcolor.dart';
-import 'package:visitors_flow_app/src/core/config/app_constants.dart';
+
 import '../../../../../config/app_routes.dart';
 import '../controllers/configuration/configuration_controller.dart';
 
@@ -38,95 +37,88 @@ class _BodyConfigurationState
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              Card(
-                color: Theme.of(context).primaryColor,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Row(children: [
-                            SizedBox(
-                                width: 50,
-                                child: CircleAvatar(
-                                  backgroundColor:
-                                      Theme.of(context).colorScheme.secondary,
-                                  radius: 50,
-                                  child: Icon(
-                                    Icons.person,
-                                    size: 50,
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                )),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text('${controller.model.name}',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: HexColor(AppConstants
-                                          .SCAFFOLD_BACKGROUND_COLOR))),
-                            ),
-                          ]),
-                          const SizedBox(height: 10.0),
-                          // list item menus
-                          ListTile(
-                            title: Text('Editar dados do perfil',
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Row(children: [
+                          SizedBox(
+                              width: 50,
+                              child: CircleAvatar(
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.secondary,
+                                radius: 50,
+                                child: Icon(
+                                  Icons.person,
+                                  size: 50,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              )),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text('${controller.model.name}',
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
-                                    color: HexColor(AppConstants
-                                        .SCAFFOLD_BACKGROUND_COLOR))),
-                            leading: Icon(
-                              Icons.person,
-                              color: Theme.of(context).colorScheme.secondary,
-                            ),
-                            onTap: () {
-                              Modular.to
-                                  .pushNamed(AppRoutes.CONFIG_PROFILE,
-                                      arguments: controller.model)
-                                  .then((_) {
-                                // you have come back to your Settings screen
-                                _getUser();
-                              });
-                            },
+                                    color: Theme.of(context).primaryColor)),
                           ),
-                          ListTile(
-                            title: Text('Segurança',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: HexColor(AppConstants
-                                        .SCAFFOLD_BACKGROUND_COLOR))),
-                            leading: Icon(Icons.security,
-                                color: Theme.of(context).colorScheme.secondary),
-                            onTap: () {
-                              Modular.to.pushNamed(AppRoutes.CONFIG_SECURITY,
-                                  arguments: controller.model);
-                            },
+                        ]),
+                        const SizedBox(height: 10.0),
+                        // list item menus
+                        ListTile(
+                          title: Text('Editar dados do perfil',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).primaryColor)),
+                          leading: Icon(
+                            Icons.person,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
-                          ListTile(
-                            title: Text('Sair',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: HexColor(AppConstants
-                                        .SCAFFOLD_BACKGROUND_COLOR))),
-                            leading: Icon(
-                              Icons.exit_to_app,
-                              color: Theme.of(context).colorScheme.secondary,
-                            ),
-                            onTap: () async {
-                              await controller.logout();
-                              Modular.to.navigate(AppRoutes.AUTH);
-                            },
+                          onTap: () {
+                            Modular.to
+                                .pushNamed(AppRoutes.CONFIG_PROFILE,
+                                    arguments: controller.model)
+                                .then((_) {
+                              // you have come back to your Settings screen
+                              _getUser();
+                            });
+                          },
+                        ),
+                        ListTile(
+                          title: Text('Segurança',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).primaryColor)),
+                          leading: Icon(Icons.security,
+                              color: Theme.of(context).colorScheme.secondary),
+                          onTap: () {
+                            Modular.to.pushNamed(AppRoutes.CONFIG_SECURITY,
+                                arguments: controller.model);
+                          },
+                        ),
+                        ListTile(
+                          title: Text('Sair',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).primaryColor)),
+                          leading: Icon(
+                            Icons.exit_to_app,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
-                        ],
-                      ),
+                          onTap: () async {
+                            await controller.logout();
+                            Modular.to.navigate(AppRoutes.AUTH);
+                          },
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),
