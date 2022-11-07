@@ -6,6 +6,7 @@ class MemberViewModel {
   String? address;
   String? job;
   DateTime? birthday;
+  String? genre;
   String? createdAt;
   String? updatedAt;
 
@@ -17,6 +18,7 @@ class MemberViewModel {
       this.address,
       this.job,
       this.birthday,
+      this.genre,
       this.createdAt,
       this.updatedAt});
 }

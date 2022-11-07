@@ -29,6 +29,7 @@ class MemberModel {
   String? address;
   String? job;
   DateTime? birthday;
+  String? genre;
 
   MemberModel(
       {this.sId,
@@ -37,6 +38,7 @@ class MemberModel {
       this.email,
       this.address,
       this.job,
+      this.genre,
       this.birthday});
 
   MemberModel.fromJson(Map<String, dynamic> json) {
@@ -46,6 +48,7 @@ class MemberModel {
     email = json['email'];
     address = json['address'];
     job = json['job'];
+    genre = json['genre'];
     birthday =
         json["birthday"] == null ? null : DateTime.parse(json["birthday"]);
   }
@@ -58,6 +61,7 @@ class MemberModel {
     data['email'] = email;
     data['address'] = address;
     data['job'] = job;
+    data['genre'] = genre;
     if (birthday == null) {
       data["birthday"] = null;
     } else {

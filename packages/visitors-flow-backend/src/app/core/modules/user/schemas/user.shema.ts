@@ -23,6 +23,9 @@ export class User {
   @Prop()
   roles: string[]
 
+  @Prop()
+  genre: string;
+
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -36,6 +36,7 @@ abstract class _MemberControllerBase with Store {
       phone: member.phone,
       email: member.email,
       birthday: member.birthday,
+      genre: member.genre,
       job: member.job);
 
   Future<void> getMembers() async {

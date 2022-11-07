@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
+
 import '../../../../shared/errors/errors.dart';
 import '../../../../shared/services/local_storage_service.dart';
 import '../../start/submodules/configuration/view-models/user_view_model.dart';
@@ -69,6 +70,7 @@ class UserService implements IUserService {
         name: model.name,
         email: model.email,
         password: model.password,
+        genre: model.genre,
         phone: model.phone));
   }
 
@@ -78,6 +80,7 @@ class UserService implements IUserService {
         sId: model.id,
         name: model.name,
         email: model.email,
+        genre: model.genre,
         phone: model.phone));
   }
 

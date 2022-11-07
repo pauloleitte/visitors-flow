@@ -1,13 +1,12 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
-import 'package:visitors_flow_app/src/core/config/app_routes.dart';
+import 'package:visitors_flow_app/src/core/modules/start/submodules/management/modules/visitors/models/visitor_model.dart';
+
 import '../../../../../../../../shared/widgets/multi_selection_widget.dart';
 import '../../../../../../../config/theme_helper.dart';
 import '../../notice/models/notice_model.dart';
-import '../../visitors/models/visitor_model.dart';
 import '../controllers/ceremony_controller.dart';
 import '../models/ceremony_model.dart';
 
@@ -39,14 +38,93 @@ class _BodyCeremonyFormState
     await controller.getNotices();
   }
 
-  Future<void> save() async {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      if (controller.ceremony.sId == null) {
-        await controller.createCeremony();
-      } else {
-        await controller.updateCeremony();
-      }
+  Widget _getCardVisitor(VisitorModel member) {
+    return Card(
+      elevation: 10,
+      child: ListTile(
+        title: Text(
+          member.name!,
+          style:
+              const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+        onTap: null,
+      ),
+    );
+  }
+
+  Widget _getCardNotice(NoticeModel notice) {
+    return Card(
+      elevation: 10,
+      child: ListTile(
+        title: Text(
+          notice.name!,
+          style:
+              const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+        onTap: null,
+      ),
+    );
+  }
+
+  Widget _buildListVisitors() {
+    final visitors = controller.ceremony.visitors;
+    if (visitors != null) {
+      return Column(
+        children: [
+          InkWell(
+              onTap: _showMultiSelectVisitor,
+              child: const Text('Vincular visitantes +')),
+          const SizedBox(
+            height: 10,
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: visitors.length,
+              itemBuilder: (ctx, i) => Column(
+                children: <Widget>[
+                  _getCardVisitor(visitors[i]),
+                  const Divider(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      );
+    } else {
+      return InkWell(
+          onTap: _showMultiSelectVisitor,
+          child: const Text('Vincular visitantes +'));
+    }
+  }
+
+  Widget _buildListNotices() {
+    final notices = controller.ceremony.notices;
+    if (notices != null) {
+      return Column(
+        children: [
+          InkWell(
+              onTap: _showMultiSelectNotice,
+              child: const Text('Vincular avisos +')),
+          const SizedBox(
+            height: 10,
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: notices.length,
+              itemBuilder: (ctx, i) => Column(
+                children: <Widget>[
+                  _getCardNotice(notices[i]),
+                  const Divider(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      );
+    } else {
+      return InkWell(
+          onTap: _showMultiSelectNotice,
+          child: const Text('Vincular avisos +'));
     }
   }
 
@@ -57,7 +135,7 @@ class _BodyCeremonyFormState
         return MultiSelect<VisitorModel>(
           items: controller.visitors,
           title: 'Visitantes',
-          initialValue: controller.ceremony.visitors!,
+          initialValue: controller.ceremony.visitors ?? [],
         );
       },
     );
@@ -74,9 +152,10 @@ class _BodyCeremonyFormState
       context: context,
       builder: (BuildContext context) {
         return MultiSelect<NoticeModel>(
-            items: controller.notices,
-            title: 'Avisos',
-            initialValue: controller.ceremony.notices!);
+          items: controller.notices,
+          title: 'Avisos',
+          initialValue: controller.ceremony.notices ?? [],
+        );
       },
     );
 
@@ -87,124 +166,14 @@ class _BodyCeremonyFormState
     }
   }
 
-  Widget _buildListNotices() {
-    if (controller.ceremony.notices != null) {
-      return Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Text(
-                'Avisos',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              IconButton(
-                  onPressed: _showMultiSelectNotice,
-                  icon: Icon(
-                    Icons.add,
-                    color: Theme.of(context).primaryColor,
-                  )),
-            ],
-          ),
-          SizedBox(
-            height: 100,
-            child: ListView.builder(
-              itemCount: controller.ceremony.notices!.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  color: Theme.of(context).colorScheme.secondary,
-                  child: ListTile(
-                    title: Text(
-                      controller.ceremony.notices![index].name!,
-                      style: const TextStyle(color: Colors.black),
-                    ),
-                    onTap: () {
-                      Modular.to.pushNamed(AppRoutes.NOTICE_FORM,
-                          arguments: controller.ceremony.notices![index]);
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
-      );
-    } else {
-      return Container(
-        margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
-        child: Text.rich(TextSpan(children: [
-          const TextSpan(text: "Clique aqui para cadastar um "),
-          TextSpan(
-            text: 'aviso',
-            recognizer: TapGestureRecognizer()
-              ..onTap = () => {Modular.to.pushNamed(AppRoutes.NOTICE_FORM)},
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).primaryColor),
-          ),
-        ])),
-      );
-    }
-  }
-
-  Widget _buildListVisitors() {
-    if (controller.ceremony.visitors != null) {
-      return Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Text(
-                'Visitantes',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              IconButton(
-                  onPressed: _showMultiSelectVisitor,
-                  icon: Icon(
-                    Icons.add,
-                    color: Theme.of(context).primaryColor,
-                  )),
-            ],
-          ),
-          SizedBox(
-            height: 100,
-            child: ListView.builder(
-              itemCount: controller.ceremony.visitors!.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  color: Theme.of(context).colorScheme.secondary,
-                  child: ListTile(
-                    title: Text(
-                      controller.ceremony.visitors![index].name!,
-                      style: const TextStyle(color: Colors.black),
-                    ),
-                    onTap: () {
-                      Modular.to.pushNamed(AppRoutes.VISITOR_FORM,
-                          arguments: controller.ceremony.visitors![index]);
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
-      );
-    } else {
-      return Container(
-        margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
-        //child: Text('Don\'t have an account? Create'),
-        child: Text.rich(TextSpan(children: [
-          const TextSpan(text: "Clique aqui para cadastar um "),
-          TextSpan(
-            text: 'visitante',
-            recognizer: TapGestureRecognizer()
-              ..onTap = () => {Modular.to.pushNamed(AppRoutes.VISITOR_FORM)},
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).primaryColor),
-          ),
-        ])),
-      );
+  Future<void> save() async {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      if (controller.ceremony.sId == null) {
+        await controller.createCeremony();
+      } else {
+        await controller.updateCeremony();
+      }
     }
   }
 
@@ -290,8 +259,10 @@ class _BodyCeremonyFormState
                     },
                   ),
                 ),
-                // _buildListVisitors(),
-                // _buildListNotices(),
+                const SizedBox(height: 20.0),
+                SizedBox(height: 150, child: _buildListVisitors()),
+                const SizedBox(height: 20.0),
+                SizedBox(height: 150, child: _buildListNotices()),
                 const SizedBox(height: 20.0),
                 Container(
                   decoration: ThemeHelper().buttonBoxDecoration(context),

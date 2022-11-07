@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
+import 'package:visitors_flow_app/src/core/config/app_constants.dart';
 import 'package:visitors_flow_app/src/core/config/theme_helper.dart';
 
 import '../controllers/member_controller.dart';
@@ -72,22 +73,44 @@ class _BodyMemberFormState
                 ),
                 const SizedBox(height: 30.0),
                 Container(
-                  decoration: ThemeHelper().inputBoxDecorationShaddow(),
-                  child: TextFormField(
-                    initialValue: controller.member.job,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Cargo é obrigatório';
-                      }
-                      return null;
-                    },
-                    decoration: ThemeHelper()
-                        .textInputDecoration('Cargo', 'Insira um cargo'),
-                    onSaved: (value) {
-                      controller.member.job = value;
-                    },
-                  ),
-                ),
+                    decoration: ThemeHelper().inputBoxDecorationShaddow(),
+                    child: DropdownButtonFormField(
+                      value: controller.member.genre,
+                      items: AppConstants.GENRE_LIST
+                          .map(
+                              (e) => DropdownMenuItem(value: e, child: Text(e)))
+                          .toList(),
+                      onChanged: (val) {
+                        controller.member.genre = val as String;
+                      },
+                      validator: (val) {
+                        if ((val == null)) {
+                          return "Escolha uma opcão";
+                        }
+                        return null;
+                      },
+                      onSaved: (val) {
+                        controller.member.genre = val as String;
+                      },
+                      decoration: ThemeHelper()
+                          .textInputDecoration('Sexo', 'Escolha seu sexo'),
+                    )),
+                const SizedBox(height: 30.0),
+                Container(
+                    decoration: ThemeHelper().inputBoxDecorationShaddow(),
+                    child: DropdownButtonFormField(
+                      value: controller.member.job,
+                      items: AppConstants.JOB_LIST
+                          .map(
+                              (e) => DropdownMenuItem(value: e, child: Text(e)))
+                          .toList(),
+                      onChanged: (val) {},
+                      onSaved: (val) {
+                        controller.member.job = val as String;
+                      },
+                      decoration: ThemeHelper()
+                          .textInputDecoration('Cargo', 'Escolha um cargo'),
+                    )),
                 const SizedBox(height: 30.0),
                 Container(
                   decoration: ThemeHelper().inputBoxDecorationShaddow(),
@@ -187,7 +210,7 @@ class _BodyMemberFormState
                 Container(
                   decoration: ThemeHelper().buttonBoxDecoration(context),
                   child: ElevatedButton(
-                            style: ThemeHelper().buttonStyle(context),
+                    style: ThemeHelper().buttonStyle(context),
                     onPressed: controller.busy ? null : save,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start:backend": "nx run visitors-flow-backend:serve",
+    "serve:backend": "nx run visitors-flow-backend:serve",
     "watch:mobx": "cd packages/visitors-flow-app && flutter pub run build_runner watch --delete-conflicting-outputs"
   },
   "private": true,

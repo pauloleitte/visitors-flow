@@ -4,4 +4,5 @@ export class CreateUserDto {
     email: string;
     phone: string;
     roles?: string[];
+    genre: string;
 }

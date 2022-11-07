@@ -1,14 +1,14 @@
-import { InjectModel } from '@nestjs/mongoose';
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { Model } from 'mongoose';
-import { User } from '../schemas/user.shema';
-import { CreateUserDto } from '../dto/create-user.dto';
-import { UpdateUserDto } from '../dto/update-user.dto';
-import { BcryptService } from '../../../../shared/services/bcrypt.service';
 import {
   BadRequestException,
-  InternalServerErrorException,
+  InternalServerErrorException
 } from '@nestjs/common/exceptions';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { BcryptService } from '../../../../shared/services/bcrypt.service';
+import { CreateUserDto } from '../dto/create-user.dto';
+import { UpdateUserDto } from '../dto/update-user.dto';
+import { User } from '../schemas/user.shema';
 
 @Injectable()
 export class UserService {
@@ -40,6 +40,7 @@ export class UserService {
       name: user.name,
       email: user.email,
       phone: user.phone,
+      genre: user.genre,
       password: await this.bcryptService.encrypt(user.password),
     });
 

@@ -4,6 +4,18 @@ import 'package:flutter/material.dart';
 
 class AppConstants {
   static const PRIMARY_COLOR = "#253C59";
+  static const GENRE_LIST = ["Masculino", "Feminino"];
+  static const JOB_LIST = [
+    "Cooperador",
+    "Diácono",
+    "Evangelista",
+    "Presbítero",
+    "Pastor",
+    "Regente",
+    "Músico",
+    "Secretária",
+    "Tesoureiro"
+  ];
   static const SCAFFOLD_BACKGROUND_COLOR = "#F1F2F0";
   static const SECONDARY_COLOR = "#BF9445";
   static const MaterialColor PRIMARY_COLOR_SWATCH = const MaterialColor(

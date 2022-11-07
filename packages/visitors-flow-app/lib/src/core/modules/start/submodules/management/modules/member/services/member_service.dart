@@ -18,6 +18,7 @@ class MemberService implements IMemberService {
         address: model.address,
         birthday: model.birthday,
         job: model.job,
+        genre: model.genre,
         email: model.email,
         phone: model.phone));
   }
@@ -46,6 +47,7 @@ class MemberService implements IMemberService {
         address: model.address,
         job: model.job,
         email: model.email,
+        genre: model.genre,
         birthday: model.birthday,
         phone: model.phone));
   }

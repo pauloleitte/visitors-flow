@@ -34,6 +34,7 @@ export class AuthService {
       name: user.name,
       phone: user.phone,
       roles: user.roles,
+      genre: user.genre,
     };
     return {
       accessToken: this.jwtService.sign(payload),
@@ -53,6 +54,7 @@ export class AuthService {
       name: user.name,
       phone: user.phone,
       roles: user.roles,
+      genre: user.genre,
     };
     return {
       accessToken: this.jwtService.sign(payload),

@@ -28,6 +28,9 @@ export class Member {
 
   @Prop({required: true})
   birthday: Date;
+
+  @Prop({required: true})
+  genre: string;
 }
 
 export const MemberSchema = SchemaFactory.createForClass(Member);

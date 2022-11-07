@@ -1,12 +1,5 @@
 import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  UseGuards,
+  Body, Controller, Delete, Get, Param, Patch, Post, UseGuards
 } from '@nestjs/common';
 import { Roles } from '../../auth/decorators/role.decorator';
 import { Role } from '../../auth/enums/role.enum';
@@ -20,8 +13,8 @@ import { UserService } from '../services/user.service';
 export class UserController {
   constructor(private readonly service: UserService) {}
 
-  @Roles(Role.Admin)
-  @UseGuards(JwtAuthGuard, RoleGuard)
+  // @Roles(Role.Admin)
+  // @UseGuards(JwtAuthGuard, RoleGuard)
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.service.create(createUserDto);

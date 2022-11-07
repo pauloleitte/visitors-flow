@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import '../../../../../config/app_constants.dart';
 import '../../../../../config/theme_helper.dart';
 import '../../../../auth/models/user_model.dart';
 import '../controllers/profile/profile_controller.dart';
@@ -64,6 +66,30 @@ class _BodyProfileState extends ModularState<BodyProfile, ProfileController> {
                     ),
                     const SizedBox(height: 20.0),
                     Container(
+                        decoration: ThemeHelper().inputBoxDecorationShaddow(),
+                        child: DropdownButtonFormField(
+                          value: controller.model.genre,
+                          items: AppConstants.GENRE_LIST
+                              .map((e) =>
+                                  DropdownMenuItem(value: e, child: Text(e)))
+                              .toList(),
+                          onChanged: (val) {
+                            controller.model.genre = val as String;
+                          },
+                          validator: (val) {
+                            if ((val == null)) {
+                              return "Escolha uma opcão";
+                            }
+                            return null;
+                          },
+                          onSaved: (val) {
+                            controller.model.genre = val as String;
+                          },
+                          decoration: ThemeHelper()
+                              .textInputDecoration('Sexo', 'Escolha seu sexo'),
+                        )),
+                    const SizedBox(height: 20.0),
+                    Container(
                       decoration: ThemeHelper().inputBoxDecorationShaddow(),
                       child: TextFormField(
                         initialValue: controller.model.email,
@@ -110,13 +136,13 @@ class _BodyProfileState extends ModularState<BodyProfile, ProfileController> {
                     Container(
                       decoration: ThemeHelper().buttonBoxDecoration(context),
                       child: ElevatedButton(
-                            style: ThemeHelper().buttonStyle(context),
+                        style: ThemeHelper().buttonStyle(context),
                         onPressed: controller.busy ? null : save,
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
                           child: Text(
                             "Salvar".toUpperCase(),
-                                   style: ThemeHelper().buttonTextStyle(context),
+                            style: ThemeHelper().buttonTextStyle(context),
                           ),
                         ),
                       ),

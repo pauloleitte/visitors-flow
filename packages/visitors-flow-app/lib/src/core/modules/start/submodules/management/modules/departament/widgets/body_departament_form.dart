@@ -131,8 +131,8 @@ class _BodyDepartamentFormState
       );
     } else {
       return InkWell(
-          onTap: _showMultiSelectMember,
-          child: const Text('Vincular membros +'));
+          onTap: _showMultiSelectNotice,
+          child: const Text('Vincular avisos +'));
     }
   }
 
