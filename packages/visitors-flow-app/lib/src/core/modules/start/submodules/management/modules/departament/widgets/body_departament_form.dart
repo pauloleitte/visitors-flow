@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:visitors_flow_app/src/core/config/app_routes.dart';
 import 'package:visitors_flow_app/src/core/modules/start/submodules/management/modules/notice/models/notice_model.dart';
-import 'package:visitors_flow_app/src/shared/widgets/multi_selection_widget.dart';
+import 'package:visitors_flow_app/src/shared/utils/mutiselect-params.dart';
 
 import '../../../../../../../config/theme_helper.dart';
 import '../../member/models/member_model.dart';
@@ -46,129 +47,29 @@ class _BodyDepartamentFormState
     }
   }
 
-  Widget _getCardMember(MemberModel member) {
-    return Card(
-      elevation: 10,
-      child: ListTile(
-        title: Text(
-          member.name!,
-          style:
-              const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-        onTap: null,
-      ),
-    );
-  }
-
-  Widget _getCardNotice(NoticeModel notice) {
-    return Card(
-      elevation: 10,
-      child: ListTile(
-        title: Text(
-          notice.name!,
-          style:
-              const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-        onTap: null,
-      ),
-    );
-  }
-
-  Widget _buildListMembers() {
-    final members = controller.departament.members;
-    if (members != null) {
-      return Column(
-        children: [
-          InkWell(
-              onTap: _showMultiSelectMember,
-              child: const Text('Vincular membros +')),
-          const SizedBox(
-            height: 10,
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: members.length,
-              itemBuilder: (ctx, i) => Column(
-                children: <Widget>[
-                  _getCardMember(members[i]),
-                  const Divider(),
-                ],
-              ),
-            ),
-          ),
-        ],
-      );
-    } else {
-      return InkWell(
-          onTap: _showMultiSelectMember,
-          child: const Text('Vincular membros +'));
-    }
-  }
-
-  Widget _buildListNotices() {
-    final notices = controller.departament.notices;
-    if (notices != null) {
-      return Column(
-        children: [
-          InkWell(
-              onTap: _showMultiSelectNotice,
-              child: const Text('Vincular avisos +')),
-          const SizedBox(
-            height: 10,
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: notices.length,
-              itemBuilder: (ctx, i) => Column(
-                children: <Widget>[
-                  _getCardNotice(notices[i]),
-                  const Divider(),
-                ],
-              ),
-            ),
-          ),
-        ],
-      );
-    } else {
-      return InkWell(
-          onTap: _showMultiSelectNotice,
-          child: const Text('Vincular avisos +'));
-    }
-  }
-
   void _showMultiSelectMember() async {
-    final results = await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return MultiSelect<MemberModel>(
-          items: controller.members,
-          title: 'Membros',
-          initialValue: controller.departament.members ?? [],
-        );
-      },
-    );
-
+    final data = MultiSelectParams<MemberModel>(
+        initialValue: controller.departament.members ?? [],
+        items: controller.members,
+        title: "Membros");
+    final results = await Modular.to
+        .pushNamed(AppRoutes.DEPARTAMENT_MEMBER, arguments: data);
     if (results != null) {
-      final result = List<MemberModel>.from(results);
+      final result = List<MemberModel>.from(results as Iterable<dynamic>);
       controller.departament.members = result;
       setState(() {});
     }
   }
 
   void _showMultiSelectNotice() async {
-    final results = await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return MultiSelect<NoticeModel>(
-          items: controller.notices,
-          title: 'Avisos',
-          initialValue: controller.departament.notices ?? [],
-        );
-      },
-    );
-
+    final data = MultiSelectParams<NoticeModel>(
+        initialValue: controller.departament.notices ?? [],
+        items: controller.notices,
+        title: "Avisos");
+    final results = await Modular.to
+        .pushNamed(AppRoutes.DEPARTAMENT_MEMBER, arguments: data);
     if (results != null) {
-      final result = List<NoticeModel>.from(results);
+      final result = List<NoticeModel>.from(results as Iterable<dynamic>);
       controller.departament.notices = result;
       setState(() {});
     }
@@ -222,9 +123,66 @@ class _BodyDepartamentFormState
                   ),
                 ),
                 const SizedBox(height: 20.0),
-                SizedBox(height: 150, child: _buildListMembers()),
-                const SizedBox(height: 20.0),
-                SizedBox(height: 150, child: _buildListNotices()),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 120,
+                      height: 120,
+                      child: GestureDetector(
+                        onTap: _showMultiSelectNotice,
+                        child: Card(
+                            color: Theme.of(context).primaryColor,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.notifications,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                ),
+                                Text(
+                                  "Avisos",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary),
+                                )
+                              ],
+                            )),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 120,
+                      height: 120,
+                      child: GestureDetector(
+                        onTap: _showMultiSelectMember,
+                        child: Card(
+                            color: Theme.of(context).primaryColor,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.people,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                ),
+                                Text(
+                                  "Membros",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary),
+                                )
+                              ],
+                            )),
+                      ),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 20.0),
                 Container(
                   decoration: ThemeHelper().buttonBoxDecoration(context),

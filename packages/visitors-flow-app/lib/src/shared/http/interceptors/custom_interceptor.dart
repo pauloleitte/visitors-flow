@@ -42,17 +42,26 @@ class CustomInterceptors extends InterceptorsWrapper {
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) async {
     if (err.response?.statusCode != null) {
-      return super.onError(err, handler);
+      if (err.response!.statusCode! >= 400 &&
+          err.response!.statusCode! <= 499) {
+        return super.onError(err, handler);
+      } else {
+        logout();
+      }
     }
     if (err.error.runtimeType != 'String') {
-      Modular.get<ITokenService>().saveLocalDB(TokenModel());
-      Modular.get<IUserService>().saveLocalDB(UserModel());
-      Modular.to.navigate(AppRoutes.AUTH);
+      logout();
     }
     return super.onError(err, handler);
   }
 
   String genToken(String? token) {
     return 'Bearer $token';
+  }
+
+  void logout() {
+    Modular.get<ITokenService>().saveLocalDB(TokenModel());
+    Modular.get<IUserService>().saveLocalDB(UserModel());
+    Modular.to.navigate(AppRoutes.AUTH);
   }
 }

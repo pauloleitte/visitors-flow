@@ -36,7 +36,7 @@ class _BodyMemberState extends ModularState<BodyMember, MemberController> {
           radius: 25,
           backgroundColor: Theme.of(context).primaryColor,
           child: Icon(
-            Icons.notifications_outlined,
+            Icons.people,
             color: Theme.of(context).colorScheme.secondary,
           ),
         ),
