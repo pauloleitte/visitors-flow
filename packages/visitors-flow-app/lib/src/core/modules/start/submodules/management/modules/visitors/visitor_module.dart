@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:visitors_flow_app/src/core/modules/start/submodules/management/modules/visitors/pages/visitor_detail_page.dart';
 
 import 'controllers/visitor_controller.dart';
 import 'pages/visitor_page.dart';
@@ -17,6 +18,10 @@ class VisitorModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) => const VisitorPage()),
+    ChildRoute('/detail',
+        child: (_, args) => VisitorDetailPage(
+              visitor: args.data,
+            )),
     ChildRoute('/form',
         child: (_, args) => VisitorPageForm(
               visitor: args.data,

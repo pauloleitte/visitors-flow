@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:visitors_flow_app/src/core/modules/start/submodules/management/modules/member/pages/member_detail_page.dart';
 
 import 'controllers/member_controller.dart';
 import 'pages/member_form_page.dart';
@@ -19,6 +20,10 @@ class MemberModule extends Module {
     ChildRoute(
       '/',
       child: (_, args) => const MemeberPage(),
+    ),
+    ChildRoute(
+      '/detail',
+      child: (_, args) => MemberDetailPage(member: args.data),
     ),
     ChildRoute('/form',
         child: (_, args) => MemberFormPage(

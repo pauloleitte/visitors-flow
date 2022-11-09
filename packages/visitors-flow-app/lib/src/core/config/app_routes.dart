@@ -16,11 +16,14 @@ class AppRoutes {
   static const CEREMONY_NOTICE = '/start/management/ceremony/notice';
   static const CEREMONY_VISITOR = '/start/management/ceremony/visitor';
   static const VISITOR = '/start/management/visitor';
+  static const VISITOR_DETAIL = '/start/management/visitor/detail';
   static const VISITOR_FORM = '/start/management/visitor/form';
   static const NOTICE = '/start/management/notice';
   static const NOTICE_FORM = '/start/management/notice/form';
+  static const NOTICE_DETAIL = '/start/management/notice/detail';
   static const MEMBER = '/start/management/member';
   static const MEMBER_FORM = '/start/management/member/form';
+  static const MEMBER_DETAIL = '/start/management/member/detail';
   static const DEPARTAMENT = '/start/management/departament';
   static const DEPARTAMENT_DETAIL = '/start/management/departament/detail';
   static const DEPARTAMENT_FORM = '/start/management/departament/form';

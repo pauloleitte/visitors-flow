@@ -82,7 +82,10 @@ class _DepartamentDetailPageState extends State<DepartamentDetailPage> {
                                   notice.name!,
                                   style: const TextStyle(color: Colors.black),
                                 ),
-                                onTap: null,
+                                onTap: () {
+                                  Modular.to.pushNamed(AppRoutes.NOTICE_DETAIL,
+                                      arguments: notice);
+                                },
                                 subtitle: Text(
                                   notice.description!,
                                   style: const TextStyle(
@@ -95,6 +98,53 @@ class _DepartamentDetailPageState extends State<DepartamentDetailPage> {
                         ),
                       )
                     : const Text("Nenhum Aviso"),
+                const SizedBox(height: 20.0),
+                Text("Membros",
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColor)),
+                const SizedBox(height: 20.0),
+                widget.departament!.members != null
+                    ? Expanded(
+                        child: ListView.builder(
+                          itemCount: widget.departament!.members!.length,
+                          itemBuilder: (context, index) {
+                            final member = widget.departament!.members![index];
+                            return Card(
+                              elevation: 10,
+                              child: ListTile(
+                                leading: CircleAvatar(
+                                  radius: 25,
+                                  backgroundColor:
+                                      Theme.of(context).primaryColor,
+                                  child: Icon(
+                                    Icons.person,
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
+                                  ),
+                                ),
+                                title: Text(
+                                  member.name!,
+                                  style: const TextStyle(color: Colors.black),
+                                ),
+                                onTap: () {
+                                  Modular.to.pushNamed(AppRoutes.MEMBER_DETAIL,
+                                      arguments: member);
+                                },
+                                subtitle: Text(
+                                  member.email!,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                    : const Text("Nenhum Membro"),
+                const SizedBox(height: 20.0),
               ],
             ),
           ),

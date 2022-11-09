@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
 import '../../../../../../../config/app_routes.dart';
 import '../controllers/notice_controller.dart';
 import '../models/notice_model.dart';
@@ -44,7 +45,7 @@ class _BodyNoticeState extends ModularState<BodyNotice, NoticeController> {
           style: const TextStyle(color: Colors.black),
         ),
         onTap: () {
-          Modular.to.navigate(AppRoutes.NOTICE_FORM, arguments: notice);
+          Modular.to.pushNamed(AppRoutes.NOTICE_DETAIL, arguments: notice);
         },
         subtitle: Text(
           '${notice.description}',

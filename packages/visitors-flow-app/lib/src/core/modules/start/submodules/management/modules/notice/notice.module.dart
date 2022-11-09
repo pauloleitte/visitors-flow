@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:visitors_flow_app/src/core/modules/start/submodules/management/modules/notice/pages/notice_detail_page.dart';
 
 import 'controllers/notice_controller.dart';
 import 'pages/notice_form_page.dart';
@@ -17,6 +18,8 @@ class NoticeModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) => const NoticePage()),
+    ChildRoute('/detail',
+        child: (_, args) => NoticeDetailPage(notice: args.data)),
     ChildRoute('/form', child: (_, args) => NoticeFormPage(notice: args.data)),
   ];
 }

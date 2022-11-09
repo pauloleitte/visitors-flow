@@ -89,7 +89,10 @@ class _CeremonyDetailPageState extends State<CeremonyDetailPage> {
                                   notice.name!,
                                   style: const TextStyle(color: Colors.black),
                                 ),
-                                onTap: null,
+                                onTap: () {
+                                  Modular.to.pushNamed(AppRoutes.NOTICE_DETAIL,
+                                      arguments: notice);
+                                },
                                 subtitle: Text(
                                   notice.description!,
                                   style: const TextStyle(
@@ -132,7 +135,10 @@ class _CeremonyDetailPageState extends State<CeremonyDetailPage> {
                                   visitor.name!,
                                   style: const TextStyle(color: Colors.black),
                                 ),
-                                onTap: null,
+                                onTap: () {
+                                  Modular.to.pushNamed(AppRoutes.VISITOR_DETAIL,
+                                      arguments: visitor);
+                                },
                                 subtitle: Text(
                                   visitor.email!,
                                   style: const TextStyle(

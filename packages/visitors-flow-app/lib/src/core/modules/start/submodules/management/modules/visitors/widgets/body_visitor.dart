@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:visitors_flow_app/src/core/modules/start/submodules/management/modules/visitors/models/visitor_model.dart';
+
 import '../../../../../../../config/app_routes.dart';
 import '../controllers/visitor_controller.dart';
 
@@ -45,7 +46,7 @@ class _BodyVisitorState extends ModularState<BodyVisitor, VisitorController> {
           style: const TextStyle(color: Colors.black),
         ),
         onTap: () {
-          Modular.to.navigate(AppRoutes.VISITOR_FORM, arguments: visitor);
+          Modular.to.pushNamed(AppRoutes.VISITOR_DETAIL, arguments: visitor);
         },
         subtitle: Text(
           '${visitor.email}',

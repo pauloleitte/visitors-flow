@@ -43,7 +43,7 @@ class _BodyCeremonyState
           style: const TextStyle(color: Colors.black),
         ),
         onTap: () {
-          Modular.to.navigate(AppRoutes.CEREMONY_DETAIL, arguments: ceremony);
+          Modular.to.pushNamed(AppRoutes.CEREMONY_DETAIL, arguments: ceremony);
         },
         subtitle: Text(
           DateFormat('dd/MM/yyyy').format(ceremony.date!),
