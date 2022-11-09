@@ -12,6 +12,9 @@ class AppRoutes {
   static const CONFIG_SECURITY = '/start/config/security';
   static const CEREMONY = '/start/management/ceremony';
   static const CEREMONY_FORM = '/start/management/ceremony/form';
+  static const CEREMONY_DETAIL = '/start/management/ceremony/detail';
+  static const CEREMONY_NOTICE = '/start/management/ceremony/notice';
+  static const CEREMONY_VISITOR = '/start/management/ceremony/visitor';
   static const VISITOR = '/start/management/visitor';
   static const VISITOR_FORM = '/start/management/visitor/form';
   static const NOTICE = '/start/management/notice';

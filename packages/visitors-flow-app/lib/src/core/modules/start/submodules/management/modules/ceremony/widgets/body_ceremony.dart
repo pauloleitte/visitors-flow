@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
+
 import '../../../../../../../config/app_routes.dart';
 import '../controllers/ceremony_controller.dart';
 import '../models/ceremony_model.dart';
@@ -42,7 +43,7 @@ class _BodyCeremonyState
           style: const TextStyle(color: Colors.black),
         ),
         onTap: () {
-          Modular.to.navigate(AppRoutes.CEREMONY_FORM, arguments: ceremony);
+          Modular.to.navigate(AppRoutes.CEREMONY_DETAIL, arguments: ceremony);
         },
         subtitle: Text(
           DateFormat('dd/MM/yyyy').format(ceremony.date!),

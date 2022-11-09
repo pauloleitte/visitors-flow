@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
+import 'package:visitors_flow_app/src/core/config/app_routes.dart';
 import 'package:visitors_flow_app/src/core/modules/start/submodules/management/modules/visitors/models/visitor_model.dart';
+import 'package:visitors_flow_app/src/shared/utils/mutiselect-params.dart';
 
-import '../../../../../../../../shared/widgets/multi_selection_widget.dart';
 import '../../../../../../../config/theme_helper.dart';
 import '../../notice/models/notice_model.dart';
 import '../controllers/ceremony_controller.dart';
@@ -38,129 +39,29 @@ class _BodyCeremonyFormState
     await controller.getNotices();
   }
 
-  Widget _getCardVisitor(VisitorModel member) {
-    return Card(
-      elevation: 10,
-      child: ListTile(
-        title: Text(
-          member.name!,
-          style:
-              const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-        onTap: null,
-      ),
-    );
-  }
-
-  Widget _getCardNotice(NoticeModel notice) {
-    return Card(
-      elevation: 10,
-      child: ListTile(
-        title: Text(
-          notice.name!,
-          style:
-              const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-        onTap: null,
-      ),
-    );
-  }
-
-  Widget _buildListVisitors() {
-    final visitors = controller.ceremony.visitors;
-    if (visitors != null) {
-      return Column(
-        children: [
-          InkWell(
-              onTap: _showMultiSelectVisitor,
-              child: const Text('Vincular visitantes +')),
-          const SizedBox(
-            height: 10,
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: visitors.length,
-              itemBuilder: (ctx, i) => Column(
-                children: <Widget>[
-                  _getCardVisitor(visitors[i]),
-                  const Divider(),
-                ],
-              ),
-            ),
-          ),
-        ],
-      );
-    } else {
-      return InkWell(
-          onTap: _showMultiSelectVisitor,
-          child: const Text('Vincular visitantes +'));
-    }
-  }
-
-  Widget _buildListNotices() {
-    final notices = controller.ceremony.notices;
-    if (notices != null) {
-      return Column(
-        children: [
-          InkWell(
-              onTap: _showMultiSelectNotice,
-              child: const Text('Vincular avisos +')),
-          const SizedBox(
-            height: 10,
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: notices.length,
-              itemBuilder: (ctx, i) => Column(
-                children: <Widget>[
-                  _getCardNotice(notices[i]),
-                  const Divider(),
-                ],
-              ),
-            ),
-          ),
-        ],
-      );
-    } else {
-      return InkWell(
-          onTap: _showMultiSelectNotice,
-          child: const Text('Vincular avisos +'));
-    }
-  }
-
   void _showMultiSelectVisitor() async {
-    final results = await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return MultiSelect<VisitorModel>(
-          items: controller.visitors,
-          title: 'Visitantes',
-          initialValue: controller.ceremony.visitors ?? [],
-        );
-      },
-    );
-
+    final data = MultiSelectParams<VisitorModel>(
+        initialValue: controller.ceremony.visitors ?? [],
+        items: controller.visitors,
+        title: "Avisos");
+    final results =
+        await Modular.to.pushNamed(AppRoutes.CEREMONY_VISITOR, arguments: data);
     if (results != null) {
-      final result = List<VisitorModel>.from(results);
+      final result = List<VisitorModel>.from(results as Iterable<dynamic>);
       controller.ceremony.visitors = result;
       setState(() {});
     }
   }
 
   void _showMultiSelectNotice() async {
-    final results = await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return MultiSelect<NoticeModel>(
-          items: controller.notices,
-          title: 'Avisos',
-          initialValue: controller.ceremony.notices ?? [],
-        );
-      },
-    );
-
+    final data = MultiSelectParams<NoticeModel>(
+        initialValue: controller.ceremony.notices ?? [],
+        items: controller.notices,
+        title: "Avisos");
+    final results =
+        await Modular.to.pushNamed(AppRoutes.CEREMONY_NOTICE, arguments: data);
     if (results != null) {
-      final result = List<NoticeModel>.from(results);
+      final result = List<NoticeModel>.from(results as Iterable<dynamic>);
       controller.ceremony.notices = result;
       setState(() {});
     }
@@ -259,11 +160,68 @@ class _BodyCeremonyFormState
                     },
                   ),
                 ),
-                const SizedBox(height: 20.0),
-                SizedBox(height: 150, child: _buildListVisitors()),
-                const SizedBox(height: 20.0),
-                SizedBox(height: 150, child: _buildListNotices()),
-                const SizedBox(height: 20.0),
+                const SizedBox(height: 30.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 120,
+                      height: 120,
+                      child: GestureDetector(
+                        onTap: _showMultiSelectNotice,
+                        child: Card(
+                            color: Theme.of(context).primaryColor,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.notifications,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                ),
+                                Text(
+                                  "Avisos",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary),
+                                )
+                              ],
+                            )),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 120,
+                      height: 120,
+                      child: GestureDetector(
+                        onTap: _showMultiSelectVisitor,
+                        child: Card(
+                            color: Theme.of(context).primaryColor,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.people,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                ),
+                                Text(
+                                  "Visitantes",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary),
+                                )
+                              ],
+                            )),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 30.0),
                 Container(
                   decoration: ThemeHelper().buttonBoxDecoration(context),
                   child: ElevatedButton(

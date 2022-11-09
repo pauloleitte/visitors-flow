@@ -73,7 +73,7 @@ class _BodyHomeState extends ModularState<BodyHome, HomeController> {
           style: TextStyle(color: Theme.of(context).primaryColor),
         ),
         onTap: () {
-          Modular.to.pushNamed(AppRoutes.CEREMONY_FORM, arguments: ceremony);
+          Modular.to.pushNamed(AppRoutes.CEREMONY_DETAIL, arguments: ceremony);
         },
         subtitle: Text(
           DateFormat('dd/MM/yyyy').format(ceremony.date!),

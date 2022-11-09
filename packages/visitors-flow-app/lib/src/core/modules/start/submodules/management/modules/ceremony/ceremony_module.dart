@@ -1,4 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:visitors_flow_app/src/core/modules/start/submodules/management/modules/ceremony/pages/ceremony_detail_page.dart';
+import 'package:visitors_flow_app/src/core/modules/start/submodules/management/modules/ceremony/pages/ceremony_notice_page.dart';
+import 'package:visitors_flow_app/src/core/modules/start/submodules/management/modules/ceremony/pages/ceremony_visitor_page.dart';
 
 import '../notice/repositories/notice_repository.dart';
 import '../notice/services/notice_service.dart';
@@ -27,6 +30,18 @@ class CeremonyModule extends Module {
     ChildRoute(
       '/',
       child: (_, args) => const CeremonyPage(),
+    ),
+    ChildRoute(
+      '/detail',
+      child: (_, args) => CeremonyDetailPage(ceremony: args.data),
+    ),
+    ChildRoute(
+      '/notice',
+      child: (_, args) => CeremonyNoticePage(params: args.data),
+    ),
+    ChildRoute(
+      '/visitor',
+      child: (_, args) => CeremonyVisitorPage(params: args.data),
     ),
     ChildRoute('/form',
         child: (_, args) => CeremonyFormPage(
