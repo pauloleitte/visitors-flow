@@ -6,8 +6,9 @@ import 'app_constants.dart';
 
 class ThemeHelper {
   InputDecoration textInputDecoration(
-      [String lableText = "", String hintText = ""]) {
+      [String lableText = "", String hintText = "", Icon? icon]) {
     return InputDecoration(
+      prefixIcon: icon,
       labelText: lableText,
       hintText: hintText,
       fillColor: Colors.white,
